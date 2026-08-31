@@ -25,6 +25,16 @@ export default async function TopicsPage({
     weeks.find((week) => week.id === requested) ?? weeks.at(0) ?? null;
   const selectedDate = selected ? getWeekDate(selected.id, calendar) : null;
   const admin = await isAdmin();
+  const topicGroups = selected
+    ? Array.from(
+        selected.topics.reduce((groups, topic) => {
+          const group = groups.get(topic.title) ?? [];
+          group.push(topic);
+          groups.set(topic.title, group);
+          return groups;
+        }, new Map<string, typeof selected.topics>()),
+      )
+    : [];
 
   return (
     <>
@@ -66,21 +76,36 @@ export default async function TopicsPage({
                           {formatWeekDate(selectedDate, locale)}
                         </time>
                       )}
-                      <h2>{selected.title}</h2>
+                      <h2>{copy.weekLabel} {selected.id}</h2>
                     </div>
-                    <span>{selected.topics.length} {copy.questions}</span>
+                    <span>
+                      {topicGroups.length} {locale === "tr" ? "konu başlığı" : "topics"}
+                      {" · "}
+                      {selected.topics.length} {copy.questions}
+                    </span>
                   </div>
-                  <ol className="topic-list">
-                    {selected.topics.map((topic) => (
-                      <li key={topic.id}>
-                        <span>{String(topic.position).padStart(2, "0")}</span>
-                        <div>
-                          {topic.category && <small>{topic.category}</small>}
-                          <p>{topic.question}</p>
-                        </div>
-                      </li>
+                  <div className="topic-groups">
+                    {topicGroups.map(([title, topics], groupIndex) => (
+                      <section className="topic-group" key={title}>
+                        <header>
+                          <span>{String(groupIndex + 1).padStart(2, "0")}</span>
+                          <div>
+                            <small>{locale === "tr" ? "KONU BAŞLIĞI" : "TOPIC"}</small>
+                            <h3>{title}</h3>
+                          </div>
+                          <b>{topics.length} {copy.questions}</b>
+                        </header>
+                        <ol className="topic-list">
+                          {topics.map((topic, questionIndex) => (
+                            <li key={topic.id}>
+                              <span>{String(questionIndex + 1).padStart(2, "0")}</span>
+                              <p>{topic.question}</p>
+                            </li>
+                          ))}
+                        </ol>
+                      </section>
                     ))}
-                  </ol>
+                  </div>
                 </div>
               )}
             </>

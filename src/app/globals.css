@@ -88,67 +88,13 @@ button {
 .logo {
   align-items: center;
   display: inline-flex;
-  gap: 11px;
+  flex: 0 0 auto;
 }
 
-.logo-mark {
-  align-items: center;
-  background: linear-gradient(135deg, var(--coral) 0 48%, var(--ink) 48% 100%);
-  border-radius: 50% 50% 45% 55%;
-  color: white;
-  display: inline-flex;
-  height: 44px;
-  justify-content: center;
-  position: relative;
-  transform: rotate(-4deg);
-  width: 44px;
-}
-
-.logo-mark::before {
-  border: 2px solid white;
-  border-radius: 50%;
-  border-right-color: transparent;
-  content: "";
-  height: 10px;
-  left: 7px;
-  position: absolute;
-  top: 8px;
-  transform: rotate(-18deg);
-  width: 10px;
-}
-
-.logo-mark::after {
-  color: white;
-  content: "★";
-  font-size: 7px;
-  position: absolute;
-  right: 7px;
-  top: 7px;
-  transform: rotate(4deg);
-}
-
-.logo-mark svg {
-  transform: rotate(4deg);
-}
-
-.logo-type {
-  display: grid;
-  line-height: 1;
-}
-
-.logo-type strong {
-  font-family: var(--font-serif), Georgia, serif;
-  font-size: 25px;
-  font-weight: 700;
-  letter-spacing: -1px;
-}
-
-.logo-type span {
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 1.8px;
-  margin-top: 4px;
-  text-transform: uppercase;
+.brand-logo {
+  display: block;
+  height: auto;
+  width: 154px;
 }
 
 .desktop-nav {
@@ -889,6 +835,149 @@ h3 {
   margin-bottom: 0;
 }
 
+.how-section {
+  background:
+    radial-gradient(circle at 100% 10%, rgba(142, 181, 229, 0.2), transparent 28%),
+    var(--cream);
+}
+
+.how-intro {
+  align-items: end;
+  display: grid;
+  gap: 70px;
+  grid-template-columns: 1fr 0.85fr;
+  margin-bottom: 65px;
+}
+
+.how-intro h2 {
+  font-size: clamp(40px, 5.2vw, 62px);
+  font-weight: 500;
+  letter-spacing: -2.5px;
+  line-height: 1.05;
+  margin: 18px 0 0;
+}
+
+.how-intro > p {
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.how-story {
+  display: grid;
+  gap: 22px;
+}
+
+.how-story article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  box-shadow: 0 14px 48px rgba(10, 49, 97, 0.06);
+  display: grid;
+  gap: 55px;
+  grid-template-columns: 0.78fr 1.22fr;
+  overflow: hidden;
+  padding: 48px;
+  position: relative;
+}
+
+.how-story article::before {
+  background: var(--coral);
+  bottom: 0;
+  content: "";
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 5px;
+}
+
+.how-story article:nth-child(even)::before {
+  background: var(--ink);
+}
+
+.how-story-heading {
+  align-content: start;
+  display: grid;
+}
+
+.how-story-heading > span {
+  color: var(--coral);
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 30px;
+  margin-bottom: 38px;
+}
+
+.how-story article:nth-child(even) .how-story-heading > span {
+  color: var(--ink);
+}
+
+.how-story-heading small {
+  color: var(--ink-soft);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.how-story-heading h3 {
+  font-size: 29px;
+  line-height: 1.15;
+  margin: 9px 0 0;
+}
+
+.how-story article > p {
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.9;
+  margin: 0;
+}
+
+.how-principles {
+  margin-top: 85px;
+}
+
+.how-principles > h2 {
+  font-size: 35px;
+  margin: 0 0 28px;
+}
+
+.how-principles > div {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.how-principles article {
+  background: var(--ink);
+  border-radius: 18px;
+  color: white;
+  min-height: 220px;
+  padding: 27px;
+}
+
+.how-principles article:nth-child(even) {
+  background: var(--coral);
+}
+
+.how-principles article > span {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 22px;
+  opacity: 0.7;
+}
+
+.how-principles h3 {
+  font-size: 22px;
+  margin: 45px 0 8px;
+}
+
+.how-principles p {
+  font-size: 12px;
+  line-height: 1.65;
+  margin: 0;
+  opacity: 0.78;
+}
+
 .role-grid {
   display: grid;
   gap: 18px;
@@ -1430,6 +1519,71 @@ h3 {
   font-weight: 700;
 }
 
+.topic-groups {
+  display: grid;
+  gap: 24px;
+  padding-top: 30px;
+}
+
+.topic-group {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.topic-group > header {
+  align-items: center;
+  background: var(--mint-light);
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 44px 1fr auto;
+  padding: 22px 25px;
+}
+
+.topic-group:nth-child(even) > header {
+  background: #fff0f1;
+}
+
+.topic-group > header > span {
+  align-items: center;
+  background: var(--ink);
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  font-size: 10px;
+  font-weight: 900;
+  height: 40px;
+  justify-content: center;
+  width: 40px;
+}
+
+.topic-group:nth-child(even) > header > span {
+  background: var(--coral);
+}
+
+.topic-group > header small {
+  color: var(--ink-soft);
+  display: block;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 1.3px;
+  margin-bottom: 4px;
+}
+
+.topic-group > header h3 {
+  font-size: 27px;
+  margin: 0;
+}
+
+.topic-group > header b {
+  color: var(--ink-soft);
+  font-size: 10px;
+}
+
+.topic-group .topic-list {
+  padding: 0 24px;
+}
+
 .topic-list {
   list-style: none;
   margin: 0;
@@ -1443,6 +1597,16 @@ h3 {
   gap: 25px;
   grid-template-columns: 48px 1fr;
   padding: 27px 4px;
+}
+
+.topic-group .topic-list li {
+  grid-template-columns: 38px 1fr;
+  padding: 22px 2px;
+}
+
+.topic-group .topic-list li > span {
+  height: 34px;
+  width: 34px;
 }
 
 .topic-list li:last-child {
@@ -2294,13 +2458,14 @@ textarea {
   top: 0;
 }
 
-.site-footer .logo-mark {
-  height: 39px;
-  width: 39px;
+.site-footer .logo {
+  background: white;
+  border-radius: 12px;
+  padding: 8px 12px;
 }
 
-.site-footer .logo-type strong {
-  font-size: 22px;
+.site-footer .brand-logo {
+  width: 180px;
 }
 
 .footer-grid {
@@ -2446,9 +2611,15 @@ textarea {
   }
 
   .participation-intro-grid,
-  .requirement-card {
+  .requirement-card,
+  .how-intro,
+  .how-story article {
     gap: 35px;
     grid-template-columns: 1fr;
+  }
+
+  .how-principles > div {
+    grid-template-columns: 1fr 1fr;
   }
 
   .testimonial-grid blockquote {
@@ -2473,17 +2644,8 @@ textarea {
     height: 70px;
   }
 
-  .logo-mark {
-    height: 38px;
-    width: 38px;
-  }
-
-  .logo-type strong {
-    font-size: 20px;
-  }
-
-  .logo-type span {
-    font-size: 8px;
+  .brand-logo {
+    width: 128px;
   }
 
   .header-inner > .button {
@@ -2566,6 +2728,30 @@ textarea {
     padding: 38px 28px;
   }
 
+  .how-intro {
+    margin-bottom: 45px;
+  }
+
+  .how-story article {
+    padding: 32px 26px;
+  }
+
+  .how-story-heading > span {
+    margin-bottom: 24px;
+  }
+
+  .how-principles {
+    margin-top: 60px;
+  }
+
+  .how-principles > div {
+    grid-template-columns: 1fr;
+  }
+
+  .how-principles article {
+    min-height: 190px;
+  }
+
   .participation-intro-grid {
     margin-bottom: 45px;
   }
@@ -2627,6 +2813,24 @@ textarea {
     align-items: flex-start;
     flex-direction: column;
     gap: 14px;
+  }
+
+  .topic-group > header {
+    align-items: start;
+    grid-template-columns: 40px 1fr;
+    padding: 19px 18px;
+  }
+
+  .topic-group > header b {
+    grid-column: 2;
+  }
+
+  .topic-group > header h3 {
+    font-size: 23px;
+  }
+
+  .topic-group .topic-list {
+    padding: 0 15px;
   }
 
   .topic-list li {

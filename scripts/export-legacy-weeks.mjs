@@ -35,11 +35,6 @@ function text(html) {
     .trim();
 }
 
-function safeSheetName(id, title) {
-  const safeTitle = title.replace(/[\\/*?:[\]]/g, " ").replace(/\s+/g, " ").trim();
-  return `Hafta ${id} - ${safeTitle}`.slice(0, 31);
-}
-
 const response = await fetch(sourceUrl);
 if (!response.ok) {
   throw new Error(`Source returned HTTP ${response.status}.`);
@@ -72,7 +67,7 @@ for (let index = 0; index < headings.length; index += 1) {
   if (topics.length === 0) {
     throw new Error(`No questions found for Hafta ${id}.`);
   }
-  weeks.push({ id, title: topics[0].category || `Hafta ${id}`, topics });
+  weeks.push({ id, title: `Hafta ${id}`, topics });
 }
 
 if (weeks.length === 0) {
@@ -81,19 +76,23 @@ if (weeks.length === 0) {
 
 const workbook = XLSX.utils.book_new();
 for (const week of weeks) {
-  const rows = week.topics.map((topic) => ({
-    Başlık: week.title,
-    Kategori: topic.category,
-    Soru: topic.question,
-  }));
-  const sheet = XLSX.utils.json_to_sheet(rows, {
-    header: ["Başlık", "Kategori", "Soru"],
+  let previousTitle = "";
+  const rows = week.topics.map((topic) => {
+    const title = topic.category === previousTitle ? "" : topic.category;
+    previousTitle = topic.category;
+    return {
+      Başlık: title,
+      Soru: topic.question,
+    };
   });
-  sheet["!cols"] = [{ wch: 28 }, { wch: 24 }, { wch: 78 }];
+  const sheet = XLSX.utils.json_to_sheet(rows, {
+    header: ["Başlık", "Soru"],
+  });
+  sheet["!cols"] = [{ wch: 30 }, { wch: 90 }];
   XLSX.utils.book_append_sheet(
     workbook,
     sheet,
-    safeSheetName(week.id, week.title),
+    `Hafta ${week.id}`,
   );
 }
 

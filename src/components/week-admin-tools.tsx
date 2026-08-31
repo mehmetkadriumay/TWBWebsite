@@ -78,8 +78,8 @@ export function WeekAdminTools({
         </strong>
         <small>
           {locale === "tr"
-            ? "Her hafta ayrı bir sekmedir; sekme adı “Hafta 1 - Konu”, sütunlar Başlık, Kategori ve Soru olmalıdır. "
-            : "Each week is a separate tab named “Hafta 1 - Topic” with Başlık, Kategori, and Soru columns. "}
+            ? "Her hafta “Hafta 1” biçiminde ayrı bir sekmedir. Başlık sütununa her konu bir kez yazılır; altındaki satırlarda o konuya ait sorular Soru sütununda yer alır. "
+            : "Each week is a separate tab named “Hafta 1”. Enter each topic once in Başlık, then place that topic's questions beneath it in the Soru column. "}
           <a href="/api/admin/weeks/template">
             {locale === "tr" ? "Örnek dosyayı indir" : "Download a template"}
           </a>

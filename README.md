@@ -47,13 +47,14 @@ The SQLite database is created automatically in `data/twb.sqlite`. On first laun
 
 ## Weekly topic workbook
 
-Each week is a separate worksheet named in the form `Hafta 1 - Topic Name`. Every worksheet contains:
+Each week is a separate worksheet named in the form `Hafta 1`. Every worksheet contains:
 
 | Column | Purpose |
 |---|---|
-| `Başlık` | Full week title |
-| `Kategori` | Question category |
+| `Başlık` | Topic heading; enter it once on the first row of that topic |
 | `Soru` | Conversation question |
+
+Leave `Başlık` blank on the following rows while adding more questions under the same topic. Enter the next heading in `Başlık` when a new topic begins. Legacy workbooks containing a `Kategori` column remain import-compatible.
 
 Administrators can delete the selected week, export all weeks, or import a workbook from the top of the Conversation Topics page.
 

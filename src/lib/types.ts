@@ -16,7 +16,7 @@ export type Week = {
 export type Topic = {
   id: number;
   position: number;
-  category: string;
+  title: string;
   question: string;
 };
 

@@ -30,13 +30,6 @@ function parseWeekNumber(value: unknown, sheetName: string): number | null {
   return fromSheet ? Number.parseInt(fromSheet, 10) : null;
 }
 
-function parseSheetTitle(sheetName: string, id: number): string {
-  const title = sheetName
-    .replace(new RegExp(`^\\s*(hafta|week)\\s*${id}\\s*[-–—:]?\\s*`, "i"), "")
-    .trim();
-  return title || `Hafta ${id}`;
-}
-
 export function parseWeeksWorkbook(buffer: Buffer): ImportedWeek[] {
   const workbook = XLSX.read(buffer, { type: "buffer", cellDates: false });
   const collected = new Map<number, ImportedWeek>();
@@ -46,6 +39,12 @@ export function parseWeeksWorkbook(buffer: Buffer): ImportedWeek[] {
       workbook.Sheets[sheetName],
       { defval: "" },
     );
+    const usesLegacyCategoryColumn = rows.some((row) =>
+      String(
+        findValue(row, ["kategori", "category", "bolum", "section"]) ?? "",
+      ).trim(),
+    );
+    let currentTopicTitle = "";
 
     for (const row of rows) {
       const id = parseWeekNumber(
@@ -63,22 +62,35 @@ export function parseWeeksWorkbook(buffer: Buffer): ImportedWeek[] {
 
       if (!id || !question) continue;
 
-      const title =
-        String(
-          findValue(row, [
-            "baslik",
-            "title",
-            "hafta basligi",
-            "topic",
-            "konu",
-          ]) ?? "",
-        ).trim() || parseSheetTitle(sheetName, id);
-      const category = String(
+      const heading = String(
+        findValue(row, [
+          "baslik",
+          "title",
+          "konu basligi",
+          "topic",
+          "topic title",
+          "konu",
+        ]) ?? "",
+      ).trim();
+      const legacyCategory = String(
         findValue(row, ["kategori", "category", "bolum", "section"]) ?? "",
       ).trim();
-      const week = collected.get(id) ?? { id, title, topics: [] };
-      if (week.title === `Hafta ${id}` && title !== week.title) week.title = title;
-      week.topics.push({ category, question });
+      const rowTopicTitle = usesLegacyCategoryColumn
+        ? legacyCategory || heading
+        : heading || currentTopicTitle;
+      if (!rowTopicTitle) {
+        throw new Error(
+          `${sheetName}: Every question must be beneath a Başlık value.`,
+        );
+      }
+      currentTopicTitle = rowTopicTitle;
+
+      const week = collected.get(id) ?? {
+        id,
+        title: `Hafta ${id}`,
+        topics: [],
+      };
+      week.topics.push({ title: rowTopicTitle, question });
       collected.set(id, week);
     }
   }
@@ -86,7 +98,7 @@ export function parseWeeksWorkbook(buffer: Buffer): ImportedWeek[] {
   const weeks = [...collected.values()].sort((a, b) => a.id - b.id);
   if (weeks.length === 0) {
     throw new Error(
-      "No topics found. Name each tab 'Hafta 1 - Topic' and use Kategori and Soru columns.",
+      "No topics found. Name each tab 'Hafta 1' and use Başlık and Soru columns.",
     );
   }
   return weeks;
@@ -95,12 +107,11 @@ export function parseWeeksWorkbook(buffer: Buffer): ImportedWeek[] {
 type WorkbookWeek = {
   id: number;
   title: string;
-  topics: Array<{ category: string; question: string }>;
+  topics: Array<{ title: string; question: string }>;
 };
 
 function sheetNameForWeek(week: WorkbookWeek): string {
-  const safeTitle = week.title.replace(/[\\/*?:[\]]/g, " ").replace(/\s+/g, " ").trim();
-  return `Hafta ${week.id} - ${safeTitle}`.slice(0, 31);
+  return `Hafta ${week.id}`;
 }
 
 export function createWeeksWorkbook(weeks: WorkbookWeek[]): Buffer {
@@ -109,15 +120,19 @@ export function createWeeksWorkbook(weeks: WorkbookWeek[]): Buffer {
   }
   const workbook = XLSX.utils.book_new();
   for (const week of [...weeks].sort((a, b) => a.id - b.id)) {
-    const rows = week.topics.map((topic) => ({
-      Başlık: week.title,
-      Kategori: topic.category,
-      Soru: topic.question,
-    }));
-    const sheet = XLSX.utils.json_to_sheet(rows, {
-      header: ["Başlık", "Kategori", "Soru"],
+    let previousTitle = "";
+    const rows = week.topics.map((topic) => {
+      const title = topic.title === previousTitle ? "" : topic.title;
+      previousTitle = topic.title;
+      return {
+        Başlık: title,
+        Soru: topic.question,
+      };
     });
-    sheet["!cols"] = [{ wch: 28 }, { wch: 24 }, { wch: 78 }];
+    const sheet = XLSX.utils.json_to_sheet(rows, {
+      header: ["Başlık", "Soru"],
+    });
+    sheet["!cols"] = [{ wch: 30 }, { wch: 90 }];
     XLSX.utils.book_append_sheet(workbook, sheet, sheetNameForWeek(week));
   }
   return XLSX.write(workbook, { type: "buffer", bookType: "xlsx" });
@@ -127,24 +142,28 @@ export function createTemplateWorkbook(): Buffer {
   return createWeeksWorkbook([
     {
       id: 1,
-      title: "Friendship",
+      title: "Hafta 1",
       topics: [
         {
-          category: "Warm-up",
+          title: "Friendship",
           question: "What makes someone a good friend?",
         },
         {
-          category: "Discussion",
+          title: "Friendship",
           question: "How do friendships change as we grow older?",
+        },
+        {
+          title: "Trust",
+          question: "How can a person earn another person's trust?",
         },
       ],
     },
     {
       id: 2,
-      title: "Travel",
+      title: "Hafta 2",
       topics: [
         {
-          category: "Warm-up",
+          title: "Travel",
           question: "Where would you most like to travel?",
         },
       ],

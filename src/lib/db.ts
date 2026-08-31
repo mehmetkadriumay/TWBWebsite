@@ -3,7 +3,11 @@ import "server-only";
 import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { defaultPages, seedTopics } from "@/lib/default-content";
+import {
+  defaultPages,
+  legacyHowItWorksBodies,
+  seedTopics,
+} from "@/lib/default-content";
 import { parseWeeksWorkbook } from "@/lib/import-weeks";
 import type {
   AcademicCalendar,
@@ -104,6 +108,31 @@ function getDb(): DatabaseSync {
     insertPage.run(page.slug, page.title, page.eyebrow, page.summary, page.body);
   }
 
+  const updateLegacyPage = db.prepare(`
+    UPDATE pages SET body = ?, updated_at = CURRENT_TIMESTAMP
+    WHERE slug = ? AND body = ?
+  `);
+  const howItWorksTr = defaultPages.find(
+    (page) => page.slug === "nasil-calisiyoruz",
+  );
+  const howItWorksEn = defaultPages.find(
+    (page) => page.slug === "nasil-calisiyoruz-en",
+  );
+  if (howItWorksTr) {
+    updateLegacyPage.run(
+      howItWorksTr.body,
+      howItWorksTr.slug,
+      legacyHowItWorksBodies.tr,
+    );
+  }
+  if (howItWorksEn) {
+    updateLegacyPage.run(
+      howItWorksEn.body,
+      howItWorksEn.slug,
+      legacyHowItWorksBodies.en,
+    );
+  }
+
   const insertSetting = db.prepare(
     "INSERT OR IGNORE INTO settings (key, value) VALUES (?, ?)",
   );
@@ -126,9 +155,9 @@ function getDb(): DatabaseSync {
       : [
           {
             id: 1,
-            title: "Camping",
+            title: "Hafta 1",
             topics: seedTopics.map((question) => ({
-              category: "Conversation",
+              title: "Camping",
               question,
             })),
           },
@@ -145,7 +174,7 @@ function getDb(): DatabaseSync {
         insertTopic.run(
           week.id,
           index + 1,
-          topic.category,
+          topic.title,
           topic.question,
         ),
       );
@@ -162,7 +191,7 @@ type TopicRow = {
   id: number;
   week_id: number;
   position: number;
-  category: string;
+  title: string;
   question: string;
 };
 
@@ -221,7 +250,7 @@ export function getWeeks(): Week[] {
     .prepare("SELECT id, title, imported_at FROM weeks ORDER BY id ASC")
     .all() as WeekRow[];
   const topicQuery = db.prepare(`
-    SELECT id, week_id, position, category, question
+    SELECT id, week_id, position, category AS title, question
     FROM topics WHERE week_id = ? ORDER BY position, id
   `);
 
@@ -232,7 +261,7 @@ export function getWeeks(): Week[] {
     topics: (topicQuery.all(week.id) as TopicRow[]).map((topic) => ({
       id: topic.id,
       position: topic.position,
-      category: topic.category,
+      title: topic.title,
       question: topic.question,
     })),
   }));
@@ -241,7 +270,7 @@ export function getWeeks(): Week[] {
 export type ImportedWeek = {
   id: number;
   title: string;
-  topics: Array<{ category: string; question: string }>;
+  topics: Array<{ title: string; question: string }>;
 };
 
 export function replaceWeeks(weeks: ImportedWeek[]): void {
@@ -262,7 +291,7 @@ export function replaceWeeks(weeks: ImportedWeek[]): void {
       upsertWeek.run(week.id, week.title);
       deleteTopics.run(week.id);
       week.topics.forEach((topic, index) =>
-        insertTopic.run(week.id, index + 1, topic.category, topic.question),
+        insertTopic.run(week.id, index + 1, topic.title, topic.question),
       );
     }
     db.exec("COMMIT");
