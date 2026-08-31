@@ -22,13 +22,11 @@ export function StudentManagement({
   onStudentsChange: (students: Student[]) => void;
 }) {
   const [students, setStudents] = useState(initialStudents);
-  const [selectedId, setSelectedId] = useState<number | "new">(
-    initialStudents[0]?.id ?? "new",
-  );
+  const [selectedId, setSelectedId] = useState<number | "new" | "grid">("grid");
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
   const selected =
-    selectedId === "new"
+    selectedId === "new" || selectedId === "grid"
       ? emptyStudent
       : students.find((student) => student.id === selectedId) ?? emptyStudent;
 
@@ -46,6 +44,7 @@ export function StudentManagement({
       projectLeader: form.get("projectLeader") === "yes",
     };
     const creating = selectedId === "new";
+    if (selectedId === "grid") return;
     const response = await fetch(
       creating ? "/api/admin/students" : `/api/admin/students/${selectedId}`,
       {
@@ -77,7 +76,7 @@ export function StudentManagement({
   }
 
   async function remove() {
-    if (selectedId === "new") return;
+    if (selectedId === "new" || selectedId === "grid") return;
     const student = students.find((item) => item.id === selectedId);
     if (
       !window.confirm(
@@ -99,7 +98,7 @@ export function StudentManagement({
       const remaining = students.filter((student) => student.id !== selectedId);
       setStudents(remaining);
       onStudentsChange(remaining);
-      setSelectedId(remaining[0]?.id ?? "new");
+      setSelectedId("grid");
     }
   }
 
@@ -111,6 +110,16 @@ export function StudentManagement({
           <strong>{students.length}</strong>
         </div>
         <button
+          className={selectedId === "grid" ? "active" : ""}
+          onClick={() => {
+            setSelectedId("grid");
+            setMessage("");
+          }}
+          type="button"
+        >
+          <b>▦</b> {locale === "tr" ? "Tüm öğrenciler" : "All students"}
+        </button>
+        <button
           className={selectedId === "new" ? "active" : ""}
           onClick={() => {
             setSelectedId("new");
@@ -120,24 +129,27 @@ export function StudentManagement({
         >
           <b>+</b> {locale === "tr" ? "Yeni öğrenci ekle" : "Add a student"}
         </button>
-        {students.map((student) => (
-          <button
-            className={selectedId === student.id ? "active" : ""}
-            key={student.id}
-            onClick={() => {
-              setSelectedId(student.id);
-              setMessage("");
-            }}
-            type="button"
-          >
-            <b>{student.studentName.slice(0, 2).toLocaleUpperCase("tr-TR")}</b>
-            <span>{student.studentName}</span>
-          </button>
-        ))}
       </aside>
+      {selectedId === "grid" ? (
+        <StudentGrid
+          locale={locale}
+          onSelect={(id) => {
+            setSelectedId(id);
+            setMessage("");
+          }}
+          students={students}
+        />
+      ) : (
       <form className="school-form student-form" key={selectedId} onSubmit={save}>
         <div className="school-form-heading">
           <div>
+            <button
+              className="back-to-grid"
+              onClick={() => setSelectedId("grid")}
+              type="button"
+            >
+              ← {locale === "tr" ? "Tüm öğrenciler" : "All students"}
+            </button>
             <span className="eyebrow">
               {selectedId === "new"
                 ? locale === "tr" ? "Yeni kayıt" : "New record"
@@ -190,7 +202,7 @@ export function StudentManagement({
             <label htmlFor="role">{locale === "tr" ? "Rol" : "Role"}</label>
             <select defaultValue={selected.role} id="role" name="role">
               <option value="facilitator">
-                {locale === "tr" ? "Kolaylaştırıcı" : "Facilitator"}
+                {locale === "tr" ? "Yabancı Öğrenci" : "Facilitator"}
               </option>
               <option value="student">
                 {locale === "tr" ? "Öğrenci" : "Student"}
@@ -230,6 +242,87 @@ export function StudentManagement({
           </button>
         </div>
       </form>
+      )}
+    </div>
+  );
+}
+
+function StudentGrid({
+  locale,
+  onSelect,
+  students,
+}: {
+  locale: Locale;
+  onSelect: (id: number) => void;
+  students: Student[];
+}) {
+  if (students.length === 0) {
+    return (
+      <div className="school-grid-empty">
+        <span>00</span>
+        <h2>
+          {locale === "tr" ? "Henüz öğrenci eklenmedi." : "No students yet."}
+        </h2>
+        <p>
+          {locale === "tr"
+            ? "Sol taraftaki Yeni öğrenci ekle bağlantısını kullanın."
+            : "Use the Add a student link on the left."}
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="school-card-grid student-card-grid">
+      {students.map((student) => (
+        <button
+          className="school-info-card student-info-card"
+          key={student.id}
+          onClick={() => onSelect(student.id)}
+          type="button"
+        >
+          <div className="school-card-title">
+            <span>
+              {student.studentName.slice(0, 2).toLocaleUpperCase("tr-TR")}
+            </span>
+            <div>
+              <small>{locale === "tr" ? "ÖĞRENCİ" : "STUDENT"}</small>
+              <h3>{student.studentName}</h3>
+            </div>
+          </div>
+          <dl>
+            <div>
+              <dt>
+                {locale === "tr"
+                  ? "Okul / koordinatör bölgesi"
+                  : "School / coordinator region"}
+              </dt>
+              <dd>{student.schoolOrCoordinatorRegion}</dd>
+            </div>
+            <div>
+              <dt>{locale === "tr" ? "Rol" : "Role"}</dt>
+              <dd>
+                <span className={`role-pill role-${student.role}`}>
+                  {student.role === "facilitator"
+                    ? locale === "tr" ? "Yabancı Öğrenci" : "Facilitator"
+                    : locale === "tr" ? "Öğrenci" : "Student"}
+                </span>
+              </dd>
+            </div>
+            <div>
+              <dt>{locale === "tr" ? "Proje lideri" : "Project leader"}</dt>
+              <dd>
+                {student.projectLeader
+                  ? locale === "tr" ? "Evet" : "Yes"
+                  : locale === "tr" ? "Hayır" : "No"}
+              </dd>
+            </div>
+          </dl>
+          <span className="school-card-edit">
+            {locale === "tr" ? "Düzenle →" : "Edit →"}
+          </span>
+        </button>
+      ))}
     </div>
   );
 }

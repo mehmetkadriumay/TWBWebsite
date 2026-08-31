@@ -11,6 +11,7 @@ A modern bilingual website and administration application for the Turks Without 
 - Admin-only semester calendar management
 - Admin-only school and student management
 - Role-filtered student assignments for schools
+- Admin-only Twilio WhatsApp messaging
 - SQLite persistence with signed administrator sessions
 
 ## Requirements
@@ -64,3 +65,15 @@ npm start
 ```
 
 The application requires persistent storage for the `data` directory when deployed.
+
+## Twilio WhatsApp
+
+Set these environment variables to enable the WhatsApp tab:
+
+```bash
+TWILIO_ACCOUNT_SID=ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+TWILIO_AUTH_TOKEN=your-auth-token
+TWILIO_WHATSAPP_FROM=+14155238886
+```
+
+Use an approved WhatsApp sender in production. Sandbox recipients must join the Twilio WhatsApp Sandbox before they can receive messages. Free-form outbound text is permitted only during the 24-hour session after the recipient messages your business; otherwise use an approved WhatsApp template.

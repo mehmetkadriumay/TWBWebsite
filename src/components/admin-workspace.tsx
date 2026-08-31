@@ -5,6 +5,7 @@ import { ContentEditor } from "@/components/content-editor";
 import { TimeManagement } from "@/components/time-management";
 import { SchoolManagement } from "@/components/school-management";
 import { StudentManagement } from "@/components/student-management";
+import { WhatsAppManagement } from "@/components/whatsapp-management";
 import type { Locale } from "@/lib/i18n";
 import type {
   AcademicCalendar,
@@ -27,7 +28,7 @@ export function AdminWorkspace({
   students: Student[];
 }) {
   const [tab, setTab] = useState<
-    "content" | "time" | "schools" | "students"
+    "content" | "time" | "schools" | "students" | "whatsapp"
   >("content");
   const [currentStudents, setCurrentStudents] = useState(students);
 
@@ -62,6 +63,13 @@ export function AdminWorkspace({
         >
           {locale === "tr" ? "Öğrenci Yönetimi" : "Student Management"}
         </button>
+        <button
+          className={tab === "whatsapp" ? "active" : ""}
+          onClick={() => setTab("whatsapp")}
+          type="button"
+        >
+          WhatsApp
+        </button>
       </div>
       {tab === "content" ? (
         <ContentEditor locale={locale} pages={pages} />
@@ -73,12 +81,14 @@ export function AdminWorkspace({
           locale={locale}
           students={currentStudents}
         />
-      ) : (
+      ) : tab === "students" ? (
         <StudentManagement
           initialStudents={currentStudents}
           locale={locale}
           onStudentsChange={setCurrentStudents}
         />
+      ) : (
+        <WhatsAppManagement locale={locale} />
       )}
     </>
   );

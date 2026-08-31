@@ -86,6 +86,14 @@ function getDb(): DatabaseSync {
       group_type TEXT NOT NULL CHECK (group_type IN ('foreign', 'turkish')),
       PRIMARY KEY (school_id, student_id, group_type)
     );
+
+    CREATE TABLE IF NOT EXISTS participation_applications (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      form_type TEXT NOT NULL CHECK (form_type IN ('turkiye', 'us')),
+      locale TEXT NOT NULL CHECK (locale IN ('tr', 'en')),
+      payload TEXT NOT NULL,
+      submitted_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
   `);
 
   const insertPage = db.prepare(`
@@ -192,6 +200,19 @@ export function updatePage(page: ContentPage): void {
     SET title = ?, eyebrow = ?, summary = ?, body = ?, updated_at = CURRENT_TIMESTAMP
     WHERE slug = ?
   `).run(page.title, page.eyebrow, page.summary, page.body, page.slug);
+}
+
+export function createParticipationApplication(
+  formType: "turkiye" | "us",
+  locale: "tr" | "en",
+  fields: Record<string, string>,
+): void {
+  getDb()
+    .prepare(`
+      INSERT INTO participation_applications (form_type, locale, payload)
+      VALUES (?, ?, ?)
+    `)
+    .run(formType, locale, JSON.stringify(fields));
 }
 
 export function getWeeks(): Week[] {
@@ -416,7 +437,7 @@ function replaceSchoolStudents(
     if (
       insert.run(schoolId, "foreign", studentId, "facilitator").changes !== 1
     ) {
-      throw new Error("Yabancı öğrenci seçimi yalnızca kolaylaştırıcı rolünden yapılabilir.");
+      throw new Error("Yabancı öğrenci seçimi yalnızca yabancı öğrenci rolünden yapılabilir.");
     }
   }
   for (const studentId of school.turkishStudentIds) {

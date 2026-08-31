@@ -53,13 +53,11 @@ export function SchoolManagement({
   students: Student[];
 }) {
   const [schools, setSchools] = useState(initialSchools);
-  const [selectedId, setSelectedId] = useState<number | "new">(
-    initialSchools[0]?.id ?? "new",
-  );
+  const [selectedId, setSelectedId] = useState<number | "new" | "grid">("grid");
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
   const selected =
-    selectedId === "new"
+    selectedId === "new" || selectedId === "grid"
       ? emptySchool
       : schools.find((school) => school.id === selectedId) ?? emptySchool;
   const languageIndex = locale === "tr" ? 0 : 1;
@@ -81,6 +79,7 @@ export function SchoolManagement({
         .map((id) => Number(id)),
     } as SchoolInput;
     const creating = selectedId === "new";
+    if (selectedId === "grid") return;
     const response = await fetch(
       creating ? "/api/admin/schools" : `/api/admin/schools/${selectedId}`,
       {
@@ -110,7 +109,7 @@ export function SchoolManagement({
   }
 
   async function remove() {
-    if (selectedId === "new") return;
+    if (selectedId === "new" || selectedId === "grid") return;
     const school = schools.find((item) => item.id === selectedId);
     const confirmed = window.confirm(
       locale === "tr"
@@ -129,7 +128,7 @@ export function SchoolManagement({
     if (response.ok) {
       const remaining = schools.filter((school) => school.id !== selectedId);
       setSchools(remaining);
-      setSelectedId(remaining[0]?.id ?? "new");
+      setSelectedId("grid");
     }
   }
 
@@ -141,6 +140,16 @@ export function SchoolManagement({
           <strong>{schools.length}</strong>
         </div>
         <button
+          className={selectedId === "grid" ? "active" : ""}
+          onClick={() => {
+            setSelectedId("grid");
+            setMessage("");
+          }}
+          type="button"
+        >
+          <b>▦</b> {locale === "tr" ? "Tüm okullar" : "All schools"}
+        </button>
+        <button
           className={selectedId === "new" ? "active" : ""}
           onClick={() => {
             setSelectedId("new");
@@ -150,24 +159,28 @@ export function SchoolManagement({
         >
           <b>+</b> {locale === "tr" ? "Yeni okul ekle" : "Add a school"}
         </button>
-        {schools.map((school) => (
-          <button
-            className={selectedId === school.id ? "active" : ""}
-            key={school.id}
-            onClick={() => {
-              setSelectedId(school.id);
-              setMessage("");
-            }}
-            type="button"
-          >
-            <b>{school.schoolName.slice(0, 2).toLocaleUpperCase("tr-TR")}</b>
-            <span>{school.schoolName}</span>
-          </button>
-        ))}
       </aside>
+      {selectedId === "grid" ? (
+        <SchoolGrid
+          locale={locale}
+          onSelect={(id) => {
+            setSelectedId(id);
+            setMessage("");
+          }}
+          schools={schools}
+          students={students}
+        />
+      ) : (
       <form className="school-form" key={selectedId} onSubmit={save}>
         <div className="school-form-heading">
           <div>
+            <button
+              className="back-to-grid"
+              onClick={() => setSelectedId("grid")}
+              type="button"
+            >
+              ← {locale === "tr" ? "Tüm okullar" : "All schools"}
+            </button>
             <span className="eyebrow">
               {selectedId === "new"
                 ? locale === "tr" ? "Yeni kayıt" : "New record"
@@ -230,6 +243,93 @@ export function SchoolManagement({
           </button>
         </div>
       </form>
+      )}
+    </div>
+  );
+}
+
+function SchoolGrid({
+  locale,
+  onSelect,
+  schools,
+  students,
+}: {
+  locale: Locale;
+  onSelect: (id: number) => void;
+  schools: School[];
+  students: Student[];
+}) {
+  const studentNames = (ids: number[]) =>
+    ids
+      .map((id) => students.find((student) => student.id === id)?.studentName)
+      .filter(Boolean)
+      .join(", ") || "—";
+
+  if (schools.length === 0) {
+    return (
+      <div className="school-grid-empty">
+        <span>00</span>
+        <h2>{locale === "tr" ? "Henüz okul eklenmedi." : "No schools yet."}</h2>
+        <p>
+          {locale === "tr"
+            ? "Sol taraftaki Yeni okul ekle bağlantısını kullanın."
+            : "Use the Add a school link on the left."}
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="school-card-grid">
+      {schools.map((school) => (
+        <button
+          className="school-info-card"
+          key={school.id}
+          onClick={() => onSelect(school.id)}
+          type="button"
+        >
+          <div className="school-card-title">
+            <span>{school.schoolName.slice(0, 2).toLocaleUpperCase("tr-TR")}</span>
+            <div>
+              <small>{locale === "tr" ? "OKUL" : "SCHOOL"}</small>
+              <h3>{school.schoolName}</h3>
+            </div>
+          </div>
+          <dl>
+            <div>
+              <dt>{locale === "tr" ? "Koordinatör" : "Coordinator"}</dt>
+              <dd>{school.coordinatorName || "—"}</dd>
+            </div>
+            <div>
+              <dt>{locale === "tr" ? "Sorumlu öğretmen" : "Responsible teacher"}</dt>
+              <dd>{school.responsibleTeacherName || "—"}</dd>
+            </div>
+            <div>
+              <dt>{locale === "tr" ? "Yabancı öğrenciler" : "Foreign students"}</dt>
+              <dd>{studentNames(school.foreignStudentIds)}</dd>
+            </div>
+            <div>
+              <dt>{locale === "tr" ? "Türk öğrenciler" : "Turkish students"}</dt>
+              <dd>{studentNames(school.turkishStudentIds)}</dd>
+            </div>
+            <div>
+              <dt>{locale === "tr" ? "Koordinatör WhatsApp" : "Coordinator WhatsApp"}</dt>
+              <dd>{school.coordinatorWhatsappGroupName || "—"}</dd>
+            </div>
+            <div>
+              <dt>{locale === "tr" ? "Öğrenci WhatsApp" : "Student WhatsApp"}</dt>
+              <dd>{school.studentWhatsappGroupName || "—"}</dd>
+            </div>
+            <div className="meeting-row">
+              <dt>{locale === "tr" ? "Toplantı bağlantısı" : "Meeting link"}</dt>
+              <dd>{school.meetingLink || "—"}</dd>
+            </div>
+          </dl>
+          <span className="school-card-edit">
+            {locale === "tr" ? "Düzenle →" : "Edit →"}
+          </span>
+        </button>
+      ))}
     </div>
   );
 }

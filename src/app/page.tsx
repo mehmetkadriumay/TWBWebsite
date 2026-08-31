@@ -36,6 +36,15 @@ export default async function Home() {
             </div>
           </div>
           <div className="hero-visual" aria-label={copy.visualLabel}>
+            <div className="flag-ribbon" aria-hidden="true">
+              <span>TÜRKİYE</span>
+              <i />
+              <span>UNITED STATES</span>
+            </div>
+            <span className="hero-crescent" aria-hidden="true" />
+            <span className="hero-star hero-star-one" aria-hidden="true">★</span>
+            <span className="hero-star hero-star-two" aria-hidden="true">★</span>
+            <span className="hero-star hero-star-three" aria-hidden="true">★</span>
             <div className="visual-globe">
               <GlobeIcon size={150} />
               <span className="location-pin pin-tr">TR</span>
