@@ -11,7 +11,7 @@ export async function ContentPage({
   slug: string;
 }) {
   const locale = await getLocale();
-  const page = getPage(localizedSlug(slug, locale));
+  const page = await getPage(localizedSlug(slug, locale));
   if (!page) notFound();
 
   return (

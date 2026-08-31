@@ -20,7 +20,10 @@ export async function PUT(
     return NextResponse.json({ error: "Geçersiz öğrenci." }, { status: 400 });
   }
   try {
-    const student = updateStudent(id, parseStudentInput(await request.json()));
+    const student = await updateStudent(
+      id,
+      parseStudentInput(await request.json()),
+    );
     if (!student) {
       return NextResponse.json({ error: "Öğrenci bulunamadı." }, { status: 404 });
     }
@@ -44,7 +47,7 @@ export async function DELETE(
   if (!id) {
     return NextResponse.json({ error: "Geçersiz öğrenci." }, { status: 400 });
   }
-  if (!deleteStudent(id)) {
+  if (!(await deleteStudent(id))) {
     return NextResponse.json({ error: "Öğrenci bulunamadı." }, { status: 404 });
   }
   return NextResponse.json({ message: "Öğrenci silindi." });

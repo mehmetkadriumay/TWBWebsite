@@ -160,7 +160,7 @@ const participationCopy = {
 export default async function JoinPage() {
   const locale = await getLocale();
   const copy = participationCopy[locale];
-  const page = getPage(localizedSlug("projeye-katilim", locale));
+  const page = await getPage(localizedSlug("projeye-katilim", locale));
   if (!page) return null;
 
   return (

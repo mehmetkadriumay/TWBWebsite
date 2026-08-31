@@ -2,13 +2,16 @@
   "name": "turks-without-borders",
   "version": "1.0.0",
   "private": true,
+  "main": "server.js",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "node server.js",
+    "db:migrate:mysql": "node scripts/migrate-sqlite-to-mysql.mjs",
     "lint": "next lint"
   },
   "dependencies": {
+    "mysql2": "^3.24.2",
     "next": "^15.5.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

@@ -15,8 +15,10 @@ export default async function TopicsPage({
 }: {
   searchParams: Promise<{ hafta?: string }>;
 }) {
-  const weeks = getWeeks();
-  const calendar = getAcademicCalendar();
+  const [weeks, calendar] = await Promise.all([
+    getWeeks(),
+    getAcademicCalendar(),
+  ]);
   const locale = await getLocale();
   const copy = ui[locale].topics;
   const params = await searchParams;

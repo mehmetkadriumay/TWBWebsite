@@ -48,7 +48,7 @@ const copy = {
 
 export default async function HowItWorksPage() {
   const locale = await getLocale();
-  const page = getPage(localizedSlug("nasil-calisiyoruz", locale));
+  const page = await getPage(localizedSlug("nasil-calisiyoruz", locale));
   if (!page) return null;
   const localizedCopy = copy[locale];
   const paragraphs = page.body.split(/\n\n+/);

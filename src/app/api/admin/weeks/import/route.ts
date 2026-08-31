@@ -29,7 +29,7 @@ export async function POST(request: Request) {
 
   try {
     const weeks = parseWeeksWorkbook(Buffer.from(await file.arrayBuffer()));
-    replaceWeeks(weeks);
+    await replaceWeeks(weeks);
     return NextResponse.json({
       message: `${weeks.length} hafta başarıyla içe aktarıldı.`,
       weeks: weeks.map((week) => week.id),

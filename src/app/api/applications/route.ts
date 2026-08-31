@@ -114,7 +114,7 @@ export async function POST(request: NextRequest) {
     count: attempt && attempt.resetAt > now ? attempt.count + 1 : 1,
     resetAt: attempt && attempt.resetAt > now ? attempt.resetAt : now + 60 * 60 * 1000,
   });
-  createParticipationApplication(formType, locale, fields);
+  await createParticipationApplication(formType, locale, fields);
 
   return NextResponse.json(
     {

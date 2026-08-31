@@ -12,12 +12,13 @@ A modern bilingual website and administration application for the Turks Without 
 - Admin-only school and student management
 - Role-filtered student assignments for schools
 - Admin-only Twilio WhatsApp messaging
-- SQLite persistence with signed administrator sessions
+- MySQL persistence with signed administrator sessions
 
 ## Requirements
 
 - Node.js 22 or newer
 - npm
+- MySQL 8 or newer
 
 ## Local setup
 
@@ -33,7 +34,32 @@ A modern bilingual website and administration application for the Turks Without 
    cp .env.example .env.local
    ```
 
-3. Replace every placeholder in `.env.local`. `SESSION_SECRET` must contain at least 32 characters.
+3. Create an empty MySQL database and replace every placeholder in `.env.local`. `SESSION_SECRET` must contain at least 32 characters.
+
+   For local development with Docker:
+
+   ```bash
+   docker run --name twb-mysql \
+     -e MYSQL_ROOT_PASSWORD=local-root-password \
+     -e MYSQL_DATABASE=twb \
+     -e MYSQL_USER=twb \
+     -e MYSQL_PASSWORD=local-database-password \
+     -p 3306:3306 \
+     -d mysql:8.4
+   ```
+
+   Configure the matching connection:
+
+   ```env
+   MYSQL_HOST=127.0.0.1
+   MYSQL_PORT=3306
+   MYSQL_USER=twb
+   MYSQL_PASSWORD=local-database-password
+   MYSQL_DATABASE=twb
+   MYSQL_SSL=false
+   ```
+
+   A `mysql://` connection string may be supplied as `DATABASE_URL` instead.
 
 4. Start the development server:
 
@@ -43,7 +69,23 @@ A modern bilingual website and administration application for the Turks Without 
 
 5. Open [http://localhost:3000](http://localhost:3000).
 
-The SQLite database is created automatically in `data/twb.sqlite`. On first launch, conversation topics are seeded from `tum-haftalar-konusma-konulari.xlsx`.
+The MySQL schema is created automatically. On first launch, conversation topics are seeded from `tum-haftalar-konusma-konulari.xlsx`.
+
+## Migrate an existing SQLite database
+
+Configure the target MySQL connection in `.env.local`, keep the existing SQLite file at `data/twb.sqlite`, and run:
+
+```bash
+npm run db:migrate:mysql
+```
+
+The target database must be empty. To intentionally replace existing TWB data in the configured MySQL database:
+
+```bash
+npm run db:migrate:mysql -- --force
+```
+
+The migration transfers editable pages, weeks, topic headings and questions, semester settings, schools, students, school assignments, and submitted participation applications. Keep a backup of the SQLite file until the migrated application has been checked.
 
 ## Weekly topic workbook
 
@@ -65,7 +107,7 @@ npm run build
 npm start
 ```
 
-The application requires persistent storage for the `data` directory when deployed.
+Set the MySQL connection and authentication values as encrypted environment variables in production. GoDaddy Node.js Hosting can build and start the repository directly from GitHub using the included `server.js`; it supplies the listening port through `PORT`.
 
 ## Twilio WhatsApp
 

@@ -20,11 +20,13 @@ export const dynamic = "force-dynamic";
 export default async function AdminPage() {
   if (!(await isAdmin())) redirect("/admin/login");
   const locale = await getLocale();
-  const pages = getPages();
-  const weeks = getWeeks();
-  const calendar = getAcademicCalendar();
-  const schools = getSchools();
-  const students = getStudents();
+  const [pages, weeks, calendar, schools, students] = await Promise.all([
+    getPages(),
+    getWeeks(),
+    getAcademicCalendar(),
+    getSchools(),
+    getStudents(),
+  ]);
 
   return (
     <section className="admin-section">

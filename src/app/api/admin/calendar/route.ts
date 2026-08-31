@@ -38,6 +38,6 @@ export async function PUT(request: Request) {
       { status: 400 },
     );
   }
-  updateAcademicCalendar(calendar);
+  await updateAcademicCalendar(calendar);
   return NextResponse.json({ message: "Dönem tarihleri kaydedildi." });
 }

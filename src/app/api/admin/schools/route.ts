@@ -8,7 +8,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Yetkisiz işlem." }, { status: 401 });
   }
   try {
-    const school = createSchool(parseSchoolInput(await request.json()));
+    const school = await createSchool(parseSchoolInput(await request.json()));
     return NextResponse.json(
       { message: "Okul eklendi.", school },
       { status: 201 },

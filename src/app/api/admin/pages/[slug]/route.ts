@@ -10,7 +10,7 @@ export async function PUT(
     return NextResponse.json({ error: "Yetkisiz işlem." }, { status: 401 });
   }
   const { slug } = await params;
-  const existing = getPage(slug);
+  const existing = await getPage(slug);
   if (!existing) {
     return NextResponse.json({ error: "Sayfa bulunamadı." }, { status: 404 });
   }
@@ -35,7 +35,7 @@ export async function PUT(
     }
   }
 
-  updatePage({
+  await updatePage({
     slug,
     title: String(values.title).trim(),
     eyebrow: String(values.eyebrow).trim(),

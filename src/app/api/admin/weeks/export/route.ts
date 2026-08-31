@@ -7,7 +7,7 @@ export async function GET() {
   if (!(await isAdmin())) {
     return NextResponse.json({ error: "Yetkisiz işlem." }, { status: 401 });
   }
-  const weeks = getWeeks();
+  const weeks = await getWeeks();
   if (weeks.length === 0) {
     return NextResponse.json(
       { error: "Dışa aktarılacak hafta bulunamadı." },

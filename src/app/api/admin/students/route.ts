@@ -8,7 +8,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Yetkisiz işlem." }, { status: 401 });
   }
   try {
-    const student = createStudent(parseStudentInput(await request.json()));
+    const student = await createStudent(parseStudentInput(await request.json()));
     return NextResponse.json(
       { message: "Öğrenci eklendi.", student },
       { status: 201 },

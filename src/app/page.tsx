@@ -6,7 +6,7 @@ import { getLocale, localizedSlug, ui } from "@/lib/i18n";
 export default async function Home() {
   const locale = await getLocale();
   const copy = ui[locale].home;
-  const page = getPage(localizedSlug("home", locale));
+  const page = await getPage(localizedSlug("home", locale));
   if (!page) return null;
 
   return (

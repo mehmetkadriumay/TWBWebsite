@@ -13,7 +13,7 @@ export async function DELETE(
   if (!Number.isInteger(id) || id < 1) {
     return NextResponse.json({ error: "Geçersiz hafta." }, { status: 400 });
   }
-  if (!deleteWeek(id)) {
+  if (!(await deleteWeek(id))) {
     return NextResponse.json({ error: "Hafta bulunamadı." }, { status: 404 });
   }
   return NextResponse.json({ message: `Hafta ${id} silindi.` });

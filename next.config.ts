@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   outputFileTracingRoot: process.cwd(),
-  serverExternalPackages: ["node:sqlite"],
+  serverExternalPackages: ["mysql2"],
 };
 
 export default nextConfig;
