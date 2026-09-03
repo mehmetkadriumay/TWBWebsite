@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "node server.js",
+    "start": "node scripts/initialize-database.mjs && node server.js",
+    "db:export:deployment": "node scripts/export-deployment-data.mjs",
+    "db:init": "node scripts/initialize-database.mjs",
     "db:migrate:mysql": "node scripts/migrate-sqlite-to-mysql.mjs",
     "lint": "next lint"
   },

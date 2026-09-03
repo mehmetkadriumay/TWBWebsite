@@ -13,6 +13,7 @@ A modern bilingual website and administration application for the Turks Without 
 - Role-filtered student assignments for schools
 - Admin-only Twilio WhatsApp messaging
 - MySQL persistence with signed administrator sessions
+- Automatic first-deployment schema and public-content import
 
 ## Requirements
 
@@ -51,15 +52,16 @@ A modern bilingual website and administration application for the Turks Without 
    Configure the matching connection:
 
    ```env
-   MYSQL_HOST=127.0.0.1
-   MYSQL_PORT=3306
-   MYSQL_USER=twb
-   MYSQL_PASSWORD=local-database-password
-   MYSQL_DATABASE=twb
-   MYSQL_SSL=false
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_NAME=twb
+   DB_USER=twb
+   DB_PASSWORD=local-database-password
+   DB_SSL=false
    ```
 
    A `mysql://` connection string may be supplied as `DATABASE_URL` instead.
+   The legacy `MYSQL_*` names remain supported for existing local environments.
 
 4. Start the development server:
 
@@ -69,7 +71,31 @@ A modern bilingual website and administration application for the Turks Without 
 
 5. Open [http://localhost:3000](http://localhost:3000).
 
-The MySQL schema is created automatically. On first launch, conversation topics are seeded from `tum-haftalar-konusma-konulari.xlsx`.
+The MySQL schema is created automatically. On first launch, an empty database
+imports `data/godaddy-seed.json`. If that file is unavailable, conversation
+topics fall back to `tum-haftalar-konusma-konulari.xlsx`.
+
+## Deployment data
+
+Create a fresh deployment export from the currently configured database:
+
+```bash
+npm run db:export:deployment
+```
+
+This writes `data/godaddy-seed.json` with editable public pages, semester
+settings, weekly topic headings, and questions. Credentials, participation
+applications, schools, and student records are intentionally excluded so
+private information is never committed as deployment seed data.
+
+To explicitly initialize an empty database from the schema and export:
+
+```bash
+npm run db:init
+```
+
+`npm start` runs this initialization before starting the web server. Existing
+page or weekly-program data is never overwritten.
 
 ## Migrate an existing SQLite database
 
@@ -108,6 +134,16 @@ npm start
 ```
 
 Set the MySQL connection and authentication values as encrypted environment variables in production. GoDaddy Node.js Hosting can build and start the repository directly from GitHub using the included `server.js`; it supplies the listening port through `PORT`.
+
+Use the database values supplied by GoDaddy:
+
+```env
+DB_HOST=<from-hosting>
+DB_PORT=<from-hosting>
+DB_NAME=<from-hosting>
+DB_USER=<from-hosting>
+DB_PASSWORD=<from-hosting>
+```
 
 ## Twilio WhatsApp
 

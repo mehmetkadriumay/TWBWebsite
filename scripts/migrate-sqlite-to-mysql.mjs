@@ -2,49 +2,9 @@ import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import mysql from "mysql2/promise";
+import { loadLocalEnv, mysqlOptions } from "./db-config.mjs";
 
-if (typeof process.loadEnvFile === "function" && fs.existsSync(".env.local")) {
-  process.loadEnvFile(".env.local");
-}
-
-function mysqlOptions() {
-  if (process.env.DATABASE_URL) {
-    const url = new URL(process.env.DATABASE_URL);
-    if (url.protocol !== "mysql:") {
-      throw new Error("DATABASE_URL must use the mysql:// protocol.");
-    }
-    return {
-      host: url.hostname,
-      port: Number(url.port || 3306),
-      user: decodeURIComponent(url.username),
-      password: decodeURIComponent(url.password),
-      database: decodeURIComponent(url.pathname.replace(/^\//, "")),
-      ssl:
-        url.searchParams.get("ssl") === "true" ||
-        process.env.MYSQL_SSL === "true"
-          ? {}
-          : undefined,
-    };
-  }
-  const required = [
-    "MYSQL_HOST",
-    "MYSQL_USER",
-    "MYSQL_PASSWORD",
-    "MYSQL_DATABASE",
-  ];
-  const missing = required.filter((name) => !process.env[name]);
-  if (missing.length > 0) {
-    throw new Error(`Missing MySQL configuration: ${missing.join(", ")}`);
-  }
-  return {
-    host: process.env.MYSQL_HOST,
-    port: Number(process.env.MYSQL_PORT || 3306),
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWORD,
-    database: process.env.MYSQL_DATABASE,
-    ssl: process.env.MYSQL_SSL === "true" ? {} : undefined,
-  };
-}
+loadLocalEnv();
 
 const sqlitePath =
   process.argv.find((argument) => argument.startsWith("--sqlite="))?.slice(9) ??

@@ -1,0 +1,3789 @@
+{
+  "schemaVersion": 1,
+  "exportedAt": "2026-09-03T01:58:40.906Z",
+  "description": "Public website content, weekly program, and scheduling configuration. Credentials, applications, and student records are intentionally excluded.",
+  "pages": [
+    {
+      "slug": "bizim-hikayemiz",
+      "title": "Bir grupla başlayan, iki ülkeye yayılan hikâye",
+      "eyebrow": "Bizim Hikâyemiz",
+      "summary": "Amerika Birleşik Devletleri'nde yaşayan Türk gençleri ile Türkiye'nin farklı şehirlerindeki öğrenciler arasında bir köprü kurmak için yola çıktık.",
+      "body": "Turks Without Borders, Mart 2020'de Seattle'da tek bir grupla faaliyete başladı. Yalova Çiftlikköy Taşköprü Ortaokulu ile yürüttüğümüz pilot dönemin olumlu sonuçları programın bugünkü yapısını oluşturdu.\n\nİlk yılın ardından Amerika'nın farklı eyaletlerindeki Türk toplulukları da programa katıldı. Böylece Amerika'daki gençler kültürel bağlarını korurken Türkiye'deki arkadaşları günlük İngilizce kalıplarıyla pratik yapıyor; tüm katılımcılar birlikte zaman ayırmayı, dinlemeyi ve yardımlaşmayı öğreniyor.\n\nVizyonumuz; güçlü bir yabancı dil, kültürel merak ve özgüvenle dünya ile entegre, geleceğe hazır bir gençliğin temelini atmak."
+    },
+    {
+      "slug": "bizim-hikayemiz-en",
+      "title": "A story that began with one group and grew across two countries",
+      "eyebrow": "Our Story",
+      "summary": "We set out to build a bridge between Turkish youth living in the United States and students in cities throughout Türkiye.",
+      "body": "Turks Without Borders began in Seattle in March 2020 with a single group. The positive results from our pilot with Yalova Çiftlikköy Taşköprü Middle School shaped the program we run today.\n\nAfter a successful first year, Turkish communities in other US states joined the program. Young people in America maintain their cultural ties while their friends in Türkiye practice everyday English; everyone learns to make time for one another, listen, and help each other grow.\n\nOur vision is to help build a generation that is globally connected and ready for the future through strong language skills, cultural curiosity, and confidence."
+    },
+    {
+      "slug": "home",
+      "title": "Kıtalar arası dostluk ve kültür köprüsü kuruyoruz.",
+      "eyebrow": "Sınırlar olmadan öğren",
+      "summary": "Gençlerin gerçek sohbetlerle İngilizce pratiği yaptığı, kültürleri tanıdığı ve kalıcı dostluklar kurduğu gönüllü bir öğrenme topluluğu.",
+      "body": "Biz Amerika Birleşik Devletleri’nde yaşayan gençlerle Türkiye’de İngilizce öğrenen öğrencileri bir araya getiriyoruz. Haftalık, güvenli ve yönlendirilmiş görüşmelerle dil öğrenimini bir dersten ortak bir deneyime dönüştürüyoruz."
+    },
+    {
+      "slug": "home-en",
+      "title": "Building a bridge of friendship and culture across continents.",
+      "eyebrow": "Learn without borders",
+      "summary": "A volunteer learning community where young people practice English through real conversations, discover cultures, and build lasting friendships.",
+      "body": "We connect young people living in the United States with students learning English in Türkiye. Through weekly, guided, and safe conversations, language learning becomes a shared experience rather than just another class."
+    },
+    {
+      "slug": "nasil-calisiyoruz",
+      "title": "Her hafta, gerçek bir sohbet etrafında buluşuyoruz",
+      "eyebrow": "Nasıl Çalışıyoruz",
+      "summary": "Mektup arkadaşlığı fikrini günümüz teknolojisiyle yüz yüze, güvenli ve düzenli görüşmelere dönüştürüyoruz.",
+      "body": "Turks Without Borders, geçmişte yabancı dil pratiğini güçlendirmek için okullarda kullanılan mektup arkadaşlığı yaklaşımından ilham alır ve bu yaklaşımı günümüz teknolojisiyle yüz yüze çevrim içi görüşmelere dönüştürür. Proje, Amerika Birleşik Devletleri ve Washington Eyaleti yasalarına göre kurulmuş kâr amacı gütmeyen TACAWA'nın (Turkish American Cultural Association of Washington) Sosyal Dayanışma Ağı bünyesinde faaliyet gösterir.\n\nProgramı, Türkiye ve Amerika Birleşik Devletleri'nde profesyonel eğitimcilik deneyimi bulunan ve projeyi gönüllü olarak başlatıp yürüten üyeler yönetir. Belirlenmiş kurallar ve proje ekibinin gözetimi altında, Amerika'nın farklı eyaletlerinde yaşayan Türk ailelerin çocukları ile Türkiye'nin farklı illerindeki öğrenciler gönüllü olarak bir araya gelir. Görüşmeler, önceden hazırlanan haftalık konular üzerinden karşılıklı İngilizce konuşmalar şeklinde gerçekleştirilir.\n\nProjeye katılan gençler demokratik bir çalışma ortamında kararları birlikte alır, bağlı oldukları grupların yönünü belirler, elde edilen sonuçları değerlendirir ve programın sürekli gelişmesine katkıda bulunur. Bu yaklaşımın gençlerin kişisel gelişimini ve eğitimci bakış açısını güçlendirdiğini gözlemliyoruz. Gelecekte başarılı olabilmeleri için iletişim becerilerinin kritik olduğuna inanıyor ve gençlere daha fazla sorumluluk veriyoruz. Amerika'daki gençlerin Türkiye'deki arkadaşlarıyla günlük İngilizce üzerinden bağ kurması ve yaratıcı fikirlerini paylaşması; Türkiye'deki gençlerin ise yabancı dil öğrenmenin eğlenceli yönünü keşfetmesi, dili sevmesi ve İngilizceyi yalnızca bir ders değil, kişisel ve profesyonel yaşamlarında başarılarını destekleyecek bir araç olarak görmesi programın temel amaçları arasındadır."
+    },
+    {
+      "slug": "nasil-calisiyoruz-en",
+      "title": "Every week, we meet around a real conversation",
+      "eyebrow": "How It Works",
+      "summary": "We transform the traditional pen-pal idea into safe, consistent, face-to-face conversations using today's technology.",
+      "body": "Turks Without Borders draws inspiration from the pen-pal model once used in schools to reinforce foreign-language learning and transforms it into face-to-face online conversations through today's technology. The project operates through the Social Solidarity Network of TACAWA, the Turkish American Cultural Association of Washington, a nonprofit organization established under United States and Washington State law.\n\nThe program is led by volunteers with professional education experience in Türkiye and the United States who created and continue to manage the project. Within established rules and under the project team's supervision, children of Turkish families living in several U.S. states meet voluntarily with students living in different provinces of Türkiye. Their sessions are conducted as two-way English conversations based on topics prepared in advance.\n\nYoung participants work in a democratic environment where they make decisions together, help guide their groups, examine outcomes, and continually improve the program. We have observed that this approach makes a significant contribution to their personal development and educational perspective. Because strong communication skills are essential to their future success, the project gives young people greater responsibility. Its goals include helping youth in the United States connect with friends in Türkiye through everyday English and share creative ideas, while students in Türkiye discover and enjoy the engaging side of language learning and recognize that English is not merely a school subject but a tool that can support success throughout their personal and professional lives."
+    },
+    {
+      "slug": "projeye-katilim",
+      "title": "Yeni bir konuşmayla yeni bir bağ kur",
+      "eyebrow": "Projeye Katılım",
+      "summary": "Türkiye'den öğrenciler, Amerika'dan gençler, öğretmenler ve gönüllü koordinatörler için yeni gruplar açıyoruz.",
+      "body": "Başvuru yapmadan önce aşağıdaki katılım koşullarını dikkatle inceleyin. Koşullar size veya grubunuza uygunsa sayfanın sonundaki Türkiye ya da Amerika Birleşik Devletleri başvuru formunu doldurun.\n\nTürkiye başvurusu öğretmen, okul ve katılacak öğrenci grubu bilgilerini; Amerika Birleşik Devletleri başvurusu ise öğrenci, referans veren kişi ve veli bilgilerini toplar.\n\nGönderilen başvurular proje ekibi tarafından yönetim panelinde değerlendirilir. Onaylanan başvurular uygun Türk öğrenci grubu veya yabancı öğrenci kaydına dönüştürülür."
+    },
+    {
+      "slug": "projeye-katilim-en",
+      "title": "Start a new connection with one conversation",
+      "eyebrow": "Join the Project",
+      "summary": "We are opening new groups for students in Türkiye, young people in the United States, teachers, and volunteer coordinators.",
+      "body": "Before applying, carefully review the participation requirements below. If the conditions fit you or your group, complete the Türkiye or United States application form at the bottom of the page.\n\nThe Türkiye application collects teacher, school, and participating student-group information. The United States application collects applicant, referrer, and parent or guardian information.\n\nThe project team reviews submitted applications in the administration panel. Approved applications become the appropriate Turkish student-group or foreign-student record."
+    }
+  ],
+  "settings": [
+    {
+      "key": "semester1End",
+      "value": "2026-12-14"
+    },
+    {
+      "key": "semester1Start",
+      "value": "2026-09-07"
+    },
+    {
+      "key": "semester2End",
+      "value": "2027-04-12"
+    },
+    {
+      "key": "semester2Start",
+      "value": "2027-01-25"
+    }
+  ],
+  "weeks": [
+    {
+      "id": 1,
+      "title": "Hafta 1",
+      "topics": [
+        {
+          "title": "Knowing each other",
+          "question": "What is your name?"
+        },
+        {
+          "title": "Knowing each other",
+          "question": "How are you?"
+        },
+        {
+          "title": "Knowing each other",
+          "question": "How old are you"
+        },
+        {
+          "title": "Knowing each other",
+          "question": "What school do you go to?"
+        },
+        {
+          "title": "Knowing each other",
+          "question": "What grade are you in?"
+        },
+        {
+          "title": "Knowing each other",
+          "question": "What is your favorite subject in school?"
+        },
+        {
+          "title": "Knowing each other",
+          "question": "What’s your favorite English word?"
+        },
+        {
+          "title": "Knowing each other",
+          "question": "What do you do in your free time?"
+        },
+        {
+          "title": "Knowing each other",
+          "question": "Do you play any sports?"
+        },
+        {
+          "title": "Knowing each other",
+          "question": "What do you do daily during quarantine?"
+        },
+        {
+          "title": "Knowing each other",
+          "question": "Where do you want to travel?"
+        },
+        {
+          "title": "Knowing each other",
+          "question": "What’s your favorite book"
+        },
+        {
+          "title": "Knowing each other",
+          "question": "What’s your favorite show/movie?"
+        },
+        {
+          "title": "Knowing each other",
+          "question": "What’s your favorite food?"
+        },
+        {
+          "title": "Knowing each other",
+          "question": "What’s your favorite American food?"
+        },
+        {
+          "title": "Knowing each other",
+          "question": "What’s your favorite Turkish food?"
+        },
+        {
+          "title": "Knowing each other",
+          "question": "What’s your dream job?"
+        },
+        {
+          "title": "Knowing each other",
+          "question": "What do you want to be in the future?"
+        },
+        {
+          "title": "Knowing each other",
+          "question": "What’s one thing you’re excited about that’s coming up in the next year?"
+        },
+        {
+          "title": "Knowing each other",
+          "question": "What’s your hidden talent?"
+        },
+        {
+          "title": "Knowing each other",
+          "question": "If you had to eat one thing for the rest of your life, what would it be?"
+        },
+        {
+          "title": "Knowing each other",
+          "question": "What’s one of your favorite memories?"
+        },
+        {
+          "title": "Knowing each other",
+          "question": "If you could instantly become an expert in something, what would it be?"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Hafta 2",
+      "topics": [
+        {
+          "title": "Animals",
+          "question": "What animal best represents you? Why?"
+        },
+        {
+          "title": "Animals",
+          "question": "What creature scares you? Why?"
+        },
+        {
+          "title": "Animals",
+          "question": "Except for food, do humans need other animals? Why or why not?"
+        },
+        {
+          "title": "Animals",
+          "question": "What is the most effective way to save endangered species?"
+        },
+        {
+          "title": "Animals",
+          "question": "What are some examples of useful traits that help animals survive? (i.e. a giraffe’s long neck)"
+        },
+        {
+          "title": "Animals",
+          "question": "What is Darwin famous for?"
+        },
+        {
+          "title": "Animals",
+          "question": "What traits have made humans a successful species?"
+        },
+        {
+          "title": "Animals",
+          "question": "What are some animals you don’t know much about?"
+        },
+        {
+          "title": "Animals",
+          "question": "What is the cutest animal you can think of? How about the ugliest?"
+        },
+        {
+          "title": "Animals",
+          "question": "Why do humans have pets? Do you have a pet? Why or why not?"
+        },
+        {
+          "title": "Animals",
+          "question": "Are there any animals that we should try to kill off completely?"
+        },
+        {
+          "title": "Camping",
+          "question": "What is the best activity to do while camping?"
+        },
+        {
+          "title": "Camping",
+          "question": "How many times have you gone camping? Did you enjoy it?"
+        },
+        {
+          "title": "Camping",
+          "question": "Where have you gone camping?"
+        },
+        {
+          "title": "Camping",
+          "question": "What are the 4 most important things to bring when you go camping?"
+        },
+        {
+          "title": "Camping",
+          "question": "Is camping with lots of amenities (solar panels, fans, stove, etc.) still camping? How much luxury is too much?"
+        },
+        {
+          "title": "Camping",
+          "question": "Where is the best place to go camping in your country?"
+        },
+        {
+          "title": "Camping",
+          "question": "What is the longest time you have spent camping?"
+        },
+        {
+          "title": "Camping",
+          "question": "Tell a story about a camping trip (it doesn’t have to be your story)."
+        },
+        {
+          "title": "Camping",
+          "question": "What is the best thing about camping? How about the worst thing?"
+        },
+        {
+          "title": "Camping",
+          "question": "What is the best food to bring on a camping trip?"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Hafta 3",
+      "topics": [
+        {
+          "title": "Cooking",
+          "question": "How often do you cook?"
+        },
+        {
+          "title": "Cooking",
+          "question": "How good are you at cooking?"
+        },
+        {
+          "title": "Cooking",
+          "question": "What are some things that you can cook?"
+        },
+        {
+          "title": "Cooking",
+          "question": "What dish or food are you best at cooking?"
+        },
+        {
+          "title": "Cooking",
+          "question": "Do you think you can cook better than your mother?"
+        },
+        {
+          "title": "Cooking",
+          "question": "Who is a better cook, your mother or your grandmother?"
+        },
+        {
+          "title": "Cooking",
+          "question": "Are cooking shows popular in your country? Do you watch any cooking shows?"
+        },
+        {
+          "title": "Cooking",
+          "question": "What is the hardest thing to cook?"
+        },
+        {
+          "title": "Cooking",
+          "question": "What are some of the advantages of cooking your meals at home? How about the disadvantages?"
+        },
+        {
+          "title": "Cooking",
+          "question": "Is it important for husbands to know how to cook?"
+        },
+        {
+          "title": "Cooking",
+          "question": "Does your father cook?"
+        },
+        {
+          "title": "Cooking",
+          "question": "Who is the best cook you know?"
+        },
+        {
+          "title": "Cooking",
+          "question": "Would you like to be a chef? Why?"
+        },
+        {
+          "title": "Cooking",
+          "question": "If you had your own personal chef, what meal would you ask for most?"
+        },
+        {
+          "title": "Cooking",
+          "question": "How hard is it to become a chef? What do you have to do to become a chef?"
+        },
+        {
+          "title": "Fast Food",
+          "question": "What is your least favorite fast food restaurant and why?"
+        },
+        {
+          "title": "Fast Food",
+          "question": "Does fast food taste good or bad? Why?"
+        },
+        {
+          "title": "Fast Food",
+          "question": "Why is fast food so popular?"
+        },
+        {
+          "title": "Fast Food",
+          "question": "How often do you eat fast food? What do you usually eat? Where?"
+        },
+        {
+          "title": "Fast Food",
+          "question": "What is a food that people think is healthy but really isn’t?"
+        },
+        {
+          "title": "Fast Food",
+          "question": "Do you know anyone who has worked at a fast food restaurant? How did they like it?"
+        },
+        {
+          "title": "Fast Food",
+          "question": "How has fast food changed in your country?"
+        },
+        {
+          "title": "Fast Food",
+          "question": "How is your country’s fast food different from other countries’ fast food?"
+        },
+        {
+          "title": "Fast Food",
+          "question": "Can you think of any healthy fast food?"
+        },
+        {
+          "title": "Fast Food",
+          "question": "How would you define “fast food”?"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Hafta 4",
+      "topics": [
+        {
+          "title": "Games",
+          "question": "How many genres of video games can you name?"
+        },
+        {
+          "title": "Games",
+          "question": "How are some of these genres unique and different from the others?"
+        },
+        {
+          "title": "Games",
+          "question": "What are some more examples of games?"
+        },
+        {
+          "title": "Games",
+          "question": "Choose one or two examples of games or video games. What are their rules?"
+        },
+        {
+          "title": "Games",
+          "question": "What kinds of games are popular now?"
+        },
+        {
+          "title": "Games",
+          "question": "What were some games that were popular in the past?"
+        },
+        {
+          "title": "Games",
+          "question": "What makes a good game?"
+        },
+        {
+          "title": "Games",
+          "question": "Are games good for you or bad for you?"
+        },
+        {
+          "title": "Games",
+          "question": "Are games in the present better or worse than games in the past?"
+        },
+        {
+          "title": "Games",
+          "question": "Now it’s time to create a game, in your group think about?"
+        },
+        {
+          "title": "Games",
+          "question": "What format will your game be in?"
+        },
+        {
+          "title": "Games",
+          "question": "What genre will your game be?"
+        },
+        {
+          "title": "Games",
+          "question": "What will be the theme of your game?"
+        },
+        {
+          "title": "Games",
+          "question": "What will your game look like?"
+        },
+        {
+          "title": "Games",
+          "question": "What will be the name of your game?"
+        },
+        {
+          "title": "Games",
+          "question": "How will people play your game? What are the rules?"
+        },
+        {
+          "title": "Games",
+          "question": "What kind of music/sound effects will it have?"
+        },
+        {
+          "title": "Games",
+          "question": "How will the controls work?"
+        },
+        {
+          "title": "Habits",
+          "question": "What are some things you do every day?"
+        },
+        {
+          "title": "Habits",
+          "question": "What are some good habits you have?"
+        },
+        {
+          "title": "Habits",
+          "question": "Do you have any bad habits?"
+        },
+        {
+          "title": "Habits",
+          "question": "Can your group give you any advice for your bad habits?"
+        },
+        {
+          "title": "Habits",
+          "question": "What is something you should do every day but don’t?"
+        },
+        {
+          "title": "Habits",
+          "question": "What are some activities you like to do?"
+        },
+        {
+          "title": "Habits",
+          "question": "How much do you exercise every week?"
+        },
+        {
+          "title": "Habits",
+          "question": "What is a successful life? What habits should you have to have a successful life?"
+        },
+        {
+          "title": "Habits",
+          "question": "What three habits will improve your life?"
+        },
+        {
+          "title": "Habits",
+          "question": "What are some habits that can improve your English ability?"
+        },
+        {
+          "title": "Habits",
+          "question": "What is something you do about once a week, month or year?"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Hafta 5",
+      "topics": [
+        {
+          "title": "Homes",
+          "question": "Is your home clean? Are you a very organized person?"
+        },
+        {
+          "title": "Homes",
+          "question": "Do you have a lot of decorations in your home or is it bare?"
+        },
+        {
+          "title": "Homes",
+          "question": "Are you happy with the size of your home?"
+        },
+        {
+          "title": "Homes",
+          "question": "What is your favorite appliance, electronic device, or piece of furniture in your home?"
+        },
+        {
+          "title": "Homes",
+          "question": "If you had $3,000 to improve your home, what would you spend it on?"
+        },
+        {
+          "title": "Homes",
+          "question": "Do you agree with the saying “Wherever I lay my head is home.”?"
+        },
+        {
+          "title": "Homes",
+          "question": "How is your home different from your childhood home?"
+        },
+        {
+          "title": "Homes",
+          "question": "What would you say the decoration style of your home is?"
+        },
+        {
+          "title": "Homes",
+          "question": "What would your ideal house or apartment look like?"
+        },
+        {
+          "title": "Homes",
+          "question": "What do you do to maintain your home?"
+        },
+        {
+          "title": "Homes",
+          "question": "What household chores do you hate doing?"
+        },
+        {
+          "title": "Seasons",
+          "question": "What is your favorite season?"
+        },
+        {
+          "title": "Seasons",
+          "question": "What do you think of when you think of winter?"
+        },
+        {
+          "title": "Seasons",
+          "question": "What are some things your family did when you were a child in spring?"
+        },
+        {
+          "title": "Seasons",
+          "question": "What is the worst season in your country?"
+        },
+        {
+          "title": "Seasons",
+          "question": "Does it snow in your hometown in the winter? Did you use to make snowmen?"
+        },
+        {
+          "title": "Seasons",
+          "question": "What is your favorite thing to do in summer?"
+        },
+        {
+          "title": "Seasons",
+          "question": "What festivals or celebrations does your country have during the changing of the seasons?"
+        },
+        {
+          "title": "Seasons",
+          "question": "Do you ever go hiking when the leaves change in fall?"
+        },
+        {
+          "title": "Seasons",
+          "question": "Where is the best place to be in summer? How about winter?"
+        },
+        {
+          "title": "Seasons",
+          "question": "Does your country have a special food for any of the seasons?"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Hafta 6",
+      "topics": [
+        {
+          "title": "Luxury Items",
+          "question": "What is one luxury item you really want to have?"
+        },
+        {
+          "title": "Luxury Items",
+          "question": "What is imported by your country?"
+        },
+        {
+          "title": "Luxury Items",
+          "question": "Do developed countries focus too much on luxury"
+        },
+        {
+          "title": "Luxury Items",
+          "question": "What do you think is the most popular luxury item in your country?"
+        },
+        {
+          "title": "Luxury Items",
+          "question": "Who is it made by?"
+        },
+        {
+          "title": "Luxury Items",
+          "question": "What is the craziest example of a luxury item you have heard of?"
+        },
+        {
+          "title": "Luxury Items",
+          "question": "Have you ever been jealous that someone had something you didn’t?"
+        },
+        {
+          "title": "Luxury Items",
+          "question": "Do you think that luxury goods make people happy? Why or why not?"
+        },
+        {
+          "title": "Luxury Items",
+          "question": "What do you think expensive perfume is made from?"
+        },
+        {
+          "title": "Luxury Items",
+          "question": "What is something that you can spend money on that will make you happy?"
+        },
+        {
+          "title": "Luxury Items",
+          "question": "How long will it make you happy for? Who are the best electronics made by?"
+        },
+        {
+          "title": "Luxury Items",
+          "question": "Do brand name prices mean quality?"
+        },
+        {
+          "title": "Choices",
+          "question": "Would you rather live in your home country or live abroad?"
+        },
+        {
+          "title": "Choices",
+          "question": "Would you rather be smart or beautiful / handsome?"
+        },
+        {
+          "title": "Choices",
+          "question": "Would you rather be poor and happy or rich and unhappy?"
+        },
+        {
+          "title": "Choices",
+          "question": "Would you rather marry someone plain with a good personality or someone beautiful without much personality?"
+        },
+        {
+          "title": "Choices",
+          "question": "If war broke out in your country would you rather flee the country or fight?"
+        },
+        {
+          "title": "Choices",
+          "question": "Would you rather be rich or famous?"
+        },
+        {
+          "title": "Choices",
+          "question": "If you had to lose one of your senses(sight, smell, hearing, touch, taste) which would you rather lose?"
+        },
+        {
+          "title": "Choices",
+          "question": "Would you rather marry a rich celebrity or a rich CEO?"
+        },
+        {
+          "title": "Choices",
+          "question": "Would you rather have a brand new Mac or PC?"
+        },
+        {
+          "title": "Choices",
+          "question": "Would you rather take a trip to a new country or get a new TV?"
+        },
+        {
+          "title": "Idioms",
+          "question": "A blessing in disguise"
+        },
+        {
+          "title": "Idioms",
+          "question": "A dime a dozen"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Hafta 7",
+      "topics": [
+        {
+          "title": "Future",
+          "question": "What kind of neighborhood will you live in when you get older?"
+        },
+        {
+          "title": "Future",
+          "question": "What will cities be like 50 years from now? Think about how these will change (make two or three predictions for each):"
+        },
+        {
+          "title": "Future",
+          "question": "Transportation"
+        },
+        {
+          "title": "Future",
+          "question": "Pollution"
+        },
+        {
+          "title": "Future",
+          "question": "Crime"
+        },
+        {
+          "title": "Future",
+          "question": "Advertising"
+        },
+        {
+          "title": "Future",
+          "question": "Buildings"
+        },
+        {
+          "title": "Future",
+          "question": "Work"
+        },
+        {
+          "title": "Future",
+          "question": "Shopping"
+        },
+        {
+          "title": "Future",
+          "question": "Nightlife"
+        },
+        {
+          "title": "Future",
+          "question": "When will you graduate?"
+        },
+        {
+          "title": "Future",
+          "question": "How will you use English in the future?"
+        },
+        {
+          "title": "Future",
+          "question": "What kind of sci-fi movie will the future be like? (The Matrix, Terminator, i-Robot, Minority Report etc.)"
+        },
+        {
+          "title": "Future",
+          "question": "Do you think houses will be more environmentally friendly in the future?"
+        },
+        {
+          "title": "Future",
+          "question": "Where will we get our energy when we run out of oil?"
+        },
+        {
+          "title": "Future",
+          "question": "How will India and China affect the environment in the future?"
+        },
+        {
+          "title": "Future",
+          "question": "What will happen if we keep polluting the environment?"
+        },
+        {
+          "title": "Future",
+          "question": "Will the climate keep changing or go back to normal?"
+        },
+        {
+          "title": "Future",
+          "question": "Will science find a solution to the environmental problems we have? What kind of solution will it be?"
+        },
+        {
+          "title": "Future",
+          "question": "What will you do this weekend?"
+        },
+        {
+          "title": "Future",
+          "question": "What will life be like when you are 40?"
+        },
+        {
+          "title": "Future",
+          "question": "Will computers ever take over the world?"
+        },
+        {
+          "title": "Future",
+          "question": "Will we be able to add machines to our body to improve it in the future?"
+        },
+        {
+          "title": "Future",
+          "question": "How will fashion change in the future?"
+        },
+        {
+          "title": "Future",
+          "question": "What kind of music will your children listen to?"
+        },
+        {
+          "title": "Future",
+          "question": "When will humans live on another planet?"
+        },
+        {
+          "title": "Future",
+          "question": "What will you do after you finish university?"
+        },
+        {
+          "title": "Future",
+          "question": "Where will you move after you finish university?"
+        },
+        {
+          "title": "Future",
+          "question": "How will electronics be different?"
+        },
+        {
+          "title": "Future",
+          "question": "In 50 years there are projected to be 10 billion people on the earth. How will that affect the future?"
+        },
+        {
+          "title": "Future",
+          "question": "How will medicine and health care change in the future?"
+        },
+        {
+          "title": "Future",
+          "question": "China’s and India’s populations and economies are growing quickly, what do you think China and India will be like in 50 years?"
+        },
+        {
+          "title": "Future",
+          "question": "What other things will change about life in the future?"
+        },
+        {
+          "title": "Future",
+          "question": "How do you think you will change in the future?"
+        },
+        {
+          "title": "Future",
+          "question": "Where will you be and what will you be doing in 10 years?"
+        },
+        {
+          "title": "Future",
+          "question": "What is something that will happen in the future that you are looking forward to?"
+        },
+        {
+          "title": "Learning English",
+          "question": "Why are you learning English? How will you use the English you learn?"
+        },
+        {
+          "title": "Learning English",
+          "question": "Which of these do you do: attend English classes at school, learn English with a tutor (private teacher) or study English yourself (on your own)?"
+        },
+        {
+          "title": "Learning English",
+          "question": "What materials do you use for learning English?"
+        },
+        {
+          "title": "Learning English",
+          "question": "Since when (how long) have you been learning English?"
+        },
+        {
+          "title": "Learning English",
+          "question": "Is it effective to practice English your own with ready-made materials and checking your own progress?"
+        },
+        {
+          "title": "Learning English",
+          "question": "Are there any vowels or consonants you have problems with?"
+        },
+        {
+          "title": "Learning English",
+          "question": "Do you do grammar exercises based on real life situations?"
+        },
+        {
+          "title": "Learning English",
+          "question": "How do you practice speaking English?"
+        },
+        {
+          "title": "Learning English",
+          "question": "What do you use to improve your listening ability?"
+        },
+        {
+          "title": "Learning English",
+          "question": "In what ways do you expand your English vocabulary?"
+        },
+        {
+          "title": "Learning English",
+          "question": "Do you try to use what you have learned already in what you are learning now?"
+        },
+        {
+          "title": "Learning English",
+          "question": "Do you also make up your own samples of conversation sentences and examples of vocabulary usage in sentences?"
+        },
+        {
+          "title": "Learning English",
+          "question": "Do you sometimes communicate in English with native English speakers? In what ways?"
+        },
+        {
+          "title": "Learning English",
+          "question": "Do you do oral and written translation exercises from your native language into English?"
+        },
+        {
+          "title": "Learning English",
+          "question": "What is the most difficult thing about learning English?"
+        },
+        {
+          "title": "Learning English",
+          "question": "What typical mistakes do you make?"
+        },
+        {
+          "title": "Learning English",
+          "question": "What area of English are you best at (pronunciation, grammar, vocabulary, listening comprehension, speaking, reading or writing)?"
+        },
+        {
+          "title": "Learning English",
+          "question": "What do you think your level is (beginning, intermediate, advanced)"
+        },
+        {
+          "title": "Idioms",
+          "question": "Beat around the bush"
+        },
+        {
+          "title": "Idioms",
+          "question": "Better late than never"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Hafta 8",
+      "topics": [
+        {
+          "title": "Space Life",
+          "question": "Do you believe there is other life in the universe? How about intelligent life?"
+        },
+        {
+          "title": "Space Life",
+          "question": "What do you think aliens might look like?"
+        },
+        {
+          "title": "Space Life",
+          "question": "Do you think aliens have ever visited earth?"
+        },
+        {
+          "title": "Space Life",
+          "question": "What does UFO mean?"
+        },
+        {
+          "title": "Space Life",
+          "question": "Have you seen a UFO or do you know someone who has seen a UFO?"
+        },
+        {
+          "title": "Space Life",
+          "question": "What is your favorite alien from a movie?"
+        },
+        {
+          "title": "Space Life",
+          "question": "What is the scariest alien movie? If aliens did come to a country and met with the government of that country, what do you think would happen?"
+        },
+        {
+          "title": "Space Life",
+          "question": "Why are humans so fascinated by aliens?"
+        },
+        {
+          "title": "Space Life",
+          "question": "How many planets do you think are in our galaxy? How about the universe?"
+        },
+        {
+          "title": "Space Life",
+          "question": "Do you think humans will travel to another planet in your lifetime?"
+        },
+        {
+          "title": "Space Life",
+          "question": "How do you think we or aliens will get to other star systems like our own? (If we traveled at the speed of light, the nearest star with planets that we know of is 10.5 years away.)"
+        },
+        {
+          "title": "Space Life",
+          "question": "How likely is it that Aliens exist."
+        },
+        {
+          "title": "Space Life",
+          "question": "Do you think Aliens will be friendly or unfriendly."
+        },
+        {
+          "title": "Space Life",
+          "question": "What are the aliens like in your culture movies and books."
+        },
+        {
+          "title": "Space Life",
+          "question": "What’s your favorite movie about aliens."
+        },
+        {
+          "title": "Space Life",
+          "question": "What do you think the social reaction would be to Aliens"
+        },
+        {
+          "title": "Space Life",
+          "question": "If you could choose whether Aliens existed or whether they never did, which would you choose"
+        },
+        {
+          "title": "Winter",
+          "question": "Do you like winter? Is it your favorite season?"
+        },
+        {
+          "title": "Winter",
+          "question": "Do you like the snow? Does it snow often where you live?"
+        },
+        {
+          "title": "Winter",
+          "question": "What do people drink in the winter? Do you drink hot cocoa?"
+        },
+        {
+          "title": "Winter",
+          "question": "What sports do people play in the winter? What is your favorite winter sport?"
+        },
+        {
+          "title": "Winter",
+          "question": "Do you like to watch the Winter Olympics?"
+        },
+        {
+          "title": "Winter",
+          "question": "What kinds of animals do you see in the winter?"
+        },
+        {
+          "title": "Winter",
+          "question": "Do you like to go sledding?"
+        },
+        {
+          "title": "Winter",
+          "question": "Which is more fun: having a snowball fight or building a snowman?"
+        },
+        {
+          "title": "Winter",
+          "question": "What do you like most about winter? What is least favorite thing about winter?"
+        },
+        {
+          "title": "Winter",
+          "question": "Does school get canceled often when it snows?"
+        },
+        {
+          "title": "Winter",
+          "question": "Do you have any movies you like to watch in the winter?"
+        },
+        {
+          "title": "Winter",
+          "question": "* Which would you prefer: snowboarding or skiing?"
+        },
+        {
+          "title": "Winter",
+          "question": "What’s your favorite winter memory?"
+        },
+        {
+          "title": "Winter",
+          "question": "Do you like making snow angels?"
+        },
+        {
+          "title": "Winter",
+          "question": "Have you ever seen artificial snow?"
+        },
+        {
+          "title": "Winter",
+          "question": "Have you ever witnessed a blizzard?"
+        },
+        {
+          "title": "Winter",
+          "question": "Has snow ever caused a power outage at your house?"
+        },
+        {
+          "title": "Winter",
+          "question": "Do you celebrate any winter holidays?"
+        },
+        {
+          "title": "Idioms",
+          "question": "Bite the bullet"
+        },
+        {
+          "title": "Idioms",
+          "question": "Break a leg"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Hafta 9",
+      "topics": [
+        {
+          "title": "Color",
+          "question": "What is your favorite color?"
+        },
+        {
+          "title": "Color",
+          "question": "Is color important to you?"
+        },
+        {
+          "title": "Color",
+          "question": "Does color affect your emotions?"
+        },
+        {
+          "title": "Color",
+          "question": "Imagine being in a room where everything is dark blue how would you feel? What if the room was red? Black? Yellow? Pink?"
+        },
+        {
+          "title": "Color",
+          "question": "Why do you think colors affect humans so much?"
+        },
+        {
+          "title": "Color",
+          "question": "Do you think that certain colors are only for boys or only for girls?"
+        },
+        {
+          "title": "Color",
+          "question": "Which colors do guys usually like more? How about girls?"
+        },
+        {
+          "title": "Color",
+          "question": "Why do you think there is a difference?"
+        },
+        {
+          "title": "Color",
+          "question": "If you HAD to change your hair color, what color would you change it to?"
+        },
+        {
+          "title": "Color",
+          "question": "Most electronics are either black, silver or white. Why do you think this is? Do you think we will have more colorful electronics in the future?"
+        },
+        {
+          "title": "Color",
+          "question": "Colorful tattoos are becoming more popular in places like America. Do you think they will become as popular in your country? Why or why not? Would you ever get a tattoo? Why or why not? Pink and purple are rarely worn by men in western cultures, why do you think this is?"
+        },
+        {
+          "title": "Color",
+          "question": "If you bought a car, what color would it be?"
+        },
+        {
+          "title": "Communication",
+          "question": "How is communication changing between people?"
+        },
+        {
+          "title": "Communication",
+          "question": "It used to be common to talk to strangers. Do you think it’s okay to talk to people you don’t know?"
+        },
+        {
+          "title": "Communication",
+          "question": "How often do you start up a conversation with people you don’t know?"
+        },
+        {
+          "title": "Communication",
+          "question": "Think about how your Grandmother talks with people. Is it the same as how you talk to people?"
+        },
+        {
+          "title": "Communication",
+          "question": "Use your imagination. How will people communicate in the future?"
+        },
+        {
+          "title": "Communication",
+          "question": "How have smart phones changed communication?"
+        },
+        {
+          "title": "Communication",
+          "question": "Name at least 10 forms of communication."
+        },
+        {
+          "title": "Communication",
+          "question": "Do you think people can communicate with ghosts and spirits?"
+        },
+        {
+          "title": "Communication",
+          "question": "How has communication changed through human history?"
+        },
+        {
+          "title": "Communication",
+          "question": "What is the most basic form of communication?"
+        },
+        {
+          "title": "Idioms",
+          "question": "Call it a day"
+        },
+        {
+          "title": "Idioms",
+          "question": "Easy does it"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Hafta 10",
+      "topics": [
+        {
+          "title": "Memory",
+          "question": "What is the best memory you have?"
+        },
+        {
+          "title": "Memory",
+          "question": "Who was your most memorable teacher? (Bad or good)"
+        },
+        {
+          "title": "Memory",
+          "question": "Do you have any strong memories linked to a particular smell?"
+        },
+        {
+          "title": "Memory",
+          "question": "How do you want people to remember you?"
+        },
+        {
+          "title": "Memory",
+          "question": "How good is your memory?"
+        },
+        {
+          "title": "Memory",
+          "question": "What do you wish you were better at remembering?"
+        },
+        {
+          "title": "Memory",
+          "question": "Are computers making our ability to remember better or worse? Give some examples."
+        },
+        {
+          "title": "Memory",
+          "question": "How much do you think memories change over time?"
+        },
+        {
+          "title": "Memory",
+          "question": "Why do you think some people remember the same events differently?"
+        },
+        {
+          "title": "Memory",
+          "question": "Is the ability to memorize lots of things important? Why or why not?"
+        },
+        {
+          "title": "Tourism",
+          "question": "How important is tourism in your country?"
+        },
+        {
+          "title": "Tourism",
+          "question": "What is the biggest tourist destination in your country?"
+        },
+        {
+          "title": "Tourism",
+          "question": "What are the benefits of international tourism? Are there any drawbacks?"
+        },
+        {
+          "title": "Tourism",
+          "question": "Do you prefer tourism package tours or do you prefer to plan your own vacations? Why?"
+        },
+        {
+          "title": "Tourism",
+          "question": "Is it better to go to popular tourist destinations or lesser known tourist destinations? Why?"
+        },
+        {
+          "title": "Tourism",
+          "question": "Should a government try to improve domestic tourism or try to attract international tourists instead? Why?"
+        },
+        {
+          "title": "Tourism",
+          "question": "What’s the best way to travel when you visit a country? Train, car, bicycle, bus, some other way? Why?"
+        },
+        {
+          "title": "Tourism",
+          "question": "If you could create a tourism slogan for your country, what would it be?"
+        },
+        {
+          "title": "Tourism",
+          "question": "What’s the best way for a country to bring in more tourists?"
+        },
+        {
+          "title": "Tourism",
+          "question": "How do you feel about tourists who visit your country?"
+        },
+        {
+          "title": "Idioms",
+          "question": "Get out of hand"
+        },
+        {
+          "title": "Idioms",
+          "question": "Get something out of your system"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Hafta 11",
+      "topics": [
+        {
+          "title": "Free Time",
+          "question": "What are some things you like to do in your free time?"
+        },
+        {
+          "title": "Free Time",
+          "question": "Do you have more free time now than when you were a kid?"
+        },
+        {
+          "title": "Free Time",
+          "question": "What would you do if you had more free time?"
+        },
+        {
+          "title": "Free Time",
+          "question": "Is there such a thing as too much free time?"
+        },
+        {
+          "title": "Free Time",
+          "question": "How do free time activities differ now compared with the past?"
+        },
+        {
+          "title": "Free Time",
+          "question": "Do you think people had more or less free time in the past?"
+        },
+        {
+          "title": "Free Time",
+          "question": "What is the most worthwhile thing a person can do with their free time?"
+        },
+        {
+          "title": "Free Time",
+          "question": "Is there something you wish you could do with your free time but can’t?"
+        },
+        {
+          "title": "Free Time",
+          "question": "Do you think a four day work week would be a good idea?"
+        },
+        {
+          "title": "Family",
+          "question": "How do members of a family support each other?"
+        },
+        {
+          "title": "Family",
+          "question": "Who do you think has the most power in the family? Why?"
+        },
+        {
+          "title": "Family",
+          "question": "Do you agree with the saying “Children should be seen and not heard”? Why do you agree or disagree?"
+        },
+        {
+          "title": "Family",
+          "question": "Are good family members or good friends more important? Why?"
+        },
+        {
+          "title": "Family",
+          "question": "What problems do parents have to solve as their children grow up?"
+        },
+        {
+          "title": "Family",
+          "question": "How close are you to your extended family? (cousins, aunts, great uncles etc.)"
+        },
+        {
+          "title": "Family",
+          "question": "What is the perfect number of children a family should have?"
+        },
+        {
+          "title": "Family",
+          "question": "What do you think of people who marry and decide not to have children?"
+        },
+        {
+          "title": "Family",
+          "question": "What do you think is the most important thing to make a happy family?"
+        },
+        {
+          "title": "Family",
+          "question": "Is it better for mothers to stay at home with kids or go to work to earn more money for the family?"
+        },
+        {
+          "title": "Family",
+          "question": "Many families send their children to private institutes or daycares for most of the day. Is this good or bad?"
+        },
+        {
+          "title": "Family",
+          "question": "How do you define the word “home”? Is it where you live? Where your family lives or where you grew up?"
+        },
+        {
+          "title": "Family",
+          "question": "When married people talk about having children they talk about “starting a family”. Can two married people be a family if they don’t have kids?"
+        },
+        {
+          "title": "Family",
+          "question": "How do you think family life is changing in your country? (example: wife working, husband cleaning, kids at institutes) Is this change good or bad?"
+        },
+        {
+          "title": "Family",
+          "question": "What age is too young to get married?"
+        },
+        {
+          "title": "Family",
+          "question": "Why do people get married?"
+        },
+        {
+          "title": "Family",
+          "question": "If you were offered an excellent job abroad could you leave your family and country for 5 years?"
+        },
+        {
+          "title": "Idioms",
+          "question": "Get your act together"
+        },
+        {
+          "title": "Idioms",
+          "question": "Give someone the benefit of the doubt"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Hafta 12",
+      "topics": [
+        {
+          "title": "Crime",
+          "question": "What do you think the most common crime in your country is?"
+        },
+        {
+          "title": "Crime",
+          "question": "Should police in your country be stricter or less strict?"
+        },
+        {
+          "title": "Crime",
+          "question": "Is your country a safe country?"
+        },
+        {
+          "title": "Crime",
+          "question": "Have you ever seen a crime? (Don’t talk about it if it’s too upsetting for you.)"
+        },
+        {
+          "title": "Crime",
+          "question": "Do you think criminals can change?"
+        },
+        {
+          "title": "Crime",
+          "question": "Is shoplifting common in your country?"
+        },
+        {
+          "title": "Crime",
+          "question": "What kind of people shoplift and what kinds of things do they steal?"
+        },
+        {
+          "title": "Crime",
+          "question": "Does your country have a big organized crime group like the mafia?"
+        },
+        {
+          "title": "Crime",
+          "question": "Have you ever met someone from a mafia?"
+        },
+        {
+          "title": "Crime",
+          "question": "What is the best way for police to keep neighborhoods safe?"
+        },
+        {
+          "title": "Crime",
+          "question": "Can you tell if a kid will grow up to be a criminal?"
+        },
+        {
+          "title": "Computers",
+          "question": "What Internet sites do you visit regularly?"
+        },
+        {
+          "title": "Computers",
+          "question": "Do you have a computer?"
+        },
+        {
+          "title": "Computers",
+          "question": "Do you use your computer when you do homework for school?"
+        },
+        {
+          "title": "Computers",
+          "question": "Have you ever studied English using your computer?"
+        },
+        {
+          "title": "Computers",
+          "question": "What kind of computer do you have?"
+        },
+        {
+          "title": "Computers",
+          "question": "Where do you use your computer?"
+        },
+        {
+          "title": "Computers",
+          "question": "Why did you buy your computer?"
+        },
+        {
+          "title": "Computers",
+          "question": "Do you know any computer programming languages?"
+        },
+        {
+          "title": "Computers",
+          "question": "How many computer programming languages do you know?"
+        },
+        {
+          "title": "Computers",
+          "question": "Which language do you use the most often?"
+        },
+        {
+          "title": "Computers",
+          "question": "Are you still using your first computer?"
+        },
+        {
+          "title": "Computers",
+          "question": "How often do you use a computer?"
+        },
+        {
+          "title": "Computers",
+          "question": "What do you use a computer for?"
+        },
+        {
+          "title": "Computers",
+          "question": "When did you first start using a computer?"
+        },
+        {
+          "title": "Computers",
+          "question": "Who taught you to use a computer?"
+        },
+        {
+          "title": "Computers",
+          "question": "Do you use e mail?"
+        },
+        {
+          "title": "Computers",
+          "question": "Do you use e mail every day?"
+        },
+        {
+          "title": "Computers",
+          "question": "Have you ever sent an e mail to your teacher?"
+        },
+        {
+          "title": "Computers",
+          "question": "How many times a day do you access your e mail?"
+        },
+        {
+          "title": "Computers",
+          "question": "Do you have a Facebook account?"
+        },
+        {
+          "title": "Computers",
+          "question": "How many hours a day do you spend looking at it?"
+        },
+        {
+          "title": "Computers",
+          "question": "How fast can you type?"
+        },
+        {
+          "title": "Computers",
+          "question": "Have you ever taken a course at school where you used a computer?"
+        },
+        {
+          "title": "Computers",
+          "question": "How do you study English with your computer?"
+        },
+        {
+          "title": "Computers",
+          "question": "If you could buy a new computer, what would you like to buy?"
+        },
+        {
+          "title": "Computers",
+          "question": "Do you think our lives have been improved by computer technology?"
+        },
+        {
+          "title": "Computers",
+          "question": "Could you do without them?"
+        },
+        {
+          "title": "Computers",
+          "question": "Do you remember the first time you used a computer or the Internet?"
+        },
+        {
+          "title": "Computers",
+          "question": "Can your parents operate a computer?"
+        },
+        {
+          "title": "Computers",
+          "question": "How do they use their computer?"
+        },
+        {
+          "title": "Computers",
+          "question": "Do you think a computer can bring us happiness?"
+        },
+        {
+          "title": "Computers",
+          "question": "What are some good things about having a computer?"
+        },
+        {
+          "title": "Computers",
+          "question": "What are some bad things about having a computer?"
+        },
+        {
+          "title": "Computers",
+          "question": "Does having a computer make life more complicated or less complicated?"
+        },
+        {
+          "title": "Computers",
+          "question": "What computer games have you played?"
+        },
+        {
+          "title": "Computers",
+          "question": "Which are your favorites?"
+        },
+        {
+          "title": "Computers",
+          "question": "What do you do when your computer doesn’t work properly?"
+        },
+        {
+          "title": "Computers",
+          "question": "Do you have more than one computer?"
+        },
+        {
+          "title": "Computers",
+          "question": "Can you do everything you need to do when your computer is broken?"
+        },
+        {
+          "title": "Computers",
+          "question": "Do you know what a blog is?"
+        },
+        {
+          "title": "Computers",
+          "question": "Do you have one? Why/ why not?"
+        },
+        {
+          "title": "Computers",
+          "question": "Why do people have blogs?"
+        },
+        {
+          "title": "Computers",
+          "question": "What is artificial intelligence?"
+        },
+        {
+          "title": "Idioms",
+          "question": "Go back to the drawing board"
+        },
+        {
+          "title": "Idioms",
+          "question": "Hang in there"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Hafta 13",
+      "topics": [
+        {
+          "title": "Daily Life",
+          "question": "What’s one thing in your home you couldn’t live without? Why?"
+        },
+        {
+          "title": "Daily Life",
+          "question": "If you had $5,000 that you had to spend today, how would you use it? (You can always raise or lower the dollar amount in the question.)"
+        },
+        {
+          "title": "Daily Life",
+          "question": "How do you cope with stress?"
+        },
+        {
+          "title": "Daily Life",
+          "question": "What is the most challenging part of your job or your studies? What is the most rewarding part?"
+        },
+        {
+          "title": "Daily Life",
+          "question": "If you could live anywhere in the world for one year, where would you live and why?"
+        },
+        {
+          "title": "Daily Life",
+          "question": "Can you think of a time when a failure actually worked out well? Tell me about it."
+        },
+        {
+          "title": "Daily Life",
+          "question": "What was the last movie you saw at the theater?"
+        },
+        {
+          "title": "Daily Life",
+          "question": "What is one thing you’ve never done but would like to do?"
+        },
+        {
+          "title": "Daily Life",
+          "question": "If you had to give up your cellphone, your computer, or your TV, which one item would you choose to give up and why?"
+        },
+        {
+          "title": "Daily Life",
+          "question": "If you were going on a twelve-hour flight and the only entertainment you could bring was a book, what book would you choose? Why?"
+        },
+        {
+          "title": "Daily Life",
+          "question": "If you could meet one musician, living or dead, who would it be?"
+        },
+        {
+          "title": "Daily Life",
+          "question": "Do you think marriage as an institution is outdated? Why or why not?"
+        },
+        {
+          "title": "Daily Life",
+          "question": "Do you think it’s possible to have a happy family and a successful career at the same time?"
+        },
+        {
+          "title": "Daily Life",
+          "question": "What is your opinion about violence in TV, movies, and video games?"
+        },
+        {
+          "title": "Can you tell me about ...",
+          "question": "Can you tell about something you love?"
+        },
+        {
+          "title": "Can you tell me about ...",
+          "question": "Can you tell about something you hate?"
+        },
+        {
+          "title": "Can you tell me about ...",
+          "question": "Can you tell about something you really care about?"
+        },
+        {
+          "title": "Can you tell me about ...",
+          "question": "Can you tell about something you believe in?"
+        },
+        {
+          "title": "Can you tell me about ...",
+          "question": "Can you tell about something delicious?"
+        },
+        {
+          "title": "Can you tell me about ...",
+          "question": "Can you tell me about a teacher you had?"
+        },
+        {
+          "title": "Can you tell me about ...",
+          "question": "Can you tell me about something you regret?"
+        },
+        {
+          "title": "Can you tell me about ...",
+          "question": "Can you tell me about a mistake you made?"
+        },
+        {
+          "title": "Can you tell me about ...",
+          "question": "Can you tell me about someone in your family?"
+        },
+        {
+          "title": "Can you tell me about ...",
+          "question": "Can you tell me about your favorite book?"
+        },
+        {
+          "title": "Can you tell me about ...",
+          "question": "Can you tell me about someone you look up to?"
+        },
+        {
+          "title": "Can you tell me about ...",
+          "question": "Can you tell me about something you’ve achieved?"
+        },
+        {
+          "title": "Can you tell me about ...",
+          "question": "Can you tell me about the last book you’ve read / movie you’ve watched?"
+        },
+        {
+          "title": "Can you tell me about ...",
+          "question": "Can you tell me about a problem you have now?"
+        },
+        {
+          "title": "Can you tell me about ...",
+          "question": "Can you tell me about your fears?"
+        },
+        {
+          "title": "Can you tell me about ...",
+          "question": "Can you tell me about the most important lesson you’ve learnt in life so far?"
+        },
+        {
+          "title": "Idioms",
+          "question": "Hit the sack"
+        },
+        {
+          "title": "Idioms",
+          "question": "It’s not rocket science"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Hafta 14",
+      "topics": [
+        {
+          "title": "Past",
+          "question": "Who used to be your hero when you were young?"
+        },
+        {
+          "title": "Past",
+          "question": "Did you use to have a pet?"
+        },
+        {
+          "title": "Past",
+          "question": "Who were some of your favorite sports stars in the past?"
+        },
+        {
+          "title": "Past",
+          "question": "What did they play?"
+        },
+        {
+          "title": "Past",
+          "question": "Why were they your favorite?"
+        },
+        {
+          "title": "Past",
+          "question": "Name some of your country’s famous sports stars of the past."
+        },
+        {
+          "title": "Past",
+          "question": "Why were they famous?"
+        },
+        {
+          "title": "Past",
+          "question": "What was your best memory from when you were a child?"
+        },
+        {
+          "title": "Past",
+          "question": "What is your earliest memory?"
+        },
+        {
+          "title": "Past",
+          "question": "Which was better for you: elementary school, junior high school or high school? Why?"
+        },
+        {
+          "title": "Past",
+          "question": "What was your country like when you were a child?"
+        },
+        {
+          "title": "Past",
+          "question": "Do you think the past was better than the present? Why or why not?"
+        },
+        {
+          "title": "Past",
+          "question": "What were some of the benefits of living in the past?"
+        },
+        {
+          "title": "Past",
+          "question": "Talk about your country’s past (100 years ago), how was the past different from the present:"
+        },
+        {
+          "title": "Past",
+          "question": "Food"
+        },
+        {
+          "title": "Past",
+          "question": "Weddings"
+        },
+        {
+          "title": "Past",
+          "question": "Clothing"
+        },
+        {
+          "title": "Past",
+          "question": "School"
+        },
+        {
+          "title": "Past",
+          "question": "Work"
+        },
+        {
+          "title": "Past",
+          "question": "Recreation (free time activities)"
+        },
+        {
+          "title": "Past",
+          "question": "Communication"
+        },
+        {
+          "title": "My life so far",
+          "question": "Where were you born?"
+        },
+        {
+          "title": "My life so far",
+          "question": "How did you get your name?"
+        },
+        {
+          "title": "My life so far",
+          "question": "What is your first memory?"
+        },
+        {
+          "title": "My life so far",
+          "question": "What can you remember about elementary school?"
+        },
+        {
+          "title": "My life so far",
+          "question": "What was your neighborhood like when you were growing up?"
+        },
+        {
+          "title": "My life so far",
+          "question": "Was junior high school a happy time for you?"
+        },
+        {
+          "title": "My life so far",
+          "question": "What sports did you do?"
+        },
+        {
+          "title": "My life so far",
+          "question": "Did you/do you study hard at high school?"
+        },
+        {
+          "title": "My life so far",
+          "question": "Do you still have friends from your school days?"
+        },
+        {
+          "title": "My life so far",
+          "question": "What is your best memory of childhood?"
+        },
+        {
+          "title": "My life so far",
+          "question": "Have you lived in many different places?"
+        },
+        {
+          "title": "My life so far",
+          "question": "What was a good decision you made?"
+        },
+        {
+          "title": "My life so far",
+          "question": "What would you change about your life if you could?"
+        },
+        {
+          "title": "My life so far",
+          "question": "What’s the best thing that happened to you recently?"
+        },
+        {
+          "title": "My life so far",
+          "question": "What is the motto of your life?"
+        },
+        {
+          "title": "Idioms",
+          "question": "Let someone off the hook"
+        },
+        {
+          "title": "Idioms",
+          "question": "Make a long story short"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Hafta 15",
+      "topics": [
+        {
+          "title": "Entrepreneurs",
+          "question": "What are 4 pros and 4 cons of being an entrepreneur?"
+        },
+        {
+          "title": "Entrepreneurs",
+          "question": "Do you know any entrepreneurs?"
+        },
+        {
+          "title": "Entrepreneurs",
+          "question": "Does your country have a lot of entrepreneurs? Why do you think so?"
+        },
+        {
+          "title": "Entrepreneurs",
+          "question": "What is the most profitable type of business to open in your country?"
+        },
+        {
+          "title": "Entrepreneurs",
+          "question": "Should a restaurant open where there are no restaurants or lots of restaurants?"
+        },
+        {
+          "title": "Entrepreneurs",
+          "question": "In your country, is it better for a restaurant or café to be unique or familiar?"
+        },
+        {
+          "title": "Entrepreneurs",
+          "question": "How are businesses today different from businesses in the past?"
+        },
+        {
+          "title": "Entrepreneurs",
+          "question": "What must a company do or have to be successful?"
+        },
+        {
+          "title": "Entrepreneurs",
+          "question": "Are people born entrepreneurs or are they made?"
+        },
+        {
+          "title": "Entrepreneurs",
+          "question": "What traits make someone a good entrepreneur?"
+        },
+        {
+          "title": "Creativity",
+          "question": "What is creativity?"
+        },
+        {
+          "title": "Creativity",
+          "question": "Do you consider yourself a creative person? Why?"
+        },
+        {
+          "title": "Creativity",
+          "question": "What is something creative that you have done?"
+        },
+        {
+          "title": "Creativity",
+          "question": "Is creativity a good thing? Why or why not?"
+        },
+        {
+          "title": "Creativity",
+          "question": "What are some ways that a person can be creative?"
+        },
+        {
+          "title": "Creativity",
+          "question": "Is taking a risk part of creativity?"
+        },
+        {
+          "title": "Creativity",
+          "question": "Do you like to take risks? Give an example"
+        },
+        {
+          "title": "Creativity",
+          "question": "Do you often ask question the way things work?"
+        },
+        {
+          "title": "Creativity",
+          "question": "Do you like to improve things?"
+        },
+        {
+          "title": "Creativity",
+          "question": "What are some creative ways to entertain children?"
+        },
+        {
+          "title": "Creativity",
+          "question": "Can you think of a device that would make people’s life easier?"
+        },
+        {
+          "title": "Creativity",
+          "question": "How does self-confidence affect a person’s creativity?"
+        },
+        {
+          "title": "Creativity",
+          "question": "Can someone who initially seems to lack any ability for a certain form of art develop his creativity and finally come to master it?"
+        },
+        {
+          "title": "Creativity",
+          "question": "Have you heard of any such case?"
+        },
+        {
+          "title": "Creativity",
+          "question": "Do you know anyone who is personally an example of this?"
+        },
+        {
+          "title": "Creativity",
+          "question": "How does early exposure to diverse stimuli, and his involvement in creative activities affect a child’s future creativity?"
+        },
+        {
+          "title": "Creativity",
+          "question": "Do you believe that natural genetical features in a human being are absolutely determinant to their future creativity, or is interaction and engagement into self-expression and interaction with the world more influential than this?"
+        },
+        {
+          "title": "Creativity",
+          "question": "How does a person’s standard of living, involving such things as diet, exposure to chemical or other forms of pollution, active versus sedentary living, different forms of addiction, or any other aspects you may think of, affect them biologically regarding their creative capacities?"
+        },
+        {
+          "title": "Creativity",
+          "question": "Does the education system in your country encourage creativity? How?"
+        },
+        {
+          "title": "Creativity",
+          "question": "Do you think creativity comes with time and thought or you are born with creative talent?"
+        },
+        {
+          "title": "Creativity",
+          "question": "What creative activities did you do as a child?"
+        },
+        {
+          "title": "Creativity",
+          "question": "What are some incentives for creative people in the workplace?"
+        },
+        {
+          "title": "Creativity",
+          "question": "What is a creative business that you would like to start?"
+        },
+        {
+          "title": "Creativity",
+          "question": "Who are some of history’s most creative people?"
+        },
+        {
+          "title": "Creativity",
+          "question": "In which professional field do you think people are most creative? e.g science"
+        },
+        {
+          "title": "Creativity",
+          "question": "Do you often answer questions by explaining how things work?"
+        },
+        {
+          "title": "Creativity",
+          "question": "Can you think of devices that would make people’s life easier?"
+        },
+        {
+          "title": "Creativity",
+          "question": "Would you like to open your own business? Why or why not?"
+        },
+        {
+          "title": "Idioms",
+          "question": "Miss the boat"
+        },
+        {
+          "title": "Idioms",
+          "question": "No pain, no gain"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Hafta 16",
+      "topics": [
+        {
+          "title": "Television",
+          "question": "About how many hours of TV do you watch every day?"
+        },
+        {
+          "title": "Television",
+          "question": "What are some of your favorite shows?"
+        },
+        {
+          "title": "Television",
+          "question": "Do you like any foreign TV shows?"
+        },
+        {
+          "title": "Television",
+          "question": "What is the funniest show on television?"
+        },
+        {
+          "title": "Television",
+          "question": "Do you think people watch too much television?"
+        },
+        {
+          "title": "Television",
+          "question": "Are TV shows getting better or worse?"
+        },
+        {
+          "title": "Television",
+          "question": "Would you like to be on TV?"
+        },
+        {
+          "title": "Television",
+          "question": "Do you have a favorite channel?"
+        },
+        {
+          "title": "Television",
+          "question": "Do you have cable, satellite television, or neither?"
+        },
+        {
+          "title": "Television",
+          "question": "Can you recommend a TV show to your classmates?"
+        },
+        {
+          "title": "Television",
+          "question": "What is the best drama on TV now?"
+        },
+        {
+          "title": "Habits",
+          "question": "What are some things you do every day?"
+        },
+        {
+          "title": "Habits",
+          "question": "What are some good habits you have?"
+        },
+        {
+          "title": "Habits",
+          "question": "Do you have any bad habits?"
+        },
+        {
+          "title": "Habits",
+          "question": "Can your group give you any advice for your bad habits?"
+        },
+        {
+          "title": "Habits",
+          "question": "What is something you should do every day but don’t?"
+        },
+        {
+          "title": "Habits",
+          "question": "What are some activities you like to do?"
+        },
+        {
+          "title": "Habits",
+          "question": "How much do you exercise every week?"
+        },
+        {
+          "title": "Habits",
+          "question": "What is a successful life? What habits should you have to have a successful life?"
+        },
+        {
+          "title": "Habits",
+          "question": "What three habits will improve your life?"
+        },
+        {
+          "title": "Habits",
+          "question": "What are some habits that can improve your English ability?"
+        },
+        {
+          "title": "Habits",
+          "question": "What is something you do about once a week, month or year?"
+        },
+        {
+          "title": "Idioms",
+          "question": "On the ball"
+        },
+        {
+          "title": "Idioms",
+          "question": "Pull someone’s leg"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Hafta 17",
+      "topics": [
+        {
+          "title": "Movies",
+          "question": "What is your all-time favorite movie?"
+        },
+        {
+          "title": "Movies",
+          "question": "Are there any kinds of movies you dislike?"
+        },
+        {
+          "title": "Movies",
+          "question": "Have you ever seen the same movie more than once?"
+        },
+        {
+          "title": "Movies",
+          "question": "What is the worst movie you’ve ever seen?"
+        },
+        {
+          "title": "Movies",
+          "question": "What was the last movie you saw?"
+        },
+        {
+          "title": "Movies",
+          "question": "Which do you like better, action movies or comedy movies? Why?"
+        },
+        {
+          "title": "Movies",
+          "question": "What movie star would you most like to meet?"
+        },
+        {
+          "title": "Movies",
+          "question": "Who’s your favorite director?"
+        },
+        {
+          "title": "Movies",
+          "question": "What is your favorite movie soundtrack?"
+        },
+        {
+          "title": "Movies",
+          "question": "What are some of the movie characters you relate to?"
+        },
+        {
+          "title": "Movies",
+          "question": "What is your favorite classical movie?"
+        },
+        {
+          "title": "Movies",
+          "question": "Would you rather be in a movie, or be given $500.000?"
+        },
+        {
+          "title": "Movies",
+          "question": "Do you choose a film for the plot/story or the actors?"
+        },
+        {
+          "title": "Movies",
+          "question": "What is the longest film you’ve ever seen? How many hours was it?"
+        },
+        {
+          "title": "Movies",
+          "question": "Do you like animated films?"
+        },
+        {
+          "title": "Movies",
+          "question": "Do you prefer watching films in their original version or in your mother language?"
+        },
+        {
+          "title": "Movies",
+          "question": "Should you read the book before you see the movie?"
+        },
+        {
+          "title": "Movies",
+          "question": "If you could be a movie bad guy, which one would you be?"
+        },
+        {
+          "title": "Movies",
+          "question": "Which horror movie is the scariest? Why?"
+        },
+        {
+          "title": "Movies",
+          "question": "If they made a movie about your life, what kind of movie would it be? Are you a very motivated person or do you wait until the last minute to do things?"
+        },
+        {
+          "title": "Being Productive",
+          "question": "What technology helps you to be productive?"
+        },
+        {
+          "title": "Being Productive",
+          "question": "Do you think that some people are more productive because of genetics or how they were raised?"
+        },
+        {
+          "title": "Being Productive",
+          "question": "How can people improve their productivity?"
+        },
+        {
+          "title": "Being Productive",
+          "question": "Who is the most productive person you know personally?"
+        },
+        {
+          "title": "Being Productive",
+          "question": "How about really productive famous people?"
+        },
+        {
+          "title": "Being Productive",
+          "question": "Do you think people today work harder than their parents?"
+        },
+        {
+          "title": "Being Productive",
+          "question": "What are some things you want to do but don’t have time for?"
+        },
+        {
+          "title": "Being Productive",
+          "question": "What is the biggest waste of time for you?"
+        },
+        {
+          "title": "Being Productive",
+          "question": "What advice will you/do you give your children?"
+        },
+        {
+          "title": "Being Productive",
+          "question": "Do you think smart phones increase or decrease productivity?"
+        },
+        {
+          "title": "Being Productive",
+          "question": "What do you think was the most productive period of your life so far?"
+        },
+        {
+          "title": "Idioms",
+          "question": "Pull yourself together"
+        },
+        {
+          "title": "Idioms",
+          "question": "So far so good"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Hafta 18",
+      "topics": [
+        {
+          "title": "Hobbies",
+          "question": "What is your hobby?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "How long have you had a hobby?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "Why do people have hobbies?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "Why did you start your hobby?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "Can you make money from doing your hobby?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "How many hours a week do you spend on your hobby?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "Is your hobby safe or dangerous?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "What is a hobby?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "Why do people need hobbies?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "What can one do as a hobby?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "How much time can one spend on his/her hobby?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "What is your hobby?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "Does your hobby interfere with your work/study/personal life?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "Do you spend money on your hobby?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "Does your hobby influence your choice of friends?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "Can a hobby save a child from bad peer influence?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "Can a hobby be dangerous?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "Have you got a hobby?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "How long have you had your hobby?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "Which hobbies are the most expensive?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "Which hobbies are the cheapest?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "Which hobbies cost nothing at all?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "Which hobbies are the most popular in your country?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "Is hunting a hobby or a sport in your country?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "Which hobbies are the most popular with women in your country? With men?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "Did you have any hobbies when you were a child?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "Can you think of any hobbies which are popular with children and adults?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "Do you think a hobby is different from a sport?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "Are there any hobbies you would like to try?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "Are there any dangerous hobbies?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "Are there any hobbies you can do in other countries, but not your own?"
+        },
+        {
+          "title": "Hobbies",
+          "question": "Which hobbies do you think are the most difficult?"
+        },
+        {
+          "title": "The Internet",
+          "question": "How much time do you spend on the Internet?"
+        },
+        {
+          "title": "The Internet",
+          "question": "What are some of the benefits of the Internet?"
+        },
+        {
+          "title": "The Internet",
+          "question": "What are some of the dangers of the Internet?"
+        },
+        {
+          "title": "The Internet",
+          "question": "How much time should children spend on the Internet?"
+        },
+        {
+          "title": "The Internet",
+          "question": "How has the Internet changed the world?"
+        },
+        {
+          "title": "The Internet",
+          "question": "What will the Internet be like in 10 years?"
+        },
+        {
+          "title": "The Internet",
+          "question": "Are you part of any social networks like Facebook or Google+?"
+        },
+        {
+          "title": "The Internet",
+          "question": "What is your favorite website?"
+        },
+        {
+          "title": "The Internet",
+          "question": "How much did the internet effect daily life?"
+        },
+        {
+          "title": "Idioms",
+          "question": "Speak of the devil"
+        },
+        {
+          "title": "Idioms",
+          "question": "That’s the last straw"
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Hafta 19",
+      "topics": [
+        {
+          "title": "Accidents at Home",
+          "question": "What is the most dangerous thing in your home? How can your home be made less dangerous?"
+        },
+        {
+          "title": "Accidents at Home",
+          "question": "What is the most dangerous thing in your home for a child? How can it be made less dangerous?"
+        },
+        {
+          "title": "Accidents at Home",
+          "question": "What is the most dangerous thing in your home for an elderly person? How can it be made less dangerous?"
+        },
+        {
+          "title": "Accidents at Home",
+          "question": "What dangers can be found in the kitchen that can cause accidents?"
+        },
+        {
+          "title": "Accidents at Home",
+          "question": "What can be done to prevent in in kitchen accidents?"
+        },
+        {
+          "title": "Accidents at Home",
+          "question": "What can a parent do to childproof a kitchen?"
+        },
+        {
+          "title": "Accidents at Home",
+          "question": "What dangers can be found in bathrooms that can cause accidents?"
+        },
+        {
+          "title": "Accidents at Home",
+          "question": "What can be done to prevent bathroom accidents?"
+        },
+        {
+          "title": "Accidents at Home",
+          "question": "What can a parent do to childproof a bathroom?"
+        },
+        {
+          "title": "Accidents at Home",
+          "question": "What dangers can be found outside the home in the yard that can cause accidents?"
+        },
+        {
+          "title": "Accidents at Home",
+          "question": "What can be done to prevent yard accidents?"
+        },
+        {
+          "title": "Accidents at Home",
+          "question": "What can a parent do to childproof the yard?"
+        },
+        {
+          "title": "Accidents at Home",
+          "question": "What other dangers can be found in a home in bedrooms, laundry rooms, garages, and living areas?"
+        },
+        {
+          "title": "Accidents at Home",
+          "question": "What can be done throughout the house to prevent accidents?"
+        },
+        {
+          "title": "Accidents at Home",
+          "question": "What can a parent do to childproof the different rooms of the home?"
+        },
+        {
+          "title": "Accidents at Home",
+          "question": "Where at home would you put your first aid kit?"
+        },
+        {
+          "title": "Accidents at Home",
+          "question": "What would you have in it?"
+        },
+        {
+          "title": "Accidents at Home",
+          "question": "Where are these items found in a house, why could they be dangerous, to whom could they be dangerous, and what could someone do to lessen the danger they present?"
+        },
+        {
+          "title": "Hometown",
+          "question": "After you graduate do you want to live in your hometown? Why or why not?"
+        },
+        {
+          "title": "Hometown",
+          "question": "Can I visit your hometown on the Internet?"
+        },
+        {
+          "title": "Hometown",
+          "question": "Do you like your hometown? Why or why not?"
+        },
+        {
+          "title": "Hometown",
+          "question": "How many TV channels do you get at home?"
+        },
+        {
+          "title": "Hometown",
+          "question": "Do you miss your home country?"
+        },
+        {
+          "title": "Hometown",
+          "question": "What do you miss the most?"
+        },
+        {
+          "title": "Hometown",
+          "question": "Do your childhood friends still live in your hometown?"
+        },
+        {
+          "title": "Hometown",
+          "question": "If not, where are they now?"
+        },
+        {
+          "title": "Hometown",
+          "question": "Does anyone famous come from your hometown?"
+        },
+        {
+          "title": "Hometown",
+          "question": "Does your hometown have any festivals? What happens at that festival?"
+        },
+        {
+          "title": "Hometown",
+          "question": "How long does it take to get from your hometown to here?"
+        },
+        {
+          "title": "Hometown",
+          "question": "Has your hometown changed a lot since you were a kid? If so, how? Have the changes been for the better or worse?"
+        },
+        {
+          "title": "Hometown",
+          "question": "Is your hometown famous for anything?"
+        },
+        {
+          "title": "Hometown",
+          "question": "Where is your hometown?"
+        },
+        {
+          "title": "Hometown",
+          "question": "What is the population of your hometown?"
+        },
+        {
+          "title": "Hometown",
+          "question": "What is the population of your country?"
+        },
+        {
+          "title": "Hometown",
+          "question": "What are some things in your hometown that are part of history?"
+        },
+        {
+          "title": "Hometown",
+          "question": "What does your hometown produce? What does it grow?"
+        },
+        {
+          "title": "Hometown",
+          "question": "What is the best season in your hometown?"
+        },
+        {
+          "title": "Hometown",
+          "question": "What is the best thing about your hometown?"
+        },
+        {
+          "title": "Hometown",
+          "question": "What is the worst thing about your hometown?"
+        },
+        {
+          "title": "Hometown",
+          "question": "What’s there to do in your hometown?"
+        },
+        {
+          "title": "Hometown",
+          "question": "What’s your hometown like?"
+        },
+        {
+          "title": "Hometown",
+          "question": "When is the best time to come to your hometown?"
+        },
+        {
+          "title": "Hometown",
+          "question": "Where are you from?"
+        },
+        {
+          "title": "Hometown",
+          "question": "What is the geography of your hometown? (i.e. beach, mountains, etc.)"
+        },
+        {
+          "title": "Hometown",
+          "question": "What are the main attractions in your hometown?"
+        },
+        {
+          "title": "Hometown",
+          "question": "What are the main economical resources in your hometown?"
+        },
+        {
+          "title": "Hometown",
+          "question": "Can you describe the main geographical features of your hometown?"
+        },
+        {
+          "title": "Hometown",
+          "question": "What is the average temperature in winter time? (summer time?)"
+        },
+        {
+          "title": "Hometown",
+          "question": "Would you like to be in your hometown now? Why or why not?"
+        },
+        {
+          "title": "Hometown",
+          "question": "If you could live anywhere, where would you like to live?"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Hafta 20",
+      "topics": [
+        {
+          "title": "Books and Reading",
+          "question": "Books and Reading"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "What is your favorite story?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Who is your favorite author?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Who is your favorite character?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "What is your favorite genre?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Action"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Mystery"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Suspence"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Detective"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Science Fiction"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Children’s books"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "War"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Non-fiction"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Travel books"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Self-help books"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "History"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Biography"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Autobiography"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Gothic"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Classic Literature"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Modern Literature"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "What is the longest book you have ever read?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "How long did it take you to read it?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Have you ever belonged to a book club?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "What books did you read?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "What is the funniest book you have ever read?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "The saddest?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "The strangest?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "How many books have you read in your life?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Is there a time in your life when you read all the time?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "How many hours do you spend reading in a week?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Have you ever been to a book signing or met an author?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Do you have any ideas for a story for you to write?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Do you read books based on recommendations?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "What are some of the books that were recommended to you?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Were you ever given a bad recommendation?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Did it change your opinion of the person who recommended the book?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "What books have you recommended for other people?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "How often do you go to the library?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "How many books do you check out at a time?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "How do you choose the books you are going to read?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "How important is the cover of the book."
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Do you watch the movie that came from a book?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Most people say the book is better than the movie. Is this true for you?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Did you enjoy reading books in school?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "What was your favorite book growing up?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Is there a book that you have read more than once?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "What was the title?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "How many times did you read it?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Is there a book you just couldn’t finish?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "What was the title?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "What is your favorite time of day for reading?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Where is your favorite place to read?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Do you listen to music while you read?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Do you often read book before go to bed?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "What factors are important to you when choosing a book to read?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Reviews?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "A Recommendation from a friend?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "The front cover?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "What was the last book that you read?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "What is your favorite book of all time?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Have you ever read a book and then watched the movie? Which was better? Why?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Who is the most famous writer from your country?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Have you read any of their books?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Do you think that they are overrated?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "What genre of book do you enjoy most?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Have you ever tried to read a book in English?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Do you think that it is more valuable to read a book than to watch television?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Have you ever lent books to your friends and never got them back?"
+        },
+        {
+          "title": "Books and Reading",
+          "question": "Do you think that the internet and television will eventually make books obsolete?"
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Hafta 21",
+      "topics": [
+        {
+          "title": "Celebrities",
+          "question": "Have you ever seen a celebrity in person? What did you do?"
+        },
+        {
+          "title": "Celebrities",
+          "question": "Which celebrity would you like to meet? What would you do if you could spend a day with this person?"
+        },
+        {
+          "title": "Celebrities",
+          "question": "Do you think famous people have the right to have a private life?"
+        },
+        {
+          "title": "Celebrities",
+          "question": "Do you think it’s moral to sell your private life to the media?"
+        },
+        {
+          "title": "Celebrities",
+          "question": "Do you approve of people who become famous as a consequence of appearing again and again in the media and not because of having an artistic career?"
+        },
+        {
+          "title": "Celebrities",
+          "question": "What do you think of the paparazzi?"
+        },
+        {
+          "title": "Celebrities",
+          "question": "Why do you think there is such a high demand for gossip magazines and gossip TV programs?"
+        },
+        {
+          "title": "Celebrities",
+          "question": "What are the pros and cons of being a celebrity?"
+        },
+        {
+          "title": "Celebrities",
+          "question": "What do you think of fans and fan-clubs ?"
+        },
+        {
+          "title": "Celebrities",
+          "question": "Did you have any heroes when you were a teenager?"
+        },
+        {
+          "title": "Celebrities",
+          "question": "Why do you think adolescents need to have heroes?"
+        },
+        {
+          "title": "Celebrities",
+          "question": "Do you think being a celebrity automatically means the person is intelligent?"
+        },
+        {
+          "title": "Celebrities",
+          "question": "Do you think that there are times when the common man has an edge over a celebrity?"
+        },
+        {
+          "title": "Celebrities",
+          "question": "If you could influence people like a celebrity does, how would you use it for the benefit of the planet?"
+        },
+        {
+          "title": "Celebrities",
+          "question": "Which celebrity do you most admire and why ?"
+        },
+        {
+          "title": "Celebrities",
+          "question": "Would you like to be famous ? Why or why not ?"
+        },
+        {
+          "title": "Celebrities",
+          "question": "Do you think there is a relationship between beauty and celebrity ?"
+        },
+        {
+          "title": "Celebrities",
+          "question": "Can you name some famous people?"
+        },
+        {
+          "title": "Celebrities",
+          "question": "Do you know someone famous?"
+        },
+        {
+          "title": "Celebrities",
+          "question": "Would you like to be famous? Why?"
+        },
+        {
+          "title": "Celebrities",
+          "question": "Are famous people happy?"
+        },
+        {
+          "title": "Celebrities",
+          "question": "Would you like to be a celebrity?"
+        },
+        {
+          "title": "Celebrities",
+          "question": "Would you like to be a celebrity? Why would you be famous?"
+        },
+        {
+          "title": "Celebrities",
+          "question": "If you were a celebrity, would you take advantage of it to date some fans?"
+        },
+        {
+          "title": "Celebrities",
+          "question": "Should celebrities be role models?"
+        },
+        {
+          "title": "Celebrities",
+          "question": "Do you think being a celebrity automatically means the person is intelligent? Why? Why not?"
+        },
+        {
+          "title": "Celebrities",
+          "question": "Do you think celebrities write their own music?"
+        },
+        {
+          "title": "Celebrities",
+          "question": "Can you give some examples of when the common man has an edge over a celebrity?"
+        },
+        {
+          "title": "Celebrities",
+          "question": "What do you think of celebrities championing a cause? (e.g. – a cure for AIDS)"
+        },
+        {
+          "title": "Celebrities",
+          "question": "Do you think that some celebrities earn much more money than they deserve taking into consideration what they produce?"
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Hafta 22",
+      "topics": [
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "• Can you tell me some things about your neighborhood?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "What are the advantages and disadvantages of your neighborhood?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "What would you change about your neighborhood?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "What types of facilities are available near to you?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "How far are you from the city center?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "Do you like living in your neighborhood or do you not have much choice?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "What do you like about your community?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "What do you think should be changed?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "How can you help your community?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "How many of your neighbors do you know?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "Are there old people living in your community? Tell me about them."
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "Are there little children in your community? Tell me about them."
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "What do the people in your community do for recreation?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "What do you think is the most important thing about community?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "Does your community have special days to get together?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "Does your community have meetings?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "Is there a neighborhood watch program in your community?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "Would you like to raise your children in a community like yours? Why or why not?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "Is your community afraid of strangers?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "Does your community welcome strangers?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "How have you helped a neighbor?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "What are the most common neighbor complaints?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "Do you get on well with your neighbors?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "What kind of neighbor are you?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "Loud?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "Dirty?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "Nagging?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "Understanding?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "Have you ever had problems with your neighbors? Explain."
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "What is it that neighbors do that peeves you the most?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "Have you ever considered suing your neighbor? Why?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "Do you treat others as you’d like to be treated?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "What are the most common neighbor complaints?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "Do you get on well with your neighbors?"
+        },
+        {
+          "title": "Neighborhood and neighbor complaints",
+          "question": "How do you keep your neighbors from complaining?"
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Hafta 23",
+      "topics": [
+        {
+          "title": "Going to a party",
+          "question": "When do you go to a party?"
+        },
+        {
+          "title": "Going to a party",
+          "question": "What do you like to do at parties?"
+        },
+        {
+          "title": "Going to a party",
+          "question": "Where do you like to have a party/"
+        },
+        {
+          "title": "Going to a party",
+          "question": "Who do you invite to your parties?"
+        },
+        {
+          "title": "Going to a party",
+          "question": "Do you let people dance at your party?"
+        },
+        {
+          "title": "Going to a party",
+          "question": "Do you let people sing at your party?"
+        },
+        {
+          "title": "Going to a party",
+          "question": "What can people do at a party that will annoy you/"
+        },
+        {
+          "title": "Going to a party",
+          "question": "Do you serve food at your parties?"
+        },
+        {
+          "title": "Going to a party",
+          "question": "What kind of food do you serve?"
+        },
+        {
+          "title": "Going to a party",
+          "question": "Would you rather go to someone else’s house for a party or have it at yours? Why?"
+        },
+        {
+          "title": "Going to a party",
+          "question": "Describe the best party that you have been to. Why was it the best?"
+        },
+        {
+          "title": "Going to a party",
+          "question": "Do you get tired at your parties?"
+        },
+        {
+          "title": "Going to a party",
+          "question": "Would you mind if others sit at your party in your house?"
+        },
+        {
+          "title": "Going to a party",
+          "question": "Do you play games at your party? If so, what games?"
+        },
+        {
+          "title": "Going to a party",
+          "question": "Do you eat birthday cake at your birthday party?"
+        },
+        {
+          "title": "Going to a party",
+          "question": "Do you buy a birthday cake or do you make it at home?"
+        },
+        {
+          "title": "Going to a party",
+          "question": "What is there to do at a party?"
+        },
+        {
+          "title": "Going to a party",
+          "question": "What would you do if someone broke something at your party in your house?"
+        },
+        {
+          "title": "Going to a party",
+          "question": "If you are invited to a party but you don’t want to go, what do you tell the person inviting you?"
+        },
+        {
+          "title": "Going to a party",
+          "question": "What is RSVP?"
+        },
+        {
+          "title": "Going to a party",
+          "question": "Do you go to many parties that required RSVP?"
+        },
+        {
+          "title": "Going to a party",
+          "question": "Why do some parties require RSVP?"
+        },
+        {
+          "title": "Going to a party",
+          "question": "What are some polite and impolite excuses to give for not going to a party?"
+        },
+        {
+          "title": "Going to a party",
+          "question": "Did you ever have dance parties in your middle/high school?"
+        },
+        {
+          "title": "Going to a party",
+          "question": "What kind of music do you like to play in your party?"
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Hafta 24",
+      "topics": [
+        {
+          "title": "How long?",
+          "question": "How long have you lived in this country?"
+        },
+        {
+          "title": "How long?",
+          "question": "How long have you lived in this city/town?"
+        },
+        {
+          "title": "How long?",
+          "question": "How long have you lived in your apartment/house?"
+        },
+        {
+          "title": "How long?",
+          "question": "How long have you known your best friend?"
+        },
+        {
+          "title": "How long?",
+          "question": "How long have you studied English?"
+        },
+        {
+          "title": "How long?",
+          "question": "How long have you gone to this school?"
+        },
+        {
+          "title": "How long?",
+          "question": "How long have you had your car?"
+        },
+        {
+          "title": "How long?",
+          "question": "Cat?"
+        },
+        {
+          "title": "How long?",
+          "question": "Dog?"
+        },
+        {
+          "title": "How long?",
+          "question": "Business?"
+        },
+        {
+          "title": "How long?",
+          "question": "House?"
+        },
+        {
+          "title": "How long?",
+          "question": "How long have you been awake?"
+        },
+        {
+          "title": "How long?",
+          "question": "Studied?"
+        },
+        {
+          "title": "How long?",
+          "question": "Traveled?"
+        },
+        {
+          "title": "How long?",
+          "question": "How long have you been at your school?"
+        },
+        {
+          "title": "How often?",
+          "question": "How often do you travel?"
+        },
+        {
+          "title": "How often?",
+          "question": "How often do you wake up in the middle of the night?"
+        },
+        {
+          "title": "How often?",
+          "question": "How often do you go to the dentist?"
+        },
+        {
+          "title": "How often?",
+          "question": "How often do you eat candies?"
+        },
+        {
+          "title": "How often?",
+          "question": "How often do you go to the doctor?"
+        },
+        {
+          "title": "How often?",
+          "question": "How often do you say “I Love you” to your parents?"
+        },
+        {
+          "title": "How often?",
+          "question": "How often do you take your English book to study?"
+        },
+        {
+          "title": "How often?",
+          "question": "How often do you practice sports?"
+        },
+        {
+          "title": "How often?",
+          "question": "How often do you brush your teeth?"
+        },
+        {
+          "title": "How often?",
+          "question": "How often do you listen to music?"
+        },
+        {
+          "title": "How often?",
+          "question": "How often do you read?"
+        },
+        {
+          "title": "How often?",
+          "question": "How often do you go to the shopping mall?"
+        },
+        {
+          "title": "How often?",
+          "question": "How often do you buy clothes?"
+        },
+        {
+          "title": "How often?",
+          "question": "How often do you eat fast food?"
+        },
+        {
+          "title": "How often?",
+          "question": "How often do you have English classes?"
+        },
+        {
+          "title": "How often?",
+          "question": "How often do you go out with your friends?"
+        },
+        {
+          "title": "How often?",
+          "question": "How often do you go to the movies?"
+        },
+        {
+          "title": "How often?",
+          "question": "How often do you go for a walk?"
+        },
+        {
+          "title": "How often?",
+          "question": "How often do you use the Internet?"
+        },
+        {
+          "title": "If you were...",
+          "question": "If you were planning your best friend’s birthday party for six months from now, what would you start preparing this month?"
+        },
+        {
+          "title": "If you were...",
+          "question": "If you were planning a big party for all your friends, and had all the money you needed, what would you have at the party ?"
+        },
+        {
+          "title": "If you were...",
+          "question": "Food?"
+        },
+        {
+          "title": "If you were...",
+          "question": "Entertainment?"
+        },
+        {
+          "title": "If you were...",
+          "question": "Baby sitting??"
+        },
+        {
+          "title": "If you were...",
+          "question": "If you were planning a party on a very small budget, what would you do to make it a great party?"
+        },
+        {
+          "title": "If you were...",
+          "question": "Food?"
+        },
+        {
+          "title": "If you were...",
+          "question": "Entertainment?"
+        },
+        {
+          "title": "If you were...",
+          "question": "Baby sitting??"
+        },
+        {
+          "title": "If you were...",
+          "question": "If you were invited to a fancy dinner with the president or a celebrity, what would you do to prepare?"
+        },
+        {
+          "title": "If you were...",
+          "question": "If you were going to listen to a song to before you died, what song would it be? Why?"
+        },
+        {
+          "title": "If you were...",
+          "question": "If you were a rich man, where would you go for the next holiday?"
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Hafta 25",
+      "topics": [
+        {
+          "title": "Coronavirus",
+          "question": "What do you know about the coronavirus?"
+        },
+        {
+          "title": "Coronavirus",
+          "question": "How can we stop the virus spreading?(wearing masks, washing hands, tests, vaccines …)"
+        },
+        {
+          "title": "Coronavirus",
+          "question": "Do you think everyone should be vaccinated against the virus?"
+        },
+        {
+          "title": "Coronavirus",
+          "question": "Are rich countries better protected than poorer countries?"
+        },
+        {
+          "title": "Coronavirus",
+          "question": "Do you think our lives will be different in the future as a result of the virus?"
+        },
+        {
+          "title": "Natural Disasters",
+          "question": "What is a natural disaster? (fires, flooding, earthquakes …)"
+        },
+        {
+          "title": "Natural Disasters",
+          "question": "Can you give an example of a natural disaster?"
+        },
+        {
+          "title": "Natural Disasters",
+          "question": "Have you ever been in a fire?"
+        },
+        {
+          "title": "Natural Disasters",
+          "question": "If you had to leave your home quickly, what would you take with you?"
+        },
+        {
+          "title": "Natural Disasters",
+          "question": "What would you do if you lost everything?"
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Hafta 26",
+      "topics": [
+        {
+          "title": "Getting a Job",
+          "question": "What is the best way to find a job?"
+        },
+        {
+          "title": "Getting a Job",
+          "question": "What do you think are the five most common questions asked at a job interview?"
+        },
+        {
+          "title": "Getting a Job",
+          "question": "What are some things you should do for a job interview? How about things you shouldn’t do?"
+        },
+        {
+          "title": "Getting a Job",
+          "question": "How is the job market in your country, is it easy or difficult to get a job?"
+        },
+        {
+          "title": "Getting a Job",
+          "question": "How many jobs have you had? What were the interviews like to get those jobs?"
+        },
+        {
+          "title": "Getting a Job",
+          "question": "If you were going to change jobs or try to get a job, what kind of job would you want to apply for?"
+        },
+        {
+          "title": "Getting a Job",
+          "question": "How should a person dress when they go for a job interview?"
+        },
+        {
+          "title": "Getting a Job",
+          "question": "How should you act when you are in a job interview? Confident? Polite? Humble?"
+        },
+        {
+          "title": "Getting a Job",
+          "question": "What are resumes like in you country? What information do employers want to know?"
+        },
+        {
+          "title": "Getting a Job",
+          "question": "What are some good things to have on your resume?"
+        },
+        {
+          "title": "Sports",
+          "question": "What are some sports you like watching? Why?"
+        },
+        {
+          "title": "Sports",
+          "question": "What are some sports you dislike watching? Why?"
+        },
+        {
+          "title": "Sports",
+          "question": "Do you play any sports? If so, which ones?"
+        },
+        {
+          "title": "Sports",
+          "question": "Would you like to learn how to play a sport or do an activity? What would you like to learn?"
+        },
+        {
+          "title": "Sports",
+          "question": "Why are sports so popular?"
+        },
+        {
+          "title": "Sports",
+          "question": "Do you know of any interesting or strange sports or activities?"
+        },
+        {
+          "title": "Sports",
+          "question": "What two sports would you like to mix?"
+        },
+        {
+          "title": "Sports",
+          "question": "Do you prefer to watch sports or play them? Why"
+        },
+        {
+          "title": "Sports",
+          "question": "What do you think is the most dangerous sport?"
+        },
+        {
+          "title": "Sports",
+          "question": "What do you think of athletes making so much money? Is it a good thing or a bad thing?"
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Hafta 27",
+      "topics": [
+        {
+          "title": "Aging",
+          "question": "What are some of the benefits of getting older?"
+        },
+        {
+          "title": "Aging",
+          "question": "Do you think humans will ever be able to stop aging?"
+        },
+        {
+          "title": "Aging",
+          "question": "Is aging more difficult for men or women? Why?"
+        },
+        {
+          "title": "Aging",
+          "question": "Which celebrities have aged well?"
+        },
+        {
+          "title": "Aging",
+          "question": "Are older people actually wiser?"
+        },
+        {
+          "title": "Aging",
+          "question": "What kind of support should children give their aging parents?"
+        },
+        {
+          "title": "Aging",
+          "question": "How long do you want to live?"
+        },
+        {
+          "title": "Aging",
+          "question": "Who is the oldest person you know? How is their view of the world different than yours?"
+        },
+        {
+          "title": "Aging",
+          "question": "How are older people viewed in your country?"
+        },
+        {
+          "title": "Aging",
+          "question": "How well do you relate to people who are 5 years younger than you? How about 10 years younger?"
+        },
+        {
+          "title": "Dreaming",
+          "question": "How often do you dream?"
+        },
+        {
+          "title": "Dreaming",
+          "question": "Do you dream in color or black and white?"
+        },
+        {
+          "title": "Dreaming",
+          "question": "Have you ever had a flying dream?"
+        },
+        {
+          "title": "Dreaming",
+          "question": "Have you ever been falling in a dream and just when you are about to hit the ground you wake up?"
+        },
+        {
+          "title": "Dreaming",
+          "question": "Do you think dreams have meanings?"
+        },
+        {
+          "title": "Dreaming",
+          "question": "Do you think dreams can tell the future?"
+        },
+        {
+          "title": "Dreaming",
+          "question": "Have you ever been dreaming and woken up and couldn’t move?"
+        },
+        {
+          "title": "Dreaming",
+          "question": "What was the best or worst dream you can remember? Don’t share your dream if it’s too personal or too intense."
+        },
+        {
+          "title": "Dreaming",
+          "question": "Why do we forget dreams so quickly?"
+        },
+        {
+          "title": "Dreaming",
+          "question": "Have you ever kept a dream journal?"
+        },
+        {
+          "title": "Dreaming",
+          "question": "Why do we dream? What is the purpose of them?"
+        },
+        {
+          "title": "Dreaming",
+          "question": "Do you think animals dream too? What kind of dreams do you think they have?"
+        },
+        {
+          "title": "Dreaming",
+          "question": "What does your country’s culture traditionally believe about dreams?"
+        },
+        {
+          "title": "Dreaming",
+          "question": "Have you ever had déjà vue?"
+        }
+      ]
+    }
+  ]
+}

@@ -55,25 +55,30 @@ function mysqlOptions(): PoolOptions {
     };
   }
 
-  const required = [
-    "MYSQL_HOST",
-    "MYSQL_USER",
-    "MYSQL_PASSWORD",
-    "MYSQL_DATABASE",
-  ] as const;
-  const missing = required.filter((name) => !process.env[name]);
+  const values = {
+    host: process.env.DB_HOST ?? process.env.MYSQL_HOST,
+    user: process.env.DB_USER ?? process.env.MYSQL_USER,
+    password: process.env.DB_PASSWORD ?? process.env.MYSQL_PASSWORD,
+    database: process.env.DB_NAME ?? process.env.MYSQL_DATABASE,
+  };
+  const missing = Object.entries(values)
+    .filter(([, value]) => !value)
+    .map(([name]) => `DB_${name.toUpperCase()}`);
   if (missing.length > 0) {
     throw new Error(
-      `Missing MySQL configuration: ${missing.join(", ")}. Set DATABASE_URL or the MYSQL_* variables.`,
+      `Missing MySQL configuration: ${missing.join(", ")}. Set DATABASE_URL or the DB_* variables.`,
     );
   }
   return {
-    host: process.env.MYSQL_HOST,
-    port: Number(process.env.MYSQL_PORT || 3306),
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWORD,
-    database: process.env.MYSQL_DATABASE,
-    ssl: process.env.MYSQL_SSL === "true" ? {} : undefined,
+    host: values.host,
+    port: Number(process.env.DB_PORT ?? process.env.MYSQL_PORT ?? 3306),
+    user: values.user,
+    password: values.password,
+    database: values.database,
+    ssl:
+      process.env.DB_SSL === "true" || process.env.MYSQL_SSL === "true"
+        ? {}
+        : undefined,
   };
 }
 
@@ -95,6 +100,7 @@ async function initializeDatabase(pool: Pool): Promise<void> {
   const schemaPath = path.join(process.cwd(), "scripts", "mysql-schema.sql");
   await pool.query(fs.readFileSync(schemaPath, "utf8"));
   await migrateStudentSchema(pool);
+  await importDeploymentSeed(pool);
 
   for (const page of defaultPages) {
     await pool.execute(
@@ -102,6 +108,70 @@ async function initializeDatabase(pool: Pool): Promise<void> {
        VALUES (?, ?, ?, ?, ?)`,
       [page.slug, page.title, page.eyebrow, page.summary, page.body],
     );
+  }
+
+  type DeploymentSeed = {
+    schemaVersion: number;
+    pages: ContentPage[];
+    settings: Array<{ key: string; value: string }>;
+    weeks: Array<{
+      id: number;
+      title: string;
+      topics: Array<{ title: string; question: string }>;
+    }>;
+  };
+
+  async function importDeploymentSeed(pool: Pool): Promise<void> {
+    const seedPath = path.join(process.cwd(), "data", "godaddy-seed.json");
+    if (!fs.existsSync(seedPath)) return;
+    const [counts] = await pool.query<
+      (RowDataPacket & { page_count: number; week_count: number })[]
+    >(
+      `SELECT
+        (SELECT COUNT(*) FROM pages) AS page_count,
+        (SELECT COUNT(*) FROM weeks) AS week_count`,
+    );
+    if (
+      Number(counts[0]?.page_count ?? 0) > 0 ||
+      Number(counts[0]?.week_count ?? 0) > 0
+    ) {
+      return;
+    }
+
+    const seed = JSON.parse(fs.readFileSync(seedPath, "utf8")) as DeploymentSeed;
+    if (
+      seed.schemaVersion !== 1 ||
+      !Array.isArray(seed.pages) ||
+      !Array.isArray(seed.settings) ||
+      !Array.isArray(seed.weeks)
+    ) {
+      throw new Error("data/godaddy-seed.json has an unsupported format.");
+    }
+
+    const connection = await pool.getConnection();
+    try {
+      await connection.beginTransaction();
+      for (const page of seed.pages) {
+        await connection.execute(
+          `INSERT INTO pages (slug, title, eyebrow, summary, body)
+           VALUES (?, ?, ?, ?, ?)`,
+          [page.slug, page.title, page.eyebrow, page.summary, page.body],
+        );
+      }
+      for (const setting of seed.settings) {
+        await connection.execute(
+          "INSERT INTO settings (`key`, value) VALUES (?, ?)",
+          [setting.key, setting.value],
+        );
+      }
+      await replaceWeeksWithConnection(connection, seed.weeks);
+      await connection.commit();
+    } catch (error) {
+      await connection.rollback();
+      throw error;
+    } finally {
+      connection.release();
+    }
   }
 
   async function tableExists(pool: Pool, tableName: string): Promise<boolean> {
