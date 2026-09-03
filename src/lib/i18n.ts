@@ -63,7 +63,7 @@ export const ui = {
       newGroups: "Yeni gruplar açılıyor",
       cta: "Senin hikâyen hangi sohbetle başlayacak?",
       joinProject: "Projeye katıl",
-      visualLabel: "Kıtalar arası bağlantı illüstrasyonu",
+      visualLabel: "Türk ve Amerikan bayraklarını kültürler arası bir asma köprüyle birleştiren illüstrasyon",
     },
     topics: {
       eyebrow: "Konuşma Konuları",
@@ -136,7 +136,7 @@ export const ui = {
       newGroups: "New groups are opening",
       cta: "Which conversation will begin your story?",
       joinProject: "Join the project",
-      visualLabel: "Illustration of a connection between continents",
+      visualLabel: "Illustration connecting the Turkish and American flags with a suspension bridge between cultures",
     },
     topics: {
       eyebrow: "Conversation Topics",

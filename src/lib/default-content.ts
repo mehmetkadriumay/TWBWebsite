@@ -5,6 +5,16 @@ export const legacyHowItWorksBodies = {
   en: "Volunteer coordinators with professional education experience in Türkiye and the United States run the program. Students are matched in small groups suited to their age and language level.\n\nA new topic and guiding questions are published every week. Students prepare in advance, join a video call at the scheduled time, and share their ideas in everyday English.\n\nTeachers and coordinators maintain a safe environment, while students take part in group decisions and develop responsibility, communication, and leadership skills.",
 } as const;
 
+export const legacyParticipationBodies = {
+  tr: "Katılımcılar haftalık görüşmelere düzenli devam etmeyi, konuşma konularına hazırlanmayı ve görüntülü görüşmelere katılmayı kabul eder.\n\nTürkiye'deki öğrenciler öğretmenleri tarafından seçilir ve veli izniyle katılır. Amerika'daki öğrenciler bölge koordinatörleri tarafından aday gösterilir. Tüm katılımcılar güvenli iletişim kurallarına uyar; kişisel bilgilerini izinsiz paylaşmaz, politik veya uygunsuz içerik kullanmaz.\n\nÖğretmen ve koordinatörler program saatlerini ailelere bildirir, haftalık konuları öğrencilere ulaştırır ve görüşmeleri yönlendirir. Katılım için ekibimize e-posta ile ulaşabilirsiniz.",
+  en: "Participants commit to attending weekly sessions, preparing the conversation topics, and joining by video whenever possible.\n\nStudents in Türkiye are selected by their teachers and join with permission from a parent or guardian. Students in the United States are nominated by regional coordinators. Everyone follows safe communication rules, protects personal information, and avoids political or inappropriate content.\n\nTeachers and coordinators share schedules with families, distribute weekly topics, and facilitate each conversation. Email our team to begin your application.",
+} as const;
+
+export const currentParticipationBodies = {
+  tr: "Başvuru yapmadan önce aşağıdaki katılım koşullarını dikkatle inceleyin. Koşullar size veya grubunuza uygunsa sayfanın sonundaki Türkiye ya da Amerika Birleşik Devletleri başvuru formunu doldurun.\n\nTürkiye başvurusu öğretmen, okul ve katılacak öğrenci grubu bilgilerini; Amerika Birleşik Devletleri başvurusu ise öğrenci, referans veren kişi ve veli bilgilerini toplar.\n\nGönderilen başvurular proje ekibi tarafından yönetim panelinde değerlendirilir. Onaylanan başvurular uygun Türk öğrenci grubu veya yabancı öğrenci kaydına dönüştürülür.",
+  en: "Before applying, carefully review the participation requirements below. If the conditions fit you or your group, complete the Türkiye or United States application form at the bottom of the page.\n\nThe Türkiye application collects teacher, school, and participating student-group information. The United States application collects applicant, referrer, and parent or guardian information.\n\nThe project team reviews submitted applications in the administration panel. Approved applications become the appropriate Turkish student-group or foreign-student record.",
+} as const;
+
 export const defaultPages: ContentPage[] = [
   {
     slug: "home",
@@ -39,8 +49,7 @@ export const defaultPages: ContentPage[] = [
     eyebrow: "Projeye Katılım",
     summary:
       "Türkiye'den öğrenciler, Amerika'dan gençler, öğretmenler ve gönüllü koordinatörler için yeni gruplar açıyoruz.",
-    body:
-      "Katılımcılar haftalık görüşmelere düzenli devam etmeyi, konuşma konularına hazırlanmayı ve görüntülü görüşmelere katılmayı kabul eder.\n\nTürkiye'deki öğrenciler öğretmenleri tarafından seçilir ve veli izniyle katılır. Amerika'daki öğrenciler bölge koordinatörleri tarafından aday gösterilir. Tüm katılımcılar güvenli iletişim kurallarına uyar; kişisel bilgilerini izinsiz paylaşmaz, politik veya uygunsuz içerik kullanmaz.\n\nÖğretmen ve koordinatörler program saatlerini ailelere bildirir, haftalık konuları öğrencilere ulaştırır ve görüşmeleri yönlendirir. Katılım için ekibimize e-posta ile ulaşabilirsiniz.",
+    body: currentParticipationBodies.tr,
   },
   {
     slug: "home-en",
@@ -75,8 +84,7 @@ export const defaultPages: ContentPage[] = [
     eyebrow: "Join the Project",
     summary:
       "We are opening new groups for students in Türkiye, young people in the United States, teachers, and volunteer coordinators.",
-    body:
-      "Participants commit to attending weekly sessions, preparing the conversation topics, and joining by video whenever possible.\n\nStudents in Türkiye are selected by their teachers and join with permission from a parent or guardian. Students in the United States are nominated by regional coordinators. Everyone follows safe communication rules, protects personal information, and avoids political or inappropriate content.\n\nTeachers and coordinators share schedules with families, distribute weekly topics, and facilitate each conversation. Email our team to begin your application.",
+    body: currentParticipationBodies.en,
   },
 ];
 

@@ -64,6 +64,7 @@ function ApplicationForm({
 }) {
   const [message, setMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -79,7 +80,20 @@ function ApplicationForm({
     const result = (await response.json()) as { message?: string; error?: string };
     setMessage(result.message ?? result.error ?? "");
     setSubmitting(false);
-    if (response.ok) form.reset();
+    if (response.ok) {
+      form.reset();
+      setSubmitted(true);
+    }
+  }
+
+  if (submitted) {
+    return (
+      <div className="application-success" role="status">
+        <span aria-hidden="true">✓</span>
+        <h4>{locale === "tr" ? "Teşekkür ederiz!" : "Thank you!"}</h4>
+        <p>{message}</p>
+      </div>
+    );
   }
 
   return (
@@ -100,6 +114,18 @@ function ApplicationForm({
             ? "Verdiğim bilgilerin proje başvurusunun değerlendirilmesi amacıyla kullanılmasını kabul ediyorum."
             : "I agree that the information provided may be used to evaluate this project application."}
         </span>
+      </label>
+      <label className="human-verification">
+        <input name="humanVerification" required type="checkbox" value="yes" />
+        <span>
+        <strong>{locale === "tr" ? "Ben insanım" : "I am human"}</strong>
+        <small>
+          {locale === "tr"
+            ? "Başvuruyu göndermeden önce bu kutuyu işaretleyin."
+            : "Check this box before submitting your application."}
+        </small>
+        </span>
+        <i aria-hidden="true">✓</i>
       </label>
       <div className="participation-form-footer">
         <button className="button button-primary" disabled={submitting} type="submit">

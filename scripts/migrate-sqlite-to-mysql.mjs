@@ -100,7 +100,8 @@ try {
       (SELECT COUNT(*) FROM pages) +
       (SELECT COUNT(*) FROM weeks) +
       (SELECT COUNT(*) FROM schools) +
-      (SELECT COUNT(*) FROM students) +
+      (SELECT COUNT(*) FROM foreign_students) +
+      (SELECT COUNT(*) FROM turkish_students) +
       (SELECT COUNT(*) FROM participation_applications) AS row_count
   `);
   if (Number(targetRows[0].row_count) > 0 && !force) {
@@ -111,11 +112,13 @@ try {
 
   await connection.beginTransaction();
   if (force) {
-    await connection.query("DELETE FROM school_students");
+    await connection.query("DELETE FROM school_foreign_students");
+    await connection.query("DELETE FROM school_turkish_students");
     await connection.query("DELETE FROM topics");
     await connection.query("DELETE FROM participation_applications");
     await connection.query("DELETE FROM schools");
-    await connection.query("DELETE FROM students");
+    await connection.query("DELETE FROM foreign_students");
+    await connection.query("DELETE FROM turkish_students");
     await connection.query("DELETE FROM weeks");
     await connection.query("DELETE FROM settings");
     await connection.query("DELETE FROM pages");
@@ -169,26 +172,44 @@ try {
     );
   }
   for (const row of source.students) {
-    await connection.execute(
-      `INSERT INTO students (
-        id, student_name, school_or_coordinator_region, role,
-        project_leader, updated_at
-      ) VALUES (?, ?, ?, ?, ?, ?)`,
-      [
-        row.id,
-        row.student_name,
-        row.school_or_coordinator_region,
-        row.role,
-        row.project_leader,
-        row.updated_at,
-      ],
-    );
+    if (row.role === "facilitator") {
+      await connection.execute(
+        `INSERT INTO foreign_students (
+          id, applicant_first_name, applicant_last_name, applicant_email,
+          state, details, project_leader, updated_at
+        ) VALUES (?, ?, '', '', ?, '', ?, ?)`,
+        [
+          row.id,
+          row.student_name,
+          row.school_or_coordinator_region,
+          row.project_leader,
+          row.updated_at,
+        ],
+      );
+    } else {
+      await connection.execute(
+        `INSERT INTO turkish_students (
+          id, teacher_first_name, teacher_last_name, teacher_email,
+          school_name, details, project_leader, updated_at
+        ) VALUES (?, ?, '', '', ?, '', ?, ?)`,
+        [
+          row.id,
+          row.student_name,
+          row.school_or_coordinator_region,
+          row.project_leader,
+          row.updated_at,
+        ],
+      );
+    }
   }
   for (const row of source.assignments) {
+    const table =
+      row.group_type === "foreign"
+        ? "school_foreign_students"
+        : "school_turkish_students";
     await connection.execute(
-      `INSERT INTO school_students (school_id, student_id, group_type)
-       VALUES (?, ?, ?)`,
-      [row.school_id, row.student_id, row.group_type],
+      `INSERT INTO ${table} (school_id, student_id) VALUES (?, ?)`,
+      [row.school_id, row.student_id],
     );
   }
   for (const row of source.applications) {

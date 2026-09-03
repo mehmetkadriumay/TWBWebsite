@@ -9,8 +9,6 @@ export const metadata: Metadata = { title: "Projeye Katılım" };
 const participationCopy = {
   tr: {
     introTitle: "Yeni gruplarımıza katılın",
-    intro:
-      "Başvuru yapmadan önce aşağıdaki katılım koşullarını dikkatle inceleyin. Koşullar size veya grubunuza uygunsa sayfanın sonundaki Türkiye ya da Amerika Birleşik Devletleri başvuru formunu doldurun.",
     requirements: "Projeye Katılım Şartları",
     groups: [
       {
@@ -83,8 +81,6 @@ const participationCopy = {
   },
   en: {
     introTitle: "Join one of our new groups",
-    intro:
-      "Before applying, review every participation requirement below. If the conditions fit you or your group, complete the Türkiye or United States application form at the bottom of this page.",
     requirements: "Project Participation Requirements",
     groups: [
       {
@@ -173,7 +169,11 @@ export default async function JoinPage() {
             <h2>{copy.introTitle}</h2>
           </div>
           <div>
-            <p>{copy.intro}</p>
+            <div className="participation-overview-copy">
+              {page.body.split(/\n\n+/).map((paragraph, index) => (
+                <p key={`${paragraph.slice(0, 24)}-${index}`}>{paragraph}</p>
+              ))}
+            </div>
             <a className="text-link" href="#application-forms">
               {copy.applicationButton} ↓
             </a>

@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { ArrowIcon, UploadIcon } from "@/components/icons";
+import { ArrowIcon, PeopleIcon, UploadIcon } from "@/components/icons";
 import { AdminWorkspace } from "@/components/admin-workspace";
 import { LogoutButton } from "@/components/logout-button";
 import { isAdmin } from "@/lib/auth";
 import {
   getAcademicCalendar,
   getPages,
+  getParticipationApplications,
   getSchools,
   getStudents,
   getWeeks,
@@ -20,12 +21,13 @@ export const dynamic = "force-dynamic";
 export default async function AdminPage() {
   if (!(await isAdmin())) redirect("/admin/login");
   const locale = await getLocale();
-  const [pages, weeks, calendar, schools, students] = await Promise.all([
+  const [pages, weeks, calendar, schools, students, applications] = await Promise.all([
     getPages(),
     getWeeks(),
     getAcademicCalendar(),
     getSchools(),
     getStudents(),
+    getParticipationApplications(),
   ]);
 
   return (
@@ -50,11 +52,26 @@ export default async function AdminPage() {
         <div className="admin-stats">
           <article><strong>{pages.length}</strong><span>{locale === "tr" ? "Düzenlenebilir sayfa" : "Editable pages"}</span></article>
           <article><strong>{weeks.length}</strong><span>{locale === "tr" ? "Yayımlanmış hafta" : "Published weeks"}</span></article>
+          <Link href="/admin/applications">
+            <PeopleIcon />
+            <span>
+              <strong>
+                {applications.filter((application) => application.status === "pending").length}{" "}
+                {locale === "tr" ? "bekleyen başvuru" : "pending applications"}
+              </strong>
+              <small>{locale === "tr" ? "Başvuruları incele, onayla veya reddet" : "Review, approve, or reject submissions"}</small>
+            </span>
+            <ArrowIcon />
+          </Link>
           <Link href="/konusma-konulari">
             <UploadIcon />
             <span>
-              <strong>{locale === "tr" ? "Excel yönetimi" : "Excel management"}</strong>
-              <small>{locale === "tr" ? "İçe aktar veya hafta sil" : "Import or delete a week"}</small>
+              <strong>{locale === "tr" ? "Program Yönetimi" : "Program Management"}</strong>
+              <small>
+                {locale === "tr"
+                  ? "Konu ekle, sil, Excel aktar veya oku"
+                  : "Add or delete topics, import or read Excel"}
+              </small>
             </span>
             <ArrowIcon />
           </Link>

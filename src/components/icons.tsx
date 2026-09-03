@@ -79,6 +79,36 @@ export function PeopleIcon({ size = 22, className }: IconProps) {
   );
 }
 
+export function EmailIcon({ size = 22, className }: IconProps) {
+  return (
+    <svg
+      aria-hidden="true"
+      className={className}
+      fill="none"
+      height={size}
+      viewBox="0 0 24 24"
+      width={size}
+    >
+      <rect
+        height="15"
+        rx="2"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        width="19"
+        x="2.5"
+        y="4.5"
+      />
+      <path
+        d="m4 7 8 6 8-6"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.8"
+      />
+    </svg>
+  );
+}
+
 export function UploadIcon({ size = 18, className }: IconProps) {
   return (
     <svg

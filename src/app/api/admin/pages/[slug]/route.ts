@@ -42,5 +42,14 @@ export async function PUT(
     summary: String(values.summary).trim(),
     body: String(values.body).trim(),
   });
-  return NextResponse.json({ message: "İçerik yayımlandı." });
+  return NextResponse.json({
+    message: "İçerik yayımlandı.",
+    page: {
+      slug,
+      title: String(values.title).trim(),
+      eyebrow: String(values.eyebrow).trim(),
+      summary: String(values.summary).trim(),
+      body: String(values.body).trim(),
+    },
+  });
 }

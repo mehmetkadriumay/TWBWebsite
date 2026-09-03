@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BridgeInfographic } from "@/components/bridge-infographic";
 import { ArrowIcon, GlobeIcon, PeopleIcon, SparkIcon } from "@/components/icons";
 import { getPage } from "@/lib/db";
 import { getLocale, localizedSlug, ui } from "@/lib/i18n";
@@ -36,21 +37,7 @@ export default async function Home() {
             </div>
           </div>
           <div className="hero-visual" aria-label={copy.visualLabel}>
-            <div className="flag-ribbon" aria-hidden="true">
-              <span>TÜRKİYE</span>
-              <i />
-              <span>UNITED STATES</span>
-            </div>
-            <span className="hero-crescent" aria-hidden="true" />
-            <span className="hero-star hero-star-one" aria-hidden="true">★</span>
-            <span className="hero-star hero-star-two" aria-hidden="true">★</span>
-            <span className="hero-star hero-star-three" aria-hidden="true">★</span>
-            <div className="visual-globe">
-              <GlobeIcon size={150} />
-              <span className="location-pin pin-tr">TR</span>
-              <span className="location-pin pin-us">US</span>
-              <span className="connection-line" />
-            </div>
+            <BridgeInfographic label={copy.visualLabel} locale={locale} />
             <div className="floating-card floating-card-one">
               <span>{copy.weeklyTopic}</span>
               <strong>Let&apos;s talk about friendship</strong>

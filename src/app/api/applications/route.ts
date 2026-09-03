@@ -87,6 +87,18 @@ export async function POST(request: NextRequest) {
       { status: 400 },
     );
   }
+  if (fields.humanVerification !== "yes") {
+    return NextResponse.json(
+      {
+        error:
+          locale === "tr"
+            ? "Lütfen insan doğrulamasını tamamlayın."
+            : "Please complete the human verification.",
+      },
+      { status: 400 },
+    );
+  }
+  delete fields.humanVerification;
 
   const emailFields =
     formType === "turkiye"

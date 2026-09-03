@@ -223,14 +223,14 @@ export function SchoolManagement({
             locale={locale}
             name="foreignStudentIds"
             selectedIds={selected.foreignStudentIds}
-            students={students.filter((student) => student.role === "facilitator")}
+            students={students.filter((student) => student.studentType === "foreign")}
             title={locale === "tr" ? "Yabancı öğrenciler" : "Foreign students"}
           />
           <StudentSelector
             locale={locale}
             name="turkishStudentIds"
             selectedIds={selected.turkishStudentIds}
-            students={students.filter((student) => student.role === "student")}
+            students={students.filter((student) => student.studentType === "turkish")}
             title={locale === "tr" ? "Türk öğrenciler" : "Turkish students"}
           />
         </div>
@@ -259,9 +259,14 @@ function SchoolGrid({
   schools: School[];
   students: Student[];
 }) {
-  const studentNames = (ids: number[]) =>
+  const studentNames = (ids: number[], type: "foreign" | "turkish") =>
     ids
-      .map((id) => students.find((student) => student.id === id)?.studentName)
+      .map(
+        (id) =>
+          students.find(
+            (student) => student.id === id && student.studentType === type,
+          )?.studentName,
+      )
       .filter(Boolean)
       .join(", ") || "—";
 
@@ -306,11 +311,11 @@ function SchoolGrid({
             </div>
             <div>
               <dt>{locale === "tr" ? "Yabancı öğrenciler" : "Foreign students"}</dt>
-              <dd>{studentNames(school.foreignStudentIds)}</dd>
+              <dd>{studentNames(school.foreignStudentIds, "foreign")}</dd>
             </div>
             <div>
               <dt>{locale === "tr" ? "Türk öğrenciler" : "Turkish students"}</dt>
-              <dd>{studentNames(school.turkishStudentIds)}</dd>
+              <dd>{studentNames(school.turkishStudentIds, "turkish")}</dd>
             </div>
             <div>
               <dt>{locale === "tr" ? "Koordinatör WhatsApp" : "Coordinator WhatsApp"}</dt>

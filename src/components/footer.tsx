@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { EmailIcon } from "@/components/icons";
 import { Logo } from "@/components/logo";
 import { type Locale, ui } from "@/lib/i18n";
 
@@ -19,8 +20,21 @@ export function Footer({ locale }: { locale: Locale }) {
         </div>
         <div className="footer-links">
           <strong>{copy.contact}</strong>
-          <a href="mailto:hello@turkswithoutborders.net">
-            hello@turkswithoutborders.net
+          <a
+            aria-label={
+              locale === "tr"
+                ? "Serpil İngeç ve Ülkü Umay'a e-posta gönder"
+                : "Email Serpil İngeç and Ülkü Umay"
+            }
+            className="footer-email-link"
+            href="mailto:serpil_ingec@hotmail.com,ulkuumay@hotmail.com"
+            title={
+              locale === "tr"
+                ? "E-posta gönder"
+                : "Send an email"
+            }
+          >
+            <EmailIcon size={23} />
           </a>
           <Link href="/projeye-katilim">{copy.join}</Link>
         </div>
