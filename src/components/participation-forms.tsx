@@ -55,10 +55,12 @@ function Field({
 
 function ApplicationForm({
   children,
+  copy,
   formType,
   locale,
 }: {
   children: React.ReactNode;
+  copy: Record<string, string>;
   formType: FormType;
   locale: Locale;
 }) {
@@ -90,7 +92,7 @@ function ApplicationForm({
     return (
       <div className="application-success" role="status">
         <span aria-hidden="true">✓</span>
-        <h4>{locale === "tr" ? "Teşekkür ederiz!" : "Thank you!"}</h4>
+        <h4>{copy.thankYou}</h4>
         <p>{message}</p>
       </div>
     );
@@ -110,28 +112,22 @@ function ApplicationForm({
       <label className="form-consent">
         <input name="consent" required type="checkbox" value="yes" />
         <span>
-          {locale === "tr"
-            ? "Verdiğim bilgilerin proje başvurusunun değerlendirilmesi amacıyla kullanılmasını kabul ediyorum."
-            : "I agree that the information provided may be used to evaluate this project application."}
+          {copy.consent}
         </span>
       </label>
       <label className="human-verification">
         <input name="humanVerification" required type="checkbox" value="yes" />
         <span>
-        <strong>{locale === "tr" ? "Ben insanım" : "I am human"}</strong>
-        <small>
-          {locale === "tr"
-            ? "Başvuruyu göndermeden önce bu kutuyu işaretleyin."
-            : "Check this box before submitting your application."}
-        </small>
+        <strong>{copy.humanTitle}</strong>
+        <small>{copy.humanHelp}</small>
         </span>
         <i aria-hidden="true">✓</i>
       </label>
       <div className="participation-form-footer">
         <button className="button button-primary" disabled={submitting} type="submit">
           {submitting
-            ? locale === "tr" ? "Gönderiliyor..." : "Submitting..."
-            : locale === "tr" ? "Başvuruyu Gönder" : "Submit Application"}
+            ? copy.submitting
+            : copy.submit}
         </button>
         {message && <p aria-live="polite">{message}</p>}
       </div>
@@ -139,25 +135,25 @@ function ApplicationForm({
   );
 }
 
-export function ParticipationForms({ locale }: { locale: Locale }) {
-  const tr = locale === "tr";
-
+export function ParticipationForms({
+  copy,
+  locale,
+}: {
+  copy: Record<string, string>;
+  locale: Locale;
+}) {
   return (
     <section className="application-section" id="application-forms">
       <div className="container">
         <div className="application-heading">
           <span className="eyebrow">
-            {tr ? "BAŞVURU FORMLARI" : "APPLICATION FORMS"}
+            {copy.eyebrow}
           </span>
           <h2>
-            {tr
-              ? "Size uygun başvuru formunu doldurun."
-              : "Complete the application form that applies to you."}
+            {copy.title}
           </h2>
           <p>
-            {tr
-              ? "Türkiye başvurusu öğretmen ve okul grubu bilgilerini; Amerika başvurusu öğrenci, referans veren kişi ve veli bilgilerini toplar."
-              : "The Türkiye form collects teacher and school-group details; the U.S. form collects applicant, referrer, and parent information."}
+            {copy.summary}
           </p>
         </div>
 
@@ -166,55 +162,55 @@ export function ParticipationForms({ locale }: { locale: Locale }) {
             <header>
               <span>TR</span>
               <div>
-                <small>{tr ? "TÜRKİYE" : "TÜRKİYE"}</small>
-                <h3>{tr ? "Türkiye'den Proje Başvurusu" : "Project Application from Türkiye"}</h3>
+                <small>{copy.turkeyRegion}</small>
+                <h3>{copy.turkeyTitle}</h3>
               </div>
             </header>
-            <ApplicationForm formType="turkiye" locale={locale}>
+            <ApplicationForm copy={copy} formType="turkiye" locale={locale}>
               <fieldset>
-                <legend>{tr ? "Başvuruyu yapan öğretmen" : "Applying teacher"}</legend>
+                <legend>{copy.teacherSection}</legend>
                 <div className="application-fields">
-                  <Field label={tr ? "Adı" : "First name"} name="teacherFirstName" />
-                  <Field label={tr ? "Soyadı" : "Last name"} name="teacherLastName" />
-                  <Field label={tr ? "E-posta adresi" : "Email address"} name="teacherEmail" type="email" />
-                  <Field label={tr ? "Telefon numarası" : "Phone number"} name="teacherPhone" type="tel" />
+                  <Field label={copy.firstName} name="teacherFirstName" />
+                  <Field label={copy.lastName} name="teacherLastName" />
+                  <Field label={copy.email} name="teacherEmail" type="email" />
+                  <Field label={copy.phone} name="teacherPhone" type="tel" />
                 </div>
               </fieldset>
               <fieldset>
-                <legend>{tr ? "Okul bilgileri" : "School information"}</legend>
+                <legend>{copy.schoolSection}</legend>
                 <div className="application-fields">
-                  <Field label={tr ? "Çalıştığı okulun adı" : "School name"} name="schoolName" />
+                  <Field label={copy.schoolName} name="schoolName" />
                   <label>
-                    <span>{tr ? "Okulun bulunduğu il" : "Province"} *</span>
+                    <span>{copy.province} *</span>
                     <select name="province" required defaultValue="">
-                      <option disabled value="">{tr ? "İl seçin" : "Select a province"}</option>
+                      <option disabled value="">{copy.provincePlaceholder}</option>
                       {turkishProvinces.map((province) => (
                         <option key={province} value={province}>{province}</option>
                       ))}
                     </select>
                   </label>
-                  <Field label={tr ? "İlçe" : "District"} name="district" required={false} />
-                  <Field label={tr ? "Okul müdürünün adı soyadı" : "Principal's full name"} name="principalName" />
+                  <Field label={copy.district} name="district" required={false} />
+                  <Field label={copy.principal} name="principalName" />
                 </div>
               </fieldset>
               <fieldset>
-                <legend>{tr ? "Projeye katılacak öğrenciler" : "Participating students"}</legend>
+                <legend>{copy.studentsSection}</legend>
                 <div className="application-fields">
-                  <Field label={tr ? "Öğrenci sayısı" : "Number of students"} name="studentCount" type="number" />
-                  <Field label={tr ? "Yaş grubu" : "Age group"} name="ageGroup" />
+                  <Field label={copy.studentCount} name="studentCount" type="number" />
+                  <Field label={copy.ageGroup} name="ageGroup" />
                   <label className="full-field">
-                    <span>{tr ? "İngilizce seviyeleri" : "English proficiency"} *</span>
+                    <span>{copy.englishLevel} *</span>
                     <select name="englishLevel" required defaultValue="">
-                      <option disabled value="">{tr ? "Seviye seçin" : "Select a level"}</option>
-                      <option value="intermediate">{tr ? "Orta" : "Intermediate"}</option>
-                      <option value="good">{tr ? "İyi" : "Good"}</option>
-                      <option value="very-good">{tr ? "Çok iyi" : "Very good"}</option>
+                      <option disabled value="">{copy.levelPlaceholder}</option>
+                      <option value="intermediate">{copy.intermediate}</option>
+                      <option value="good">{copy.good}</option>
+                      <option value="very-good">{copy.veryGood}</option>
                     </select>
                   </label>
                 </div>
               </fieldset>
               <label className="full-field">
-                <span>{tr ? "Paylaşmak istediğiniz detay bilgiler" : "Additional details"}</span>
+                <span>{copy.details}</span>
                 <textarea name="details" rows={5} />
               </label>
             </ApplicationForm>
@@ -224,49 +220,49 @@ export function ParticipationForms({ locale }: { locale: Locale }) {
             <header>
               <span>US</span>
               <div>
-                <small>{tr ? "AMERİKA BİRLEŞİK DEVLETLERİ" : "UNITED STATES"}</small>
-                <h3>{tr ? "Amerika'dan Proje Başvurusu" : "Project Application from the U.S."}</h3>
+                <small>{copy.usRegion}</small>
+                <h3>{copy.usTitle}</h3>
               </div>
             </header>
-            <ApplicationForm formType="us" locale={locale}>
+            <ApplicationForm copy={copy} formType="us" locale={locale}>
               <fieldset>
-                <legend>{tr ? "Başvuru sahibi öğrenci" : "Applicant"}</legend>
+                <legend>{copy.applicantSection}</legend>
                 <div className="application-fields">
-                  <Field label={tr ? "Adı" : "First name"} name="applicantFirstName" />
-                  <Field label={tr ? "Soyadı" : "Last name"} name="applicantLastName" />
-                  <Field label={tr ? "E-posta adresi" : "Email address"} name="applicantEmail" type="email" />
-                  <Field label={tr ? "Doğum tarihi" : "Date of birth"} name="dateOfBirth" type="date" />
+                  <Field label={copy.firstName} name="applicantFirstName" />
+                  <Field label={copy.lastName} name="applicantLastName" />
+                  <Field label={copy.email} name="applicantEmail" type="email" />
+                  <Field label={copy.dateOfBirth} name="dateOfBirth" type="date" />
                   <label>
-                    <span>{tr ? "Eyalet" : "State"} *</span>
+                    <span>{copy.state} *</span>
                     <select name="state" required defaultValue="">
-                      <option disabled value="">{tr ? "Eyalet seçin" : "Select a state"}</option>
+                      <option disabled value="">{copy.statePlaceholder}</option>
                       {usStates.map((state) => (
                         <option key={state} value={state}>{state}</option>
                       ))}
                     </select>
                   </label>
-                  <Field label={tr ? "Şehir" : "City"} name="city" />
+                  <Field label={copy.city ?? "City"} name="city" />
                 </div>
               </fieldset>
               <fieldset>
-                <legend>{tr ? "Referans veren kişi" : "Referring person"}</legend>
+                <legend>{copy.referrerSection}</legend>
                 <div className="application-fields">
-                  <Field label={tr ? "Adı" : "First name"} name="referrerFirstName" />
-                  <Field label={tr ? "Soyadı" : "Last name"} name="referrerLastName" />
-                  <Field label={tr ? "E-posta adresi" : "Email address"} name="referrerEmail" type="email" />
+                  <Field label={copy.firstName} name="referrerFirstName" />
+                  <Field label={copy.lastName} name="referrerLastName" />
+                  <Field label={copy.email} name="referrerEmail" type="email" />
                 </div>
               </fieldset>
               <fieldset>
-                <legend>{tr ? "Veli bilgileri" : "Parent or guardian"}</legend>
+                <legend>{copy.parentSection}</legend>
                 <div className="application-fields">
-                  <Field label={tr ? "Adı" : "First name"} name="parentFirstName" />
-                  <Field label={tr ? "Soyadı" : "Last name"} name="parentLastName" />
-                  <Field label={tr ? "E-posta adresi" : "Email address"} name="parentEmail" type="email" />
-                  <Field label={tr ? "Telefon numarası" : "Phone number"} name="parentPhone" type="tel" />
+                  <Field label={copy.firstName} name="parentFirstName" />
+                  <Field label={copy.lastName} name="parentLastName" />
+                  <Field label={copy.email} name="parentEmail" type="email" />
+                  <Field label={copy.phone} name="parentPhone" type="tel" />
                 </div>
               </fieldset>
               <label className="full-field">
-                <span>{tr ? "Paylaşmak istediğiniz detay bilgiler" : "Additional details"}</span>
+                <span>{copy.details}</span>
                 <textarea name="details" rows={5} />
               </label>
             </ApplicationForm>

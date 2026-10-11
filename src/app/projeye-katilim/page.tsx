@@ -3,6 +3,10 @@ import { ParticipationForms } from "@/components/participation-forms";
 import { PageHero } from "@/components/page-hero";
 import { getPage } from "@/lib/db";
 import { getLocale, localizedSlug } from "@/lib/i18n";
+import {
+  managedSection,
+  participationSections,
+} from "@/lib/site-sections";
 
 export const metadata: Metadata = { title: "Projeye Katılım" };
 
@@ -155,9 +159,13 @@ const participationCopy = {
 
 export default async function JoinPage() {
   const locale = await getLocale();
-  const copy = participationCopy[locale];
   const page = await getPage(localizedSlug("projeye-katilim", locale));
   if (!page) return null;
+  const copy = managedSection(
+    page.sections,
+    "participation",
+    participationSections(locale),
+  );
 
   return (
     <>
@@ -181,10 +189,10 @@ export default async function JoinPage() {
         </div>
 
         <div className="container requirement-list">
-          {copy.groups.map((group) => (
-            <article className="requirement-card" key={group.number}>
+          {copy.groups.map((group, index) => (
+            <article className="requirement-card" key={group.title}>
               <header>
-                <span>{group.number}</span>
+                <span>{String(index + 1).padStart(2, "0")}</span>
                 <div>
                   <h3>{group.title}</h3>
                   <p>{group.summary}</p>
@@ -205,13 +213,13 @@ export default async function JoinPage() {
         <div className="container">
           <aside className="permission-panel">
             <div>
-              <span className="eyebrow">{locale === "tr" ? "ÖNEMLİ BELGE" : "REQUIRED DOCUMENT"}</span>
+              <span className="eyebrow">{copy.permissionEyebrow}</span>
               <h2>{copy.permissionTitle}</h2>
               <p>{copy.permissionText}</p>
             </div>
             <a
               className="button button-white"
-              href="http://www.turkswithoutborders.net/wordpress/wp-content/uploads/2023/11/katilim-izin-formu-TR.pdf"
+              href={copy.permissionUrl}
               rel="noreferrer"
               target="_blank"
             >
@@ -220,7 +228,7 @@ export default async function JoinPage() {
           </aside>
         </div>
       </section>
-      <ParticipationForms locale={locale} />
+      <ParticipationForms copy={copy.forms} locale={locale} />
     </>
   );
 }

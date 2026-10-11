@@ -7,6 +7,7 @@ import { LogoutButton } from "@/components/logout-button";
 import { isAdmin } from "@/lib/auth";
 import {
   getAcademicCalendar,
+  getNews,
   getPages,
   getParticipationApplications,
   getSchools,
@@ -21,8 +22,9 @@ export const dynamic = "force-dynamic";
 export default async function AdminPage() {
   if (!(await isAdmin())) redirect("/admin/login");
   const locale = await getLocale();
-  const [pages, weeks, calendar, schools, students, applications] = await Promise.all([
+  const [pages, news, weeks, calendar, schools, students, applications] = await Promise.all([
     getPages(),
+    getNews(true),
     getWeeks(),
     getAcademicCalendar(),
     getSchools(),
@@ -90,6 +92,7 @@ export default async function AdminPage() {
         <AdminWorkspace
           calendar={calendar}
           locale={locale}
+          news={news}
           pages={pages}
           schools={schools}
           students={students}

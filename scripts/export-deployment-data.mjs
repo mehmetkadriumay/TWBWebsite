@@ -12,11 +12,16 @@ const connection = await mysql.createConnection({
 
 try {
   const [pages] = await connection.query(`
-    SELECT slug, title, eyebrow, summary, body
+    SELECT slug, title, eyebrow, summary, body, sections
     FROM pages ORDER BY slug
   `);
   const [settings] = await connection.query(`
     SELECT \`key\`, value FROM settings ORDER BY \`key\`
+  `);
+  const [news] = await connection.query(`
+    SELECT id, title_tr, title_en, abstract_tr, abstract_en, source_name,
+      article_url, image_url, video_url, published_on, is_published
+    FROM news ORDER BY published_on IS NULL, published_on DESC, id DESC
   `);
   const [weekRows] = await connection.query(`
     SELECT id, title FROM weeks ORDER BY id
@@ -37,14 +42,22 @@ try {
     exportedAt: new Date().toISOString(),
     description:
       "Public website content, weekly program, and scheduling configuration. Credentials, applications, and student records are intentionally excluded.",
-    pages: pages.map(({ slug, title, eyebrow, summary, body }) => ({
+    pages: pages.map(({ slug, title, eyebrow, summary, body, sections }) => ({
       slug,
       title,
       eyebrow,
       summary,
       body,
+      sections:
+        typeof sections === "string" ? JSON.parse(sections) : sections ?? {},
     })),
     settings: settings.map(({ key, value }) => ({ key, value })),
+    news: news.map((item) => ({
+      ...item,
+      published_on: item.published_on
+        ? new Date(item.published_on).toISOString().slice(0, 10)
+        : null,
+    })),
     weeks: weekRows.map(({ id, title }) => ({
       id,
       title,
@@ -55,7 +68,7 @@ try {
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
   fs.writeFileSync(outputPath, `${JSON.stringify(seed, null, 2)}\n`);
   console.log(
-    `Exported ${seed.pages.length} pages, ${seed.weeks.length} weeks, and ${topicRows.length} questions to data/godaddy-seed.json.`,
+    `Exported ${seed.pages.length} pages, ${seed.news.length} news items, ${seed.weeks.length} weeks, and ${topicRows.length} questions to data/godaddy-seed.json.`,
   );
 } finally {
   await connection.end();

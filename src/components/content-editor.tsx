@@ -75,8 +75,32 @@ export function ContentEditor({
   const configuration = pageConfiguration[baseSlug(selected.slug)];
   const languageIndex = locale === "tr" ? 0 : 1;
 
+  function updateSection(path: Array<string | number>, value: string) {
+    setCurrentPages((current) =>
+      current.map((page) => {
+        if (page.slug !== selectedSlug) return page;
+        const sections = structuredClone(page.sections);
+        let target: unknown = sections;
+        for (const segment of path.slice(0, -1)) {
+          target = Array.isArray(target)
+            ? target[segment as number]
+            : (target as Record<string, unknown>)[segment as string];
+        }
+        const finalSegment = path.at(-1)!;
+        if (Array.isArray(target)) {
+          target[finalSegment as number] = value;
+        } else {
+          (target as Record<string, unknown>)[finalSegment as string] = value;
+        }
+        return { ...page, sections };
+      }),
+    );
+  }
+
   async function save(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const pageToSave = currentPages.find((page) => page.slug === selectedSlug);
+    if (!pageToSave) return;
     setBusy(true);
     setMessage("");
     const form = new FormData(event.currentTarget);
@@ -86,6 +110,7 @@ export function ContentEditor({
       title: String(form.get("title") ?? "").trim(),
       summary: String(form.get("summary") ?? "").trim(),
       body: String(form.get("body") ?? "").trim(),
+      sections: pageToSave.sections,
     };
     const response = await fetch(`/api/admin/pages/${selectedSlug}`, {
       method: "PUT",
@@ -205,6 +230,30 @@ export function ContentEditor({
                 : "Leave a blank line between paragraphs."}
           </small>
         </div>
+        {Object.keys(selected.sections).length > 0 && (
+          <div className="structured-content-editor">
+            <div className="structured-content-heading">
+              <span className="eyebrow">
+                {locale === "tr" ? "TÜM SAYFA BÖLÜMLERİ" : "ALL PAGE SECTIONS"}
+              </span>
+              <h3>
+                {locale === "tr"
+                  ? "Kartlar, başlıklar, bağlantılar ve medya"
+                  : "Cards, headings, links, and media"}
+              </h3>
+              <p>
+                {locale === "tr"
+                  ? "Bu alanlar canlı sayfadaki diğer tüm metin ve medya bilgilerini kontrol eder."
+                  : "These fields control all other text and media information on the live page."}
+              </p>
+            </div>
+            <StructuredFields
+              locale={locale}
+              onChange={updateSection}
+              value={selected.sections}
+            />
+          </div>
+        )}
         <div className="editor-footer">
           <span className="form-success" role="status">{message}</span>
           <button className="button button-primary" disabled={busy} type="submit">
@@ -216,4 +265,98 @@ export function ContentEditor({
       </form>
     </div>
   );
+}
+
+function StructuredFields({
+  locale,
+  onChange,
+  path = [],
+  value,
+}: {
+  locale: Locale;
+  onChange: (path: Array<string | number>, value: string) => void;
+  path?: Array<string | number>;
+  value: unknown;
+}) {
+  if (!value || typeof value !== "object") return null;
+  const entries = Array.isArray(value)
+    ? value.map((item, index) => [index, item] as const)
+    : Object.entries(value);
+
+  return (
+    <div className={path.length === 0 ? "structured-fields" : "structured-group"}>
+      {entries.map(([key, item]) => {
+        const nextPath = [...path, key];
+        const label = contentFieldLabel(key, path, locale);
+        if (typeof item === "string" || typeof item === "number") {
+          const text = String(item);
+          const multiline = text.length > 90;
+          return (
+            <label className="structured-field" key={nextPath.join(".")}>
+              <span>{label}</span>
+              {multiline ? (
+                <textarea
+                  onChange={(event) => onChange(nextPath, event.target.value)}
+                  rows={3}
+                  value={text}
+                />
+              ) : (
+                <input
+                  onChange={(event) => onChange(nextPath, event.target.value)}
+                  value={text}
+                />
+              )}
+            </label>
+          );
+        }
+        return (
+          <fieldset className="structured-fieldset" key={nextPath.join(".")}>
+            <legend>{label}</legend>
+            <StructuredFields
+              locale={locale}
+              onChange={onChange}
+              path={nextPath}
+              value={item}
+            />
+          </fieldset>
+        );
+      })}
+    </div>
+  );
+}
+
+function contentFieldLabel(
+  key: string | number,
+  path: Array<string | number>,
+  locale: Locale,
+): string {
+  if (typeof key === "number") {
+    return `${locale === "tr" ? "Öğe" : "Item"} ${key + 1}`;
+  }
+  const translations: Record<string, [string, string]> = {
+    home: ["Ana sayfa bölümleri", "Homepage sections"],
+    navigation: ["Navigasyon", "Navigation"],
+    footer: ["Alt bilgi", "Footer"],
+    contact: ["İletişim", "Contact"],
+    topicsPage: ["Haftalık program sayfası", "Weekly program page"],
+    values: ["Değer kartları", "Value cards"],
+    testimonials: ["Öğrenci görüşleri", "Student testimonials"],
+    videos: ["Videolar", "Videos"],
+    principles: ["Program bileşenleri", "Program principles"],
+    headings: ["Bölüm başlıkları", "Section headings"],
+    labels: ["Bölüm etiketleri", "Section labels"],
+    id: ["YouTube video kimliği", "YouTube video ID"],
+    title: ["Başlık", "Title"],
+    summary: ["Açıklama", "Summary"],
+    description: ["Açıklama", "Description"],
+    publisher: ["Yayımlayan", "Publisher"],
+    duration: ["Süre", "Duration"],
+    emailRecipients: ["E-posta alıcıları", "Email recipients"],
+    emailLabel: ["E-posta erişilebilirlik etiketi", "Email accessibility label"],
+    emailTitle: ["E-posta bağlantı başlığı", "Email link title"],
+  };
+  if (translations[key]) return translations[key][locale === "tr" ? 0 : 1];
+  return key
+    .replace(/([a-z])([A-Z])/g, "$1 $2")
+    .replace(/^./, (character) => character.toUpperCase());
 }

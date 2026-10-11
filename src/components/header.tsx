@@ -2,11 +2,15 @@ import Link from "next/link";
 import { isAdmin } from "@/lib/auth";
 import { Logo } from "@/components/logo";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { getPage } from "@/lib/db";
 import { type Locale, ui } from "@/lib/i18n";
+import { localizedSlug } from "@/lib/i18n";
+import { managedSection } from "@/lib/site-sections";
 
 export async function Header({ locale }: { locale: Locale }) {
   const admin = await isAdmin();
-  const copy = ui[locale].nav;
+  const page = await getPage(localizedSlug("home", locale));
+  const copy = managedSection(page?.sections ?? {}, "navigation", ui[locale].nav);
   const links = [
     { href: "/bizim-hikayemiz", label: copy.story },
     { href: "/nasil-calisiyoruz", label: copy.how },

@@ -87,9 +87,17 @@ try {
   for (const row of source.pages) {
     await connection.execute(
       `INSERT INTO pages
-        (slug, title, eyebrow, summary, body, updated_at)
-       VALUES (?, ?, ?, ?, ?, ?)`,
-      [row.slug, row.title, row.eyebrow, row.summary, row.body, row.updated_at],
+        (slug, title, eyebrow, summary, body, sections, updated_at)
+       VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      [
+        row.slug,
+        row.title,
+        row.eyebrow,
+        row.summary,
+        row.body,
+        "{}",
+        row.updated_at,
+      ],
     );
   }
   for (const row of source.weeks) {

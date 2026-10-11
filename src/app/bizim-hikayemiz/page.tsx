@@ -1,56 +1,40 @@
 import type { Metadata } from "next";
 import { ContentPage } from "@/components/content-page";
-import { getLocale } from "@/lib/i18n";
+import { InstagramIcon } from "@/components/icons";
+import { getNews, getPage } from "@/lib/db";
+import { getLocale, localizedSlug } from "@/lib/i18n";
+import { managedSection, storySections } from "@/lib/site-sections";
 
 export const metadata: Metadata = { title: "Bizim Hikâyemiz" };
 
-const videos = [
-  {
-    id: "sPXLQtMGHXI",
-    duration: "12:30",
-    title: "Turks Without Borders",
-    publisher: "TACAWA Social Support",
-  },
-  {
-    id: "O_XBZTjMiUY",
-    duration: "52:17",
-    title: "Turks Without Borders Project",
-    publisher: "Assembly of Turkish American Associations",
-  },
-] as const;
-
-const copy = {
-  tr: {
-    eyebrow: "PROJE VİDEOLARI",
-    title: "Hikâyemizi anlatan iki resmi kayıt.",
-    summary:
-      "Projenin nasıl doğduğunu, kimler tarafından yürütüldüğünü ve öğrenciler arasında nasıl bir kültür ve dil köprüsü kurduğunu doğrudan proje ekibinden dinleyin.",
-    descriptions: [
-      "TACAWA Sosyal Dayanışma ekibi tarafından hazırlanan Turks Without Borders proje filmi.",
-      "Projenin kurucuları Ülkü Umay ve Serpil İngeç'in proje modelini tanıttığı ve soruları yanıtladığı kapsamlı sunum.",
-    ],
-    watch: "YouTube'da izle",
-    duration: "Süre",
-    publishedBy: "Yayımlayan",
-  },
-  en: {
-    eyebrow: "PROJECT VIDEOS",
-    title: "Two official recordings that tell our story.",
-    summary:
-      "Hear directly from the project team about how the program began, who leads it, and how it builds a bridge of language and culture between students.",
-    descriptions: [
-      "A Turks Without Borders project film produced by the TACAWA Social Support team.",
-      "An in-depth presentation and Q&A in which project founders Ülkü Umay and Serpil İngeç introduce the program model.",
-    ],
-    watch: "Watch on YouTube",
-    duration: "Duration",
-    publishedBy: "Published by",
-  },
-} as const;
+function youtubeId(value: string): string | null {
+  if (!value) return null;
+  try {
+    const url = new URL(value);
+    if (url.hostname === "youtu.be") return url.pathname.slice(1) || null;
+    if (
+      url.hostname === "youtube.com" ||
+      url.hostname.endsWith(".youtube.com")
+    ) {
+      if (url.pathname.startsWith("/embed/")) {
+        return url.pathname.split("/")[2] || null;
+      }
+      return url.searchParams.get("v");
+    }
+  } catch {
+    return null;
+  }
+  return null;
+}
 
 export default async function StoryPage() {
   const locale = await getLocale();
-  const localizedCopy = copy[locale];
+  const [page, news] = await Promise.all([
+    getPage(localizedSlug("bizim-hikayemiz", locale)),
+    getNews(),
+  ]);
+  if (!page) return null;
+  const copy = managedSection(page.sections, "story", storySections(locale));
 
   return (
     <>
@@ -58,13 +42,13 @@ export default async function StoryPage() {
       <section className="section project-videos">
         <div className="container project-videos-heading">
           <div>
-            <span className="eyebrow">{localizedCopy.eyebrow}</span>
-            <h2>{localizedCopy.title}</h2>
+            <span className="eyebrow">{copy.videosEyebrow}</span>
+            <h2>{copy.videosTitle}</h2>
           </div>
-          <p>{localizedCopy.summary}</p>
+          <p>{copy.videosSummary}</p>
         </div>
         <div className="container project-video-grid">
-          {videos.map((video, index) => (
+          {copy.videos.map((video) => (
             <article className="project-video-card" key={video.id}>
               <div className="video-frame">
                 <iframe
@@ -78,21 +62,145 @@ export default async function StoryPage() {
               </div>
               <div className="project-video-copy">
                 <div className="video-meta">
-                  <span>{localizedCopy.duration}: {video.duration}</span>
-                  <span>{localizedCopy.publishedBy}: {video.publisher}</span>
+                  <span>{copy.durationLabel}: {video.duration}</span>
+                  <span>{copy.publisherLabel}: {video.publisher}</span>
                 </div>
                 <h3>{video.title}</h3>
-                <p>{localizedCopy.descriptions[index]}</p>
+                <p>{video.description}</p>
                 <a
                   href={`https://youtu.be/${video.id}`}
                   rel="noreferrer"
                   target="_blank"
                 >
-                  {localizedCopy.watch} ↗
+                  {copy.watchLabel} ↗
                 </a>
               </div>
             </article>
           ))}
+        </div>
+      </section>
+      <section className="section conversation-samples">
+        <div className="container conversation-samples-heading">
+          <div>
+            <span className="eyebrow">{copy.samplesEyebrow}</span>
+            <h2>{copy.samplesTitle}</h2>
+          </div>
+          <p>{copy.samplesSummary}</p>
+        </div>
+        <div className="container conversation-sample-grid">
+          {copy.samples.map((sample) => (
+            <article className="conversation-sample-card" key={sample.src}>
+              <video controls playsInline preload="metadata">
+                <source src={sample.src} type="video/mp4" />
+              </video>
+              <div>
+                <h3>{sample.title}</h3>
+                <p>{sample.description}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div className="container conversation-consent-notice">
+          <strong>{copy.samplesDisclaimerTitle}</strong>
+          <p>{copy.samplesDisclaimer}</p>
+        </div>
+      </section>
+      <section className="section story-news">
+        <div className="container story-news-heading">
+          <div>
+            <span className="eyebrow">{copy.newsEyebrow}</span>
+            <h2>{copy.newsTitle}</h2>
+            <p>{copy.newsSummary}</p>
+          </div>
+          <a
+            className="instagram-profile-link"
+            href="https://www.instagram.com/turks_without_borders/"
+            rel="noreferrer"
+            target="_blank"
+          >
+            <InstagramIcon />
+            <span>
+              <strong>@Turks_Without_Borders</strong>
+              <small>{copy.followInstagram} ↗</small>
+            </span>
+          </a>
+        </div>
+        <div className="container">
+          {news.length > 0 ? (
+            <div className="story-news-grid">
+              {news.map((item) => {
+                const title = locale === "tr" ? item.titleTr : item.titleEn;
+                const abstract =
+                  locale === "tr" ? item.abstractTr : item.abstractEn;
+                const videoId = youtubeId(item.videoUrl);
+                return (
+                  <article className="story-news-card" key={item.id}>
+                    {videoId ? (
+                      <div className="story-news-media video-frame">
+                        <iframe
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          allowFullScreen
+                          loading="lazy"
+                          referrerPolicy="strict-origin-when-cross-origin"
+                          src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0`}
+                          title={title}
+                        />
+                      </div>
+                    ) : item.imageUrl ? (
+                      <div className="story-news-media">
+                        {/* External news images are managed by administrators. */}
+                        <img alt="" loading="lazy" src={item.imageUrl} />
+                      </div>
+                    ) : (
+                      <div className="story-news-media story-news-placeholder">
+                        <span>TWB</span>
+                      </div>
+                    )}
+                    <div className="story-news-copy">
+                      <div className="story-news-meta">
+                        {item.sourceName && <span>{item.sourceName}</span>}
+                        {item.publishedOn && (
+                          <time dateTime={item.publishedOn}>
+                            {new Intl.DateTimeFormat(
+                              locale === "tr" ? "tr-TR" : "en-US",
+                              { dateStyle: "long", timeZone: "UTC" },
+                            ).format(new Date(`${item.publishedOn}T00:00:00Z`))}
+                          </time>
+                        )}
+                      </div>
+                      <h3>{title}</h3>
+                      <p>{abstract}</p>
+                      <div className="story-news-actions">
+                        {item.articleUrl && (
+                          <a href={item.articleUrl} rel="noreferrer" target="_blank">
+                            {copy.readNews} ↗
+                          </a>
+                        )}
+                        {item.videoUrl && !videoId && (
+                          <a href={item.videoUrl} rel="noreferrer" target="_blank">
+                            {copy.watchVideo} ↗
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="story-news-empty">
+              <span className="eyebrow">{copy.newsEyebrow}</span>
+              <p>{copy.newsEmpty}</p>
+              <a
+                href="https://www.instagram.com/turks_without_borders/"
+                rel="noreferrer"
+                target="_blank"
+              >
+                <InstagramIcon />
+                @Turks_Without_Borders ↗
+              </a>
+            </div>
+          )}
         </div>
       </section>
     </>

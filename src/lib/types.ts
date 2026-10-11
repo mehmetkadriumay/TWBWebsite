@@ -4,7 +4,24 @@ export type ContentPage = {
   eyebrow: string;
   summary: string;
   body: string;
+  sections: Record<string, unknown>;
 };
+
+export type NewsItem = {
+  id: number;
+  titleTr: string;
+  titleEn: string;
+  abstractTr: string;
+  abstractEn: string;
+  sourceName: string;
+  articleUrl: string;
+  imageUrl: string;
+  videoUrl: string;
+  publishedOn: string;
+  isPublished: boolean;
+};
+
+export type NewsInput = Omit<NewsItem, "id">;
 
 export type Week = {
   id: number;

@@ -34,22 +34,29 @@ export async function PUT(
       );
     }
   }
+  if (
+    !values.sections ||
+    typeof values.sections !== "object" ||
+    Array.isArray(values.sections) ||
+    JSON.stringify(values.sections).length > 100_000
+  ) {
+    return NextResponse.json(
+      { error: "Yapılandırılmış sayfa içeriği geçersiz." },
+      { status: 400 },
+    );
+  }
 
-  await updatePage({
+  const page = {
     slug,
     title: String(values.title).trim(),
     eyebrow: String(values.eyebrow).trim(),
     summary: String(values.summary).trim(),
     body: String(values.body).trim(),
-  });
+    sections: values.sections as Record<string, unknown>,
+  };
+  await updatePage(page);
   return NextResponse.json({
     message: "İçerik yayımlandı.",
-    page: {
-      slug,
-      title: String(values.title).trim(),
-      eyebrow: String(values.eyebrow).trim(),
-      summary: String(values.summary).trim(),
-      body: String(values.body).trim(),
-    },
+    page,
   });
 }

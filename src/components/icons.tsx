@@ -109,6 +109,31 @@ export function EmailIcon({ size = 22, className }: IconProps) {
   );
 }
 
+export function InstagramIcon({ size = 22, className }: IconProps) {
+  return (
+    <svg
+      aria-hidden="true"
+      className={className}
+      fill="none"
+      height={size}
+      viewBox="0 0 24 24"
+      width={size}
+    >
+      <rect
+        height="18"
+        rx="5"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        width="18"
+        x="3"
+        y="3"
+      />
+      <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.8" />
+      <circle cx="17.4" cy="6.7" fill="currentColor" r="1.1" />
+    </svg>
+  );
+}
+
 export function UploadIcon({ size = 18, className }: IconProps) {
   return (
     <svg

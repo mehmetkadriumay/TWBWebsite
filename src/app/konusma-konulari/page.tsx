@@ -4,8 +4,9 @@ import { ManualTopicEditor } from "@/components/manual-topic-editor";
 import { PageHero } from "@/components/page-hero";
 import { WeekAdminTools } from "@/components/week-admin-tools";
 import { isAdmin } from "@/lib/auth";
-import { getAcademicCalendar, getWeeks } from "@/lib/db";
-import { getLocale, ui } from "@/lib/i18n";
+import { getAcademicCalendar, getPage, getWeeks } from "@/lib/db";
+import { getLocale, localizedSlug, ui } from "@/lib/i18n";
+import { managedSection } from "@/lib/site-sections";
 import { formatWeekDate, getWeekDate } from "@/lib/week-schedule";
 
 export const metadata: Metadata = { title: "Konuşma Konuları" };
@@ -16,12 +17,17 @@ export default async function TopicsPage({
 }: {
   searchParams: Promise<{ hafta?: string }>;
 }) {
-  const [weeks, calendar] = await Promise.all([
+  const locale = await getLocale();
+  const [weeks, calendar, homePage] = await Promise.all([
     getWeeks(),
     getAcademicCalendar(),
+    getPage(localizedSlug("home", locale)),
   ]);
-  const locale = await getLocale();
-  const copy = ui[locale].topics;
+  const copy = managedSection(
+    homePage?.sections ?? {},
+    "topicsPage",
+    ui[locale].topics,
+  );
   const params = await searchParams;
   const requested = Number.parseInt(params.hafta ?? "", 10);
   const selected =
@@ -75,7 +81,7 @@ export default async function TopicsPage({
                       <h2>{copy.weekLabel} {selected.id}</h2>
                     </div>
                     <span>
-                      {topicCount} {locale === "tr" ? "konu başlığı" : "topics"}
+                      {topicCount} {copy.topics}
                       {" · "}
                       {selected.topics.length} {copy.questions}
                     </span>

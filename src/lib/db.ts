@@ -17,9 +17,12 @@ import {
   seedTopics,
 } from "@/lib/default-content";
 import { parseWeeksWorkbook } from "@/lib/import-weeks";
+import { defaultSections } from "@/lib/site-sections";
 import type {
   AcademicCalendar,
   ContentPage,
+  NewsInput,
+  NewsItem,
   ParticipationApplication,
   School,
   SchoolInput,
@@ -99,20 +102,50 @@ function getPool(): Pool {
 async function initializeDatabase(pool: Pool): Promise<void> {
   const schemaPath = path.join(process.cwd(), "scripts", "mysql-schema.sql");
   await pool.query(fs.readFileSync(schemaPath, "utf8"));
+  if (!(await columnExists(pool, "pages", "sections"))) {
+    await pool.query("ALTER TABLE pages ADD COLUMN sections JSON NULL AFTER body");
+    await pool.query("UPDATE pages SET sections = JSON_OBJECT() WHERE sections IS NULL");
+    await pool.query("ALTER TABLE pages MODIFY sections JSON NOT NULL");
+  }
   await migrateStudentSchema(pool);
   await importDeploymentSeed(pool);
 
   for (const page of defaultPages) {
+    const sections = defaultSections(page.slug);
     await pool.execute(
-      `INSERT IGNORE INTO pages (slug, title, eyebrow, summary, body)
-       VALUES (?, ?, ?, ?, ?)`,
-      [page.slug, page.title, page.eyebrow, page.summary, page.body],
+      `INSERT IGNORE INTO pages (slug, title, eyebrow, summary, body, sections)
+       VALUES (?, ?, ?, ?, ?, ?)`,
+      [
+        page.slug,
+        page.title,
+        page.eyebrow,
+        page.summary,
+        page.body,
+        JSON.stringify(sections),
+      ],
+    );
+    await pool.execute(
+      `UPDATE pages SET sections = ?
+       WHERE slug = ? AND JSON_LENGTH(sections) = 0`,
+      [JSON.stringify(sections), page.slug],
     );
   }
 
   type DeploymentSeed = {
     schemaVersion: number;
     pages: ContentPage[];
+    news: Array<{
+      title_tr: string;
+      title_en: string;
+      abstract_tr: string;
+      abstract_en: string;
+      source_name: string;
+      article_url: string;
+      image_url: string;
+      video_url: string;
+      published_on: string | null;
+      is_published: number;
+    }>;
     settings: Array<{ key: string; value: string }>;
     weeks: Array<{
       id: number;
@@ -142,6 +175,7 @@ async function initializeDatabase(pool: Pool): Promise<void> {
     if (
       seed.schemaVersion !== 1 ||
       !Array.isArray(seed.pages) ||
+      !Array.isArray(seed.news) ||
       !Array.isArray(seed.settings) ||
       !Array.isArray(seed.weeks)
     ) {
@@ -153,15 +187,42 @@ async function initializeDatabase(pool: Pool): Promise<void> {
       await connection.beginTransaction();
       for (const page of seed.pages) {
         await connection.execute(
-          `INSERT INTO pages (slug, title, eyebrow, summary, body)
-           VALUES (?, ?, ?, ?, ?)`,
-          [page.slug, page.title, page.eyebrow, page.summary, page.body],
+          `INSERT INTO pages (slug, title, eyebrow, summary, body, sections)
+           VALUES (?, ?, ?, ?, ?, ?)`,
+          [
+            page.slug,
+            page.title,
+            page.eyebrow,
+            page.summary,
+            page.body,
+            JSON.stringify(page.sections ?? {}),
+          ],
         );
       }
       for (const setting of seed.settings) {
         await connection.execute(
           "INSERT INTO settings (`key`, value) VALUES (?, ?)",
           [setting.key, setting.value],
+        );
+      }
+      for (const item of seed.news) {
+        await connection.execute(
+          `INSERT INTO news (
+            title_tr, title_en, abstract_tr, abstract_en, source_name,
+            article_url, image_url, video_url, published_on, is_published
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          [
+            item.title_tr,
+            item.title_en,
+            item.abstract_tr,
+            item.abstract_en,
+            item.source_name,
+            item.article_url,
+            item.image_url,
+            item.video_url,
+            item.published_on,
+            item.is_published,
+          ],
         );
       }
       await replaceWeeksWithConnection(connection, seed.weeks);
@@ -367,40 +428,200 @@ type TopicRow = RowDataPacket & {
 export async function getPage(slug: string): Promise<ContentPage | null> {
   const db = await getDb();
   const [rows] = await db.execute<PageRow[]>(
-    "SELECT slug, title, eyebrow, summary, body FROM pages WHERE slug = ?",
+    "SELECT slug, title, eyebrow, summary, body, sections FROM pages WHERE slug = ?",
     [slug],
   );
-  return rows[0] ?? null;
+  const row = rows[0];
+  if (!row) return null;
+  const storedSections =
+    typeof row.sections === "string" ? JSON.parse(row.sections) : row.sections;
+  return {
+    ...row,
+    sections: mergeContent(defaultSections(slug), storedSections),
+  };
 }
 
 export async function getPages(): Promise<ContentPage[]> {
   const db = await getDb();
   const [rows] = await db.query<PageRow[]>(`
-    SELECT slug, title, eyebrow, summary, body FROM pages
+    SELECT slug, title, eyebrow, summary, body, sections FROM pages
     ORDER BY FIELD(
       slug, 'home', 'bizim-hikayemiz', 'nasil-calisiyoruz',
       'projeye-katilim', 'home-en', 'bizim-hikayemiz-en',
       'nasil-calisiyoruz-en', 'projeye-katilim-en'
     ), slug
   `);
-  return rows.map(({ slug, title, eyebrow, summary, body }) => ({
-    slug,
-    title,
-    eyebrow,
-    summary,
-    body,
-  }));
+  return rows.map(({ slug, title, eyebrow, summary, body, sections }) => {
+    const storedSections =
+      typeof sections === "string" ? JSON.parse(sections) : sections;
+    return {
+      slug,
+      title,
+      eyebrow,
+      summary,
+      body,
+      sections: mergeContent(defaultSections(slug), storedSections),
+    };
+  });
+}
+
+function mergeContent(
+  defaults: Record<string, unknown>,
+  stored: Record<string, unknown>,
+): Record<string, unknown> {
+  const result: Record<string, unknown> = { ...defaults };
+  for (const [key, value] of Object.entries(stored ?? {})) {
+    if (
+      value &&
+      typeof value === "object" &&
+      !Array.isArray(value) &&
+      result[key] &&
+      typeof result[key] === "object" &&
+      !Array.isArray(result[key])
+    ) {
+      result[key] = mergeContent(
+        result[key] as Record<string, unknown>,
+        value as Record<string, unknown>,
+      );
+    } else {
+      result[key] = value;
+    }
+  }
+  return result;
 }
 
 export async function updatePage(page: ContentPage): Promise<void> {
   const db = await getDb();
   await db.execute(
     `UPDATE pages
-     SET title = ?, eyebrow = ?, summary = ?, body = ?,
+     SET title = ?, eyebrow = ?, summary = ?, body = ?, sections = ?,
        updated_at = CURRENT_TIMESTAMP
      WHERE slug = ?`,
-    [page.title, page.eyebrow, page.summary, page.body, page.slug],
+    [
+      page.title,
+      page.eyebrow,
+      page.summary,
+      page.body,
+      JSON.stringify(page.sections),
+      page.slug,
+    ],
   );
+}
+
+type NewsRow = RowDataPacket & {
+  id: number;
+  title_tr: string;
+  title_en: string;
+  abstract_tr: string;
+  abstract_en: string;
+  source_name: string;
+  article_url: string;
+  image_url: string;
+  video_url: string;
+  published_on: Date | string | null;
+  is_published: number;
+};
+
+const newsColumns = `
+  id, title_tr, title_en, abstract_tr, abstract_en, source_name,
+  article_url, image_url, video_url, published_on, is_published
+`;
+
+function mapNews(row: NewsRow): NewsItem {
+  return {
+    id: row.id,
+    titleTr: row.title_tr,
+    titleEn: row.title_en,
+    abstractTr: row.abstract_tr,
+    abstractEn: row.abstract_en,
+    sourceName: row.source_name,
+    articleUrl: row.article_url,
+    imageUrl: row.image_url,
+    videoUrl: row.video_url,
+    publishedOn: row.published_on
+      ? new Date(row.published_on).toISOString().slice(0, 10)
+      : "",
+    isPublished: Boolean(row.is_published),
+  };
+}
+
+export async function getNews(includeUnpublished = false): Promise<NewsItem[]> {
+  const db = await getDb();
+  const [rows] = await db.query<NewsRow[]>(
+    `SELECT ${newsColumns} FROM news
+     ${includeUnpublished ? "" : "WHERE is_published = 1"}
+     ORDER BY published_on IS NULL, published_on DESC, id DESC`,
+  );
+  return rows.map(mapNews);
+}
+
+export async function createNews(input: NewsInput): Promise<NewsItem> {
+  const db = await getDb();
+  const [result] = await db.execute<ResultSetHeader>(
+    `INSERT INTO news (
+      title_tr, title_en, abstract_tr, abstract_en, source_name,
+      article_url, image_url, video_url, published_on, is_published
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NULLIF(?, ''), ?)`,
+    [
+      input.titleTr,
+      input.titleEn,
+      input.abstractTr,
+      input.abstractEn,
+      input.sourceName,
+      input.articleUrl,
+      input.imageUrl,
+      input.videoUrl,
+      input.publishedOn,
+      input.isPublished ? 1 : 0,
+    ],
+  );
+  const [rows] = await db.execute<NewsRow[]>(
+    `SELECT ${newsColumns} FROM news WHERE id = ?`,
+    [result.insertId],
+  );
+  return mapNews(rows[0]);
+}
+
+export async function updateNews(
+  id: number,
+  input: NewsInput,
+): Promise<NewsItem | null> {
+  const db = await getDb();
+  const [result] = await db.execute<ResultSetHeader>(
+    `UPDATE news SET
+      title_tr = ?, title_en = ?, abstract_tr = ?, abstract_en = ?,
+      source_name = ?, article_url = ?, image_url = ?, video_url = ?,
+      published_on = NULLIF(?, ''), is_published = ?
+     WHERE id = ?`,
+    [
+      input.titleTr,
+      input.titleEn,
+      input.abstractTr,
+      input.abstractEn,
+      input.sourceName,
+      input.articleUrl,
+      input.imageUrl,
+      input.videoUrl,
+      input.publishedOn,
+      input.isPublished ? 1 : 0,
+      id,
+    ],
+  );
+  if (result.affectedRows === 0) return null;
+  const [rows] = await db.execute<NewsRow[]>(
+    `SELECT ${newsColumns} FROM news WHERE id = ?`,
+    [id],
+  );
+  return mapNews(rows[0]);
+}
+
+export async function deleteNews(id: number): Promise<boolean> {
+  const db = await getDb();
+  const [result] = await db.execute<ResultSetHeader>(
+    "DELETE FROM news WHERE id = ?",
+    [id],
+  );
+  return result.affectedRows > 0;
 }
 
 export async function createParticipationApplication(

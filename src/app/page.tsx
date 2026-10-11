@@ -3,12 +3,13 @@ import { BridgeInfographic } from "@/components/bridge-infographic";
 import { ArrowIcon, GlobeIcon, PeopleIcon, SparkIcon } from "@/components/icons";
 import { getPage } from "@/lib/db";
 import { getLocale, localizedSlug, ui } from "@/lib/i18n";
+import { managedSection } from "@/lib/site-sections";
 
 export default async function Home() {
   const locale = await getLocale();
-  const copy = ui[locale].home;
   const page = await getPage(localizedSlug("home", locale));
   if (!page) return null;
+  const copy = managedSection(page.sections, "home", ui[locale].home);
 
   return (
     <>

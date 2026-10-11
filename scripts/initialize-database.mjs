@@ -37,6 +37,7 @@ try {
     if (
       seed.schemaVersion !== 1 ||
       !Array.isArray(seed.pages) ||
+      !Array.isArray(seed.news) ||
       !Array.isArray(seed.settings) ||
       !Array.isArray(seed.weeks)
     ) {
@@ -47,15 +48,42 @@ try {
     try {
       for (const page of seed.pages) {
         await connection.execute(
-          `INSERT INTO pages (slug, title, eyebrow, summary, body)
-           VALUES (?, ?, ?, ?, ?)`,
-          [page.slug, page.title, page.eyebrow, page.summary, page.body],
+          `INSERT INTO pages (slug, title, eyebrow, summary, body, sections)
+           VALUES (?, ?, ?, ?, ?, ?)`,
+          [
+            page.slug,
+            page.title,
+            page.eyebrow,
+            page.summary,
+            page.body,
+            JSON.stringify(page.sections ?? {}),
+          ],
         );
       }
       for (const setting of seed.settings) {
         await connection.execute(
           "INSERT INTO settings (`key`, value) VALUES (?, ?)",
           [setting.key, setting.value],
+        );
+      }
+      for (const item of seed.news) {
+        await connection.execute(
+          `INSERT INTO news (
+            title_tr, title_en, abstract_tr, abstract_en, source_name,
+            article_url, image_url, video_url, published_on, is_published
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          [
+            item.title_tr,
+            item.title_en,
+            item.abstract_tr,
+            item.abstract_en,
+            item.source_name,
+            item.article_url,
+            item.image_url,
+            item.video_url,
+            item.published_on,
+            item.is_published,
+          ],
         );
       }
       for (const week of seed.weeks) {

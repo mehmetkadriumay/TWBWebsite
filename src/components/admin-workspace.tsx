@@ -6,10 +6,12 @@ import { TimeManagement } from "@/components/time-management";
 import { SchoolManagement } from "@/components/school-management";
 import { StudentManagement } from "@/components/student-management";
 import { WhatsAppManagement } from "@/components/whatsapp-management";
+import { NewsManagement } from "@/components/news-management";
 import type { Locale } from "@/lib/i18n";
 import type {
   AcademicCalendar,
   ContentPage,
+  NewsItem,
   School,
   Student,
 } from "@/lib/types";
@@ -18,17 +20,19 @@ export function AdminWorkspace({
   calendar,
   locale,
   pages,
+  news,
   schools,
   students,
 }: {
   calendar: AcademicCalendar;
   locale: Locale;
   pages: ContentPage[];
+  news: NewsItem[];
   schools: School[];
   students: Student[];
 }) {
   const [tab, setTab] = useState<
-    "content" | "time" | "schools" | "students" | "whatsapp"
+    "content" | "news" | "time" | "schools" | "students" | "whatsapp"
   >("content");
   const [currentStudents, setCurrentStudents] = useState(students);
 
@@ -41,6 +45,13 @@ export function AdminWorkspace({
           type="button"
         >
           {locale === "tr" ? "İçerik Yönetimi" : "Content Management"}
+        </button>
+        <button
+          className={tab === "news" ? "active" : ""}
+          onClick={() => setTab("news")}
+          type="button"
+        >
+          {locale === "tr" ? "Haber Yönetimi" : "News Management"}
         </button>
         <button
           className={tab === "time" ? "active" : ""}
@@ -73,6 +84,8 @@ export function AdminWorkspace({
       </div>
       {tab === "content" ? (
         <ContentEditor locale={locale} pages={pages} />
+      ) : tab === "news" ? (
+        <NewsManagement initialNews={news} locale={locale} />
       ) : tab === "time" ? (
         <TimeManagement calendar={calendar} locale={locale} />
       ) : tab === "schools" ? (

@@ -4,7 +4,24 @@ CREATE TABLE IF NOT EXISTS pages (
   eyebrow TEXT NOT NULL,
   summary TEXT NOT NULL,
   body LONGTEXT NOT NULL,
+  sections JSON NOT NULL,
   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS news (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title_tr VARCHAR(300) NOT NULL,
+  title_en VARCHAR(300) NOT NULL,
+  abstract_tr TEXT NOT NULL,
+  abstract_en TEXT NOT NULL,
+  source_name VARCHAR(255) NOT NULL DEFAULT '',
+  article_url TEXT NOT NULL,
+  image_url TEXT NOT NULL,
+  video_url TEXT NOT NULL,
+  published_on DATE NULL,
+  is_published TINYINT(1) NOT NULL DEFAULT 1,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX news_publication_idx (is_published, published_on, id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS weeks (

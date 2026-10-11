@@ -86,7 +86,7 @@ export const defaultPages: ContentPage[] = [
       "We are opening new groups for students in Türkiye, young people in the United States, teachers, and volunteer coordinators.",
     body: currentParticipationBodies.en,
   },
-];
+].map((page) => ({ ...page, sections: {} }));
 
 export const seedTopics = [
   "What is the best activity to do while camping?",

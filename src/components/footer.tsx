@@ -1,10 +1,26 @@
 import Link from "next/link";
-import { EmailIcon } from "@/components/icons";
+import { EmailIcon, InstagramIcon } from "@/components/icons";
 import { Logo } from "@/components/logo";
-import { type Locale, ui } from "@/lib/i18n";
+import { getPage } from "@/lib/db";
+import { localizedSlug, type Locale, ui } from "@/lib/i18n";
+import { managedSection } from "@/lib/site-sections";
 
-export function Footer({ locale }: { locale: Locale }) {
-  const copy = ui[locale].footer;
+export async function Footer({ locale }: { locale: Locale }) {
+  const page = await getPage(localizedSlug("home", locale));
+  const copy = managedSection(page?.sections ?? {}, "footer", ui[locale].footer);
+  const contact = managedSection(page?.sections ?? {}, "contact", {
+    emailRecipients: "serpil_ingec@hotmail.com,ulkuumay@hotmail.com",
+    emailLabel:
+      locale === "tr"
+        ? "Serpil İngeç ve Ülkü Umay'a e-posta gönder"
+        : "Email Serpil İngeç and Ülkü Umay",
+    emailTitle: locale === "tr" ? "E-posta gönder" : "Send an email",
+    instagramUrl: "https://www.instagram.com/turks_without_borders/",
+    instagramLabel:
+      locale === "tr"
+        ? "Turks Without Borders Instagram profilini aç"
+        : "Open the Turks Without Borders Instagram profile",
+  });
   return (
     <footer className="site-footer">
       <div className="container footer-grid">
@@ -20,22 +36,25 @@ export function Footer({ locale }: { locale: Locale }) {
         </div>
         <div className="footer-links">
           <strong>{copy.contact}</strong>
-          <a
-            aria-label={
-              locale === "tr"
-                ? "Serpil İngeç ve Ülkü Umay'a e-posta gönder"
-                : "Email Serpil İngeç and Ülkü Umay"
-            }
-            className="footer-email-link"
-            href="mailto:serpil_ingec@hotmail.com,ulkuumay@hotmail.com"
-            title={
-              locale === "tr"
-                ? "E-posta gönder"
-                : "Send an email"
-            }
-          >
-            <EmailIcon size={23} />
-          </a>
+          <div className="footer-social-links">
+            <a
+              aria-label={contact.emailLabel}
+              className="footer-email-link"
+              href={`mailto:${contact.emailRecipients}`}
+              title={contact.emailTitle}
+            >
+              <EmailIcon size={23} />
+            </a>
+            <a
+              aria-label={contact.instagramLabel}
+              className="footer-email-link"
+              href={contact.instagramUrl}
+              rel="noreferrer"
+              target="_blank"
+            >
+              <InstagramIcon size={23} />
+            </a>
+          </div>
           <Link href="/projeye-katilim">{copy.join}</Link>
         </div>
       </div>
