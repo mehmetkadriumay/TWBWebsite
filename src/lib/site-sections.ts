@@ -172,9 +172,9 @@ const participation = {
       eyebrow: "BAŞVURU FORMLARI",
       title: "Size uygun başvuru formunu doldurun.",
       summary:
-        "Türkiye başvurusu öğretmen ve okul grubu bilgilerini; Amerika başvurusu öğrenci, referans veren kişi ve veli bilgilerini toplar.",
+        "Türkiye başvurusu öğretmen ve okul grubu bilgilerini; Amerika / Avrupa başvurusu öğrenci, referans veren kişi ve veli bilgilerini toplar.",
       turkeyTitle: "Türkiye'den Proje Başvurusu",
-      usTitle: "Amerika'dan Proje Başvurusu",
+      usTitle: "Amerika ve Avrupa'dan Proje Başvurusu",
       turkeyRegion: "TÜRKİYE",
       usRegion: "AMERİKA BİRLEŞİK DEVLETLERİ",
       teacherSection: "Başvuruyu yapan öğretmen",
@@ -228,10 +228,10 @@ const participation = {
         ],
       },
       {
-        title: "Amerika Birleşik Devletleri'ndeki öğrenciler",
+        title: "Amerika Birleşik Devletleri ve Avrupa'daki öğrenciler",
         summary: "Amerika'dan katılacak öğrencilerin karşılaması gereken koşullar",
         items: [
-          "Amerika Birleşik Devletleri'nde yaşayan ve eğitimine devam eden bir öğrenci olmak.",
+          "Amerika Birleşik Devletleri'nde yada Avrupa'da yaşayan ve eğitimine devam eden bir öğrenci olmak.",
           "Başvuru tarihinde en az 13 yaşında olmak.",
           "Bir bölge koordinatörü tarafından aday gösterilmek ve en az iki kişiden referans sunabilmek.",
           "Özel bir engel bulunmadıkça haftalık görüşmelerde kamerayı açık tutmak.",
@@ -246,7 +246,7 @@ const participation = {
         summary: "Öğrencinin projeye başlamasından önce tamamlanması gereken işlemler",
         items: [
           "Türkiye'deki öğrencilerin velileri, Proje Katılım ve İzin Formunu doldurup öğrencinin okulundaki sorumlu öğretmene teslim etmelidir.",
-          "Amerika Birleşik Devletleri'ndeki öğrencilerin velileri, Proje Katılım Formunu doldurup bağlı oldukları bölge koordinatörüne teslim etmelidir.",
+          "Amerika Birleşik Devletleri ve Avrupa'daki öğrencilerin velileri, Proje Katılım Formunu doldurup bağlı oldukları bölge koordinatörüne teslim etmelidir.",
         ],
       },
       {
@@ -262,7 +262,7 @@ const participation = {
         ],
       },
       {
-        title: "Amerika'daki bölge koordinatörleri",
+        title: "Amerika / Avrupa'daki bölge koordinatörleri",
         summary: "Bölgesel grupları yöneten gönüllü koordinatörlerin görevleri",
         items: [
           "Web sitesinde yayımlanan haftalık konu başlıklarını ve soruları kendi gruplarındaki öğrencilere zamanında iletmek.",
@@ -288,7 +288,7 @@ const participation = {
       summary:
         "The Türkiye form collects teacher and school-group details; the U.S. form collects applicant, referrer, and parent information.",
       turkeyTitle: "Project Application from Türkiye",
-      usTitle: "Project Application from the U.S.",
+      usTitle: "Project Application from the U.S. / Europe",
       turkeyRegion: "TÜRKİYE",
       usRegion: "UNITED STATES",
       teacherSection: "Applying teacher",
@@ -376,7 +376,7 @@ const participation = {
         ],
       },
       {
-        title: "Regional coordinators in the United States",
+        title: "Regional coordinators in the United States / Europe",
         summary: "Responsibilities of volunteers managing regional groups",
         items: [
           "Send the weekly topic headings and questions published on the website to every student in their group.",

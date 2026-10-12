@@ -353,8 +353,8 @@ async function initializeDatabase(pool: Pool): Promise<void> {
   );
 
   const settings: Array<[keyof AcademicCalendar, string]> = [
-    ["semester1Start", "2026-09-07"],
-    ["semester1End", "2026-12-14"],
+    ["semester1Start", "2026-10-04"],
+    ["semester1End", "2026-12-13"],
     ["semester2Start", "2027-01-25"],
     ["semester2End", "2027-04-12"],
   ];
