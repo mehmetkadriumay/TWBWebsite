@@ -7,7 +7,7 @@ import type { Locale } from "@/lib/i18n";
 declare global {
   interface Window {
     grecaptcha?: {
-      render: (
+      render?: (
         element: HTMLElement,
         options: {
           sitekey: string;
@@ -16,7 +16,7 @@ declare global {
           "error-callback": () => void;
         },
       ) => number;
-      reset: (widgetId?: number) => void;
+      reset?: (widgetId?: number) => void;
     };
   }
 }
@@ -99,6 +99,7 @@ function ApplicationForm({
       !recaptchaSiteKey ||
       !recaptchaElement.current ||
       !window.grecaptcha ||
+      typeof window.grecaptcha.render !== "function" ||
       recaptchaWidgetId.current !== null
     ) {
       return;
@@ -168,7 +169,7 @@ function ApplicationForm({
     if (!submitted) {
       setRecaptchaToken("");
       if (recaptchaWidgetId.current !== null) {
-        window.grecaptcha?.reset(recaptchaWidgetId.current);
+        window.grecaptcha?.reset?.(recaptchaWidgetId.current);
       }
     }
   }
@@ -237,12 +238,28 @@ export function ParticipationForms({
   recaptchaSiteKey: string;
 }) {
   const [recaptchaReady, setRecaptchaReady] = useState(false);
+  const [recaptchaScriptLoaded, setRecaptchaScriptLoaded] = useState(false);
+
+  useEffect(() => {
+    if (!recaptchaScriptLoaded || !recaptchaSiteKey) return;
+    let attempts = 0;
+    const checkApi = window.setInterval(() => {
+      attempts += 1;
+      if (typeof window.grecaptcha?.render === "function") {
+        window.clearInterval(checkApi);
+        setRecaptchaReady(true);
+      } else if (attempts >= 100) {
+        window.clearInterval(checkApi);
+      }
+    }, 100);
+    return () => window.clearInterval(checkApi);
+  }, [recaptchaScriptLoaded, recaptchaSiteKey]);
 
   return (
     <section className="application-section" id="application-forms">
       {recaptchaSiteKey && (
         <Script
-          onReady={() => setRecaptchaReady(true)}
+          onReady={() => setRecaptchaScriptLoaded(true)}
           src={`https://www.google.com/recaptcha/api.js?render=explicit&hl=${locale}`}
           strategy="afterInteractive"
         />
