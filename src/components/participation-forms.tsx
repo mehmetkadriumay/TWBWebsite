@@ -87,6 +87,10 @@ function ApplicationForm({
   recaptchaSiteKey: string;
 }) {
   const [message, setMessage] = useState("");
+  const [documentLinks, setDocumentLinks] = useState<{
+    documentUrl: string;
+    printUrl: string;
+  } | null>(null);
   const [recaptchaToken, setRecaptchaToken] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -132,6 +136,20 @@ function ApplicationForm({
       );
       return;
     }
+    const printWindow =
+      formType === "turkiye"
+        ? window.open("", "twb-turkiye-application-print")
+        : null;
+    if (printWindow) {
+      printWindow.document.write(
+        `<p style="font:16px Arial;padding:24px">${
+          locale === "tr"
+            ? "Başvurunuz kaydediliyor..."
+            : "Your application is being saved..."
+        }</p>`,
+      );
+      printWindow.document.close();
+    }
     setSubmitting(true);
     setMessage("");
     const form = event.currentTarget;
@@ -150,9 +168,28 @@ function ApplicationForm({
       const result = (await response.json()) as {
         message?: string;
         error?: string;
+        documentUrl?: string | null;
+        printUrl?: string | null;
       };
       setMessage(result.message ?? result.error ?? "");
       if (response.ok) {
+        if (result.documentUrl && result.printUrl) {
+          setDocumentLinks({
+            documentUrl: result.documentUrl,
+            printUrl: result.printUrl,
+          });
+          const download = document.createElement("a");
+          download.href = result.documentUrl;
+          download.download = "";
+          document.body.appendChild(download);
+          download.click();
+          download.remove();
+          if (printWindow) {
+            printWindow.location.href = result.printUrl;
+          }
+        } else {
+          printWindow?.close();
+        }
         form.reset();
         setSubmitted(true);
         return;
@@ -166,11 +203,10 @@ function ApplicationForm({
     } finally {
       setSubmitting(false);
     }
-    if (!submitted) {
-      setRecaptchaToken("");
-      if (recaptchaWidgetId.current !== null) {
-        window.grecaptcha?.reset?.(recaptchaWidgetId.current);
-      }
+    printWindow?.close();
+    setRecaptchaToken("");
+    if (recaptchaWidgetId.current !== null) {
+      window.grecaptcha?.reset?.(recaptchaWidgetId.current);
     }
   }
 
@@ -180,6 +216,28 @@ function ApplicationForm({
         <span aria-hidden="true">✓</span>
         <h4>{copy.thankYou}</h4>
         <p>{message}</p>
+        {documentLinks && (
+          <div className="application-document-actions">
+            <a
+              className="button button-secondary"
+              href={documentLinks.documentUrl}
+            >
+              {locale === "tr" ? "Word belgesini indir" : "Download Word document"}
+            </a>
+            <button
+              className="button button-primary"
+              onClick={() =>
+                window.open(
+                  documentLinks.printUrl,
+                  "twb-turkiye-application-print",
+                )
+              }
+              type="button"
+            >
+              {locale === "tr" ? "Yazdır" : "Print"}
+            </button>
+          </div>
+        )}
       </div>
     );
   }

@@ -628,13 +628,14 @@ export async function createParticipationApplication(
   formType: "turkiye" | "us",
   locale: "tr" | "en",
   fields: Record<string, string>,
-): Promise<void> {
+): Promise<number> {
   const db = await getDb();
-  await db.execute(
+  const [result] = await db.execute<ResultSetHeader>(
     `INSERT INTO participation_applications (form_type, locale, payload)
      VALUES (?, ?, ?)`,
     [formType, locale, JSON.stringify(fields)],
   );
+  return result.insertId;
 }
 
 export async function getWeeks(): Promise<Week[]> {
@@ -1284,6 +1285,19 @@ export async function getParticipationApplications(): Promise<
     ORDER BY FIELD(status, 'pending', 'approved', 'rejected'), submitted_at DESC
   `);
   return rows.map(mapApplication);
+}
+
+export async function getParticipationApplicationById(
+  id: number,
+): Promise<ParticipationApplication | null> {
+  const db = await getDb();
+  const [rows] = await db.execute<ApplicationRow[]>(
+    `SELECT id, form_type, locale, payload, status, submitted_at, reviewed_at,
+      student_id, student_type
+     FROM participation_applications WHERE id = ?`,
+    [id],
+  );
+  return rows[0] ? mapApplication(rows[0]) : null;
 }
 
 export async function reviewParticipationApplication(

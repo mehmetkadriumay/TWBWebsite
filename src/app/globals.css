@@ -1780,6 +1780,14 @@ h3 {
   width: 72px;
 }
 
+.application-document-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
 .application-success h4 {
   font-family: var(--font-serif), Georgia, serif;
   font-size: 30px;

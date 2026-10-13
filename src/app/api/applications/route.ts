@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { createApplicationDocumentToken } from "@/lib/application-document-token";
 import { createParticipationApplication } from "@/lib/db";
 
 const attempts = new Map<string, { count: number; resetAt: number }>();
@@ -194,7 +195,15 @@ export async function POST(request: NextRequest) {
     count: attempt && attempt.resetAt > now ? attempt.count + 1 : 1,
     resetAt: attempt && attempt.resetAt > now ? attempt.resetAt : now + 60 * 60 * 1000,
   });
-  await createParticipationApplication(formType, locale, fields);
+  const applicationId = await createParticipationApplication(
+    formType,
+    locale,
+    fields,
+  );
+  const documentToken =
+    formType === "turkiye"
+      ? createApplicationDocumentToken(applicationId)
+      : null;
 
   return NextResponse.json(
     {
@@ -202,6 +211,13 @@ export async function POST(request: NextRequest) {
         locale === "tr"
           ? "Başvurunuz alındı. Proje ekibi bilgilerinizi inceleyecektir."
           : "Your application has been received. The project team will review your information.",
+      applicationId,
+      documentUrl: documentToken
+        ? `/api/applications/${applicationId}/document?token=${encodeURIComponent(documentToken)}`
+        : null,
+      printUrl: documentToken
+        ? `/api/applications/${applicationId}/print?token=${encodeURIComponent(documentToken)}`
+        : null,
     },
     { status: 201 },
   );
