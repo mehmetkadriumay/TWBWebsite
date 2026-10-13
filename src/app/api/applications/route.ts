@@ -4,6 +4,42 @@ import { createParticipationApplication } from "@/lib/db";
 const attempts = new Map<string, { count: number; resetAt: number }>();
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+type RecaptchaVerification = {
+  success: boolean;
+  hostname?: string;
+  "error-codes"?: string[];
+};
+
+async function verifyRecaptcha(
+  token: string,
+  ip: string,
+): Promise<RecaptchaVerification> {
+  const secret =
+    process.env.RECAPTCHA_SECRET_KEY ??
+    process.env.GOOGLE_RECAPTCHA_SECRET_KEY;
+  if (!secret) {
+    throw new Error("RECAPTCHA_SECRET_KEY is not configured.");
+  }
+  const body = new URLSearchParams({
+    secret,
+    response: token,
+  });
+  if (ip !== "local") body.set("remoteip", ip);
+  const response = await fetch(
+    "https://www.google.com/recaptcha/api/siteverify",
+    {
+      method: "POST",
+      body,
+      cache: "no-store",
+      signal: AbortSignal.timeout(10_000),
+    },
+  );
+  if (!response.ok) {
+    throw new Error(`Google reCAPTCHA returned HTTP ${response.status}.`);
+  }
+  return (await response.json()) as RecaptchaVerification;
+}
+
 const requiredFields = {
   turkiye: [
     "teacherFirstName",
@@ -37,7 +73,8 @@ const requiredFields = {
 } as const;
 
 export async function POST(request: NextRequest) {
-  const ip = request.headers.get("x-forwarded-for")?.split(",")[0] ?? "local";
+  const ip =
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "local";
   const now = Date.now();
   const attempt = attempts.get(ip);
   if (attempt && attempt.resetAt > now && attempt.count >= 5) {
@@ -58,6 +95,10 @@ export async function POST(request: NextRequest) {
   const formType = values.formType;
   const locale = values.locale === "en" ? "en" : "tr";
   const rawFields = values.fields;
+  const recaptchaToken =
+    typeof values.recaptchaToken === "string"
+      ? values.recaptchaToken.trim()
+      : "";
   if (
     (formType !== "turkiye" && formType !== "us") ||
     !rawFields ||
@@ -77,6 +118,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Geçersiz başvuru." }, { status: 400 });
   }
   delete fields.website;
+  delete fields["g-recaptcha-response"];
 
   if (
     Object.values(fields).some((value) => value.length > 3000) ||
@@ -87,18 +129,17 @@ export async function POST(request: NextRequest) {
       { status: 400 },
     );
   }
-  if (fields.humanVerification !== "yes") {
+  if (!recaptchaToken || recaptchaToken.length > 4096) {
     return NextResponse.json(
       {
         error:
           locale === "tr"
-            ? "Lütfen insan doğrulamasını tamamlayın."
-            : "Please complete the human verification.",
+            ? "Lütfen Google reCAPTCHA doğrulamasını tamamlayın."
+            : "Please complete the Google reCAPTCHA verification.",
       },
       { status: 400 },
     );
   }
-  delete fields.humanVerification;
 
   const emailFields =
     formType === "turkiye"
@@ -118,6 +159,33 @@ export async function POST(request: NextRequest) {
   ) {
     return NextResponse.json(
       { error: locale === "tr" ? "Öğrenci sayısı 1 ile 100 arasında olmalıdır." : "The student count must be between 1 and 100." },
+      { status: 400 },
+    );
+  }
+
+  let recaptcha: RecaptchaVerification;
+  try {
+    recaptcha = await verifyRecaptcha(recaptchaToken, ip);
+  } catch (error) {
+    console.error("Google reCAPTCHA verification failed:", error);
+    return NextResponse.json(
+      {
+        error:
+          locale === "tr"
+            ? "Google reCAPTCHA doğrulaması şu anda kullanılamıyor. Lütfen daha sonra tekrar deneyin."
+            : "Google reCAPTCHA verification is currently unavailable. Please try again later.",
+      },
+      { status: 503 },
+    );
+  }
+  if (!recaptcha.success) {
+    return NextResponse.json(
+      {
+        error:
+          locale === "tr"
+            ? "Google reCAPTCHA doğrulaması başarısız oldu. Lütfen tekrar deneyin."
+            : "Google reCAPTCHA verification failed. Please try again.",
+      },
       { status: 400 },
     );
   }

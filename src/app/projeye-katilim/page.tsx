@@ -228,7 +228,15 @@ export default async function JoinPage() {
           </aside>
         </div>
       </section>
-      <ParticipationForms copy={copy.forms} locale={locale} />
+      <ParticipationForms
+        copy={copy.forms}
+        locale={locale}
+        recaptchaSiteKey={
+          process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ??
+          process.env.RECAPTCHA_SITE_KEY ??
+          ""
+        }
+      />
     </>
   );
 }

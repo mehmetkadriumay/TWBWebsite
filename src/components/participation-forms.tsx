@@ -1,7 +1,25 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import Script from "next/script";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import type { Locale } from "@/lib/i18n";
+
+declare global {
+  interface Window {
+    grecaptcha?: {
+      render: (
+        element: HTMLElement,
+        options: {
+          sitekey: string;
+          callback: (token: string) => void;
+          "expired-callback": () => void;
+          "error-callback": () => void;
+        },
+      ) => number;
+      reset: (widgetId?: number) => void;
+    };
+  }
+}
 
 const turkishProvinces = [
   "Adana", "Adıyaman", "Afyonkarahisar", "Ağrı", "Aksaray", "Amasya",
@@ -58,33 +76,100 @@ function ApplicationForm({
   copy,
   formType,
   locale,
+  recaptchaReady,
+  recaptchaSiteKey,
 }: {
   children: React.ReactNode;
   copy: Record<string, string>;
   formType: FormType;
   locale: Locale;
+  recaptchaReady: boolean;
+  recaptchaSiteKey: string;
 }) {
   const [message, setMessage] = useState("");
+  const [recaptchaToken, setRecaptchaToken] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const recaptchaElement = useRef<HTMLDivElement>(null);
+  const recaptchaWidgetId = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (
+      !recaptchaReady ||
+      !recaptchaSiteKey ||
+      !recaptchaElement.current ||
+      !window.grecaptcha ||
+      recaptchaWidgetId.current !== null
+    ) {
+      return;
+    }
+    recaptchaWidgetId.current = window.grecaptcha.render(
+      recaptchaElement.current,
+      {
+        sitekey: recaptchaSiteKey,
+        callback: setRecaptchaToken,
+        "expired-callback": () => setRecaptchaToken(""),
+        "error-callback": () => {
+          setRecaptchaToken("");
+          setMessage(
+            locale === "tr"
+              ? "Google reCAPTCHA yüklenemedi. Lütfen sayfayı yenileyin."
+              : "Google reCAPTCHA could not load. Please refresh the page.",
+          );
+        },
+      },
+    );
+  }, [locale, recaptchaReady, recaptchaSiteKey]);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!recaptchaToken) {
+      setMessage(
+        locale === "tr"
+          ? "Lütfen Google reCAPTCHA doğrulamasını tamamlayın."
+          : "Please complete the Google reCAPTCHA verification.",
+      );
+      return;
+    }
     setSubmitting(true);
     setMessage("");
     const form = event.currentTarget;
     const values = Object.fromEntries(new FormData(form).entries());
-    const response = await fetch("/api/applications", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ formType, locale, fields: values }),
-    });
-    const result = (await response.json()) as { message?: string; error?: string };
-    setMessage(result.message ?? result.error ?? "");
-    setSubmitting(false);
-    if (response.ok) {
-      form.reset();
-      setSubmitted(true);
+    try {
+      const response = await fetch("/api/applications", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          formType,
+          locale,
+          fields: values,
+          recaptchaToken,
+        }),
+      });
+      const result = (await response.json()) as {
+        message?: string;
+        error?: string;
+      };
+      setMessage(result.message ?? result.error ?? "");
+      if (response.ok) {
+        form.reset();
+        setSubmitted(true);
+        return;
+      }
+    } catch {
+      setMessage(
+        locale === "tr"
+          ? "Başvuru gönderilemedi. Lütfen bağlantınızı kontrol edip tekrar deneyin."
+          : "The application could not be submitted. Check your connection and try again.",
+      );
+    } finally {
+      setSubmitting(false);
+    }
+    if (!submitted) {
+      setRecaptchaToken("");
+      if (recaptchaWidgetId.current !== null) {
+        window.grecaptcha?.reset(recaptchaWidgetId.current);
+      }
     }
   }
 
@@ -115,16 +200,23 @@ function ApplicationForm({
           {copy.consent}
         </span>
       </label>
-      <label className="human-verification">
-        <input name="humanVerification" required type="checkbox" value="yes" />
-        <span>
-        <strong>{copy.humanTitle}</strong>
-        <small>{copy.humanHelp}</small>
-        </span>
-        <i aria-hidden="true">✓</i>
-      </label>
+      <div className="recaptcha-field">
+        {recaptchaSiteKey ? (
+          <div ref={recaptchaElement} />
+        ) : (
+          <p role="alert">
+            {locale === "tr"
+              ? "Google reCAPTCHA site anahtarı yapılandırılmamış."
+              : "The Google reCAPTCHA site key is not configured."}
+          </p>
+        )}
+      </div>
       <div className="participation-form-footer">
-        <button className="button button-primary" disabled={submitting} type="submit">
+        <button
+          className="button button-primary"
+          disabled={submitting || !recaptchaSiteKey}
+          type="submit"
+        >
           {submitting
             ? copy.submitting
             : copy.submit}
@@ -138,12 +230,23 @@ function ApplicationForm({
 export function ParticipationForms({
   copy,
   locale,
+  recaptchaSiteKey,
 }: {
   copy: Record<string, string>;
   locale: Locale;
+  recaptchaSiteKey: string;
 }) {
+  const [recaptchaReady, setRecaptchaReady] = useState(false);
+
   return (
     <section className="application-section" id="application-forms">
+      {recaptchaSiteKey && (
+        <Script
+          onReady={() => setRecaptchaReady(true)}
+          src={`https://www.google.com/recaptcha/api.js?render=explicit&hl=${locale}`}
+          strategy="afterInteractive"
+        />
+      )}
       <div className="container">
         <div className="application-heading">
           <span className="eyebrow">
@@ -166,7 +269,13 @@ export function ParticipationForms({
                 <h3>{copy.turkeyTitle}</h3>
               </div>
             </header>
-            <ApplicationForm copy={copy} formType="turkiye" locale={locale}>
+            <ApplicationForm
+              copy={copy}
+              formType="turkiye"
+              locale={locale}
+              recaptchaReady={recaptchaReady}
+              recaptchaSiteKey={recaptchaSiteKey}
+            >
               <fieldset>
                 <legend>{copy.teacherSection}</legend>
                 <div className="application-fields">
@@ -224,7 +333,13 @@ export function ParticipationForms({
                 <h3>{copy.usTitle}</h3>
               </div>
             </header>
-            <ApplicationForm copy={copy} formType="us" locale={locale}>
+            <ApplicationForm
+              copy={copy}
+              formType="us"
+              locale={locale}
+              recaptchaReady={recaptchaReady}
+              recaptchaSiteKey={recaptchaSiteKey}
+            >
               <fieldset>
                 <legend>{copy.applicantSection}</legend>
                 <div className="application-fields">

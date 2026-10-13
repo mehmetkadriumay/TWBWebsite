@@ -145,6 +145,19 @@ DB_USER=<from-hosting>
 DB_PASSWORD=<from-hosting>
 ```
 
+Add the Google reCAPTCHA v2 credentials in the GoDaddy application environment
+as encrypted variables. Do not add their values to GitHub or a committed `.env`
+file:
+
+```env
+RECAPTCHA_SITE_KEY=<google-recaptcha-v2-site-key>
+RECAPTCHA_SECRET_KEY=<google-recaptcha-v2-secret-key>
+```
+
+Restart the Node.js application after saving the variables. The site key is
+passed to the two participation forms at runtime, while the secret key remains
+server-side and is used only to verify submission tokens with Google.
+
 ## Twilio WhatsApp
 
 Set these environment variables to enable the WhatsApp tab:

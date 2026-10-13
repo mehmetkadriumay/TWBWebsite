@@ -1739,54 +1739,21 @@ h3 {
   line-height: 1.55;
 }
 
-.human-verification {
-  align-items: center;
-  background: #f8fafc;
-  border: 1px solid #c5d0de;
-  border-radius: 12px;
-  cursor: pointer;
-  display: grid;
-  gap: 13px;
-  grid-template-columns: 24px 1fr 30px;
-  max-width: 360px;
-  padding: 14px 16px;
+.recaptcha-field {
+  min-height: 78px;
+  overflow-x: auto;
 }
 
-.human-verification input {
-  accent-color: var(--coral);
-  height: 22px;
+.recaptcha-field > p {
+  background: #fff0f0;
+  border: 1px solid #e6b6b6;
+  border-radius: 10px;
+  color: #8f2020;
+  font-size: 12px;
+  line-height: 1.5;
   margin: 0;
-  padding: 0;
-  width: 22px;
-}
-
-.human-verification > span {
-  display: grid;
-  gap: 3px;
-}
-
-.human-verification strong {
-  font-size: 13px;
-}
-
-.human-verification small {
-  color: var(--ink-soft);
-  font-size: 10px;
-  line-height: 1.35;
-}
-
-.human-verification i {
-  align-items: center;
-  background: var(--mint-light);
-  border-radius: 50%;
-  color: var(--ink);
-  display: flex;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 900;
-  height: 30px;
-  justify-content: center;
-  width: 30px;
+  max-width: 360px;
+  padding: 13px 15px;
 }
 
 .application-success {
