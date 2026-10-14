@@ -49,8 +49,13 @@ export function ApplicationManagement({
 }) {
   const [applications, setApplications] = useState(initialApplications);
   const [busyId, setBusyId] = useState<number | null>(null);
+  const [documentBusyId, setDocumentBusyId] = useState<number | null>(null);
+  const [hideRejected, setHideRejected] = useState(false);
   const [message, setMessage] = useState("");
   const languageIndex = locale === "tr" ? 0 : 1;
+  const visibleApplications = hideRejected
+    ? applications.filter((application) => application.status !== "rejected")
+    : applications;
 
   async function review(id: number, decision: "approve" | "reject") {
     setBusyId(id);
@@ -102,6 +107,72 @@ export function ApplicationManagement({
     }
   }
 
+  async function openDocument(
+    application: ParticipationApplication,
+    action: "download" | "print",
+  ) {
+    const printWindow =
+      action === "print"
+        ? window.open("", "twb-turkiye-application-print")
+        : null;
+    if (action === "print" && !printWindow) {
+      setMessage(
+        locale === "tr"
+          ? "Yazdırma penceresi açılamadı. Tarayıcınızda açılır pencerelere izin verip tekrar deneyin."
+          : "The print window could not be opened. Allow pop-ups in your browser and try again.",
+      );
+      return;
+    }
+    if (printWindow) {
+      printWindow.document.write(
+        `<p style="font:16px Arial;padding:24px">${
+          locale === "tr" ? "Belge hazırlanıyor..." : "Preparing document..."
+        }</p>`,
+      );
+      printWindow.document.close();
+    }
+
+    setDocumentBusyId(application.id);
+    setMessage("");
+    try {
+      const response = await fetch(`/api/admin/applications/${application.id}`);
+      const result = (await response.json()) as {
+        documentUrl?: string;
+        printUrl?: string;
+        error?: string;
+      };
+      if (!response.ok || !result.documentUrl || !result.printUrl) {
+        printWindow?.close();
+        setMessage(
+          result.error ??
+            (locale === "tr"
+              ? "Belge hazırlanamadı."
+              : "The document could not be prepared."),
+        );
+        return;
+      }
+      if (action === "print" && printWindow) {
+        printWindow.location.href = result.printUrl;
+        return;
+      }
+      const download = document.createElement("a");
+      download.href = result.documentUrl;
+      download.download = "";
+      document.body.appendChild(download);
+      download.click();
+      download.remove();
+    } catch {
+      printWindow?.close();
+      setMessage(
+        locale === "tr"
+          ? "Belge hazırlanamadı. Bağlantınızı kontrol edip tekrar deneyin."
+          : "The document could not be prepared. Check your connection and try again.",
+      );
+    } finally {
+      setDocumentBusyId(null);
+    }
+  }
+
   if (applications.length === 0) {
     return (
       <div className="application-review-empty">
@@ -114,8 +185,30 @@ export function ApplicationManagement({
   return (
     <div className="application-review">
       {message && <p className="application-review-message" role="status">{message}</p>}
+      <label className="application-review-filter">
+        <input
+          checked={hideRejected}
+          onChange={(event) => setHideRejected(event.target.checked)}
+          type="checkbox"
+        />
+        <span>
+          {locale === "tr"
+            ? "Reddedilen başvuruları gizle"
+            : "Hide rejected applications"}
+        </span>
+      </label>
       <div className="application-review-list">
-        {applications.map((application) => (
+        {visibleApplications.length === 0 && (
+          <div className="application-review-empty">
+            <span>00</span>
+            <h2>
+              {locale === "tr"
+                ? "Filtreye uygun başvuru yok."
+                : "No applications match this filter."}
+            </h2>
+          </div>
+        )}
+        {visibleApplications.map((application) => (
           <article className="application-review-card" key={application.id}>
             <header>
               <div>
@@ -182,16 +275,50 @@ export function ApplicationManagement({
                       : locale === "tr" ? "Başvuru reddedildi." : "Application rejected."}
                   </span>
                   {application.status === "approved" && (
-                    <button
-                      className="button application-delete"
-                      disabled={busyId === application.id}
-                      onClick={() => void remove(application)}
-                      type="button"
-                    >
-                      {busyId === application.id
-                        ? locale === "tr" ? "Siliniyor..." : "Deleting..."
-                        : locale === "tr" ? "Sil" : "Delete"}
-                    </button>
+                    <>
+                      {application.formType === "turkiye" && (
+                        <div className="application-document-actions">
+                          <button
+                            className="button button-secondary"
+                            disabled={documentBusyId === application.id}
+                            onClick={() =>
+                              void openDocument(application, "download")
+                            }
+                            type="button"
+                          >
+                            {locale === "tr"
+                              ? "Word belgesini indir"
+                              : "Download Word document"}
+                          </button>
+                          <button
+                            className="button button-primary"
+                            disabled={documentBusyId === application.id}
+                            onClick={() =>
+                              void openDocument(application, "print")
+                            }
+                            type="button"
+                          >
+                            {documentBusyId === application.id
+                              ? locale === "tr"
+                                ? "Hazırlanıyor..."
+                                : "Preparing..."
+                              : locale === "tr"
+                                ? "Yazdır"
+                                : "Print"}
+                          </button>
+                        </div>
+                      )}
+                      <button
+                        className="button application-delete"
+                        disabled={busyId === application.id}
+                        onClick={() => void remove(application)}
+                        type="button"
+                      >
+                        {busyId === application.id
+                          ? locale === "tr" ? "Siliniyor..." : "Deleting..."
+                          : locale === "tr" ? "Sil" : "Delete"}
+                      </button>
+                    </>
                   )}
                 </>
               )}

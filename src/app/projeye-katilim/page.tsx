@@ -210,23 +210,6 @@ export default async function JoinPage() {
           ))}
         </div>
 
-        <div className="container">
-          <aside className="permission-panel">
-            <div>
-              <span className="eyebrow">{copy.permissionEyebrow}</span>
-              <h2>{copy.permissionTitle}</h2>
-              <p>{copy.permissionText}</p>
-            </div>
-            <a
-              className="button button-white"
-              href={copy.permissionUrl}
-              rel="noreferrer"
-              target="_blank"
-            >
-              {copy.permissionLink}
-            </a>
-          </aside>
-        </div>
       </section>
       <ParticipationForms
         copy={copy.forms}
