@@ -17,17 +17,17 @@ export async function PUT(
   }
   const id = parseId((await params).id);
   if (!id) {
-    return NextResponse.json({ error: "Geçersiz haber." }, { status: 400 });
+    return NextResponse.json({ error: "Geçersiz içerik." }, { status: 400 });
   }
   try {
     const news = await updateNews(id, parseNewsInput(await request.json()));
     if (!news) {
-      return NextResponse.json({ error: "Haber bulunamadı." }, { status: 404 });
+      return NextResponse.json({ error: "İçerik bulunamadı." }, { status: 404 });
     }
-    return NextResponse.json({ message: "Haber güncellendi.", news });
+    return NextResponse.json({ message: "İçerik güncellendi.", news });
   } catch (error) {
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Haber güncellenemedi." },
+      { error: error instanceof Error ? error.message : "İçerik güncellenemedi." },
       { status: 400 },
     );
   }
@@ -42,10 +42,10 @@ export async function DELETE(
   }
   const id = parseId((await params).id);
   if (!id) {
-    return NextResponse.json({ error: "Geçersiz haber." }, { status: 400 });
+    return NextResponse.json({ error: "Geçersiz içerik." }, { status: 400 });
   }
   if (!(await deleteNews(id))) {
-    return NextResponse.json({ error: "Haber bulunamadı." }, { status: 404 });
+    return NextResponse.json({ error: "İçerik bulunamadı." }, { status: 404 });
   }
-  return NextResponse.json({ message: "Haber silindi." });
+  return NextResponse.json({ message: "İçerik silindi." });
 }

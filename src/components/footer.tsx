@@ -32,6 +32,9 @@ export async function Footer({ locale }: { locale: Locale }) {
           <strong>{copy.explore}</strong>
           <Link href="/bizim-hikayemiz">{copy.story}</Link>
           <Link href="/nasil-calisiyoruz">{copy.how}</Link>
+          <Link href="/haberler-ve-guncellemeler">
+            {copy.updates ?? ui[locale].footer.updates}
+          </Link>
           <Link href="/konusma-konulari">{copy.topics}</Link>
         </div>
         <div className="footer-links">

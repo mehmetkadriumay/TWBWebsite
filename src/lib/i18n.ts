@@ -18,6 +18,7 @@ export const ui = {
     nav: {
       story: "Hikâyemiz",
       how: "Nasıl Çalışır?",
+      updates: "Haberler ve Güncellemeler",
       topics: "Haftalık Program ve Konular",
       join: "Katıl",
       admin: "Yönetim",
@@ -33,6 +34,7 @@ export const ui = {
       contact: "İletişim",
       story: "Bizim Hikâyemiz",
       how: "Nasıl Çalışıyoruz",
+      updates: "Haberler ve Güncellemeler",
       topics: "Haftalık Program ve Konular",
       join: "Projeye katıl",
       note: "Gençler için, gönüllülerle.",
@@ -92,6 +94,7 @@ export const ui = {
     nav: {
       story: "Our Story",
       how: "How It Works",
+      updates: "News & Updates",
       topics: "Weekly Program and Topics",
       join: "Join Us",
       admin: "Admin",
@@ -107,6 +110,7 @@ export const ui = {
       contact: "Contact",
       story: "Our Story",
       how: "How It Works",
+      updates: "News & Updates",
       topics: "Weekly Program and Topics",
       join: "Join the project",
       note: "For young people, powered by volunteers.",

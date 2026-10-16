@@ -10,12 +10,12 @@ export async function POST(request: Request) {
   try {
     const news = await createNews(parseNewsInput(await request.json()));
     return NextResponse.json(
-      { message: "Haber eklendi.", news },
+      { message: "İçerik eklendi.", news },
       { status: 201 },
     );
   } catch (error) {
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Haber eklenemedi." },
+      { error: error instanceof Error ? error.message : "İçerik eklenemedi." },
       { status: 400 },
     );
   }

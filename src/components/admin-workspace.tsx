@@ -51,7 +51,7 @@ export function AdminWorkspace({
           onClick={() => setTab("news")}
           type="button"
         >
-          {locale === "tr" ? "Haber Yönetimi" : "News Management"}
+          {locale === "tr" ? "Haberler ve Güncellemeler" : "News & Updates"}
         </button>
         <button
           className={tab === "time" ? "active" : ""}

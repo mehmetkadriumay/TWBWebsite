@@ -1,31 +1,13 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { ContentPage } from "@/components/content-page";
 import { InstagramIcon } from "@/components/icons";
 import { getNews, getPage } from "@/lib/db";
 import { getLocale, localizedSlug } from "@/lib/i18n";
+import { formatNewsDate, youtubeId } from "@/lib/news";
 import { managedSection, storySections } from "@/lib/site-sections";
 
 export const metadata: Metadata = { title: "Bizim Hikâyemiz" };
-
-function youtubeId(value: string): string | null {
-  if (!value) return null;
-  try {
-    const url = new URL(value);
-    if (url.hostname === "youtu.be") return url.pathname.slice(1) || null;
-    if (
-      url.hostname === "youtube.com" ||
-      url.hostname.endsWith(".youtube.com")
-    ) {
-      if (url.pathname.startsWith("/embed/")) {
-        return url.pathname.split("/")[2] || null;
-      }
-      return url.searchParams.get("v");
-    }
-  } catch {
-    return null;
-  }
-  return null;
-}
 
 export default async function StoryPage() {
   const locale = await getLocale();
@@ -35,6 +17,7 @@ export default async function StoryPage() {
   ]);
   if (!page) return null;
   const copy = managedSection(page.sections, "story", storySections(locale));
+  const pressNews = news.filter((item) => item.contentType === "news");
 
   return (
     <>
@@ -112,23 +95,28 @@ export default async function StoryPage() {
             <h2>{copy.newsTitle}</h2>
             <p>{copy.newsSummary}</p>
           </div>
-          <a
-            className="instagram-profile-link"
-            href="https://www.instagram.com/turks_without_borders/"
-            rel="noreferrer"
-            target="_blank"
-          >
-            <InstagramIcon />
-            <span>
-              <strong>@Turks_Without_Borders</strong>
-              <small>{copy.followInstagram} ↗</small>
-            </span>
-          </a>
+          <div className="story-news-heading-actions">
+            <Link className="story-news-all-link" href="/haberler-ve-guncellemeler">
+              {locale === "tr" ? "Tüm haberler ve güncellemeler" : "All news & updates"} →
+            </Link>
+            <a
+              className="instagram-profile-link"
+              href="https://www.instagram.com/turks_without_borders/"
+              rel="noreferrer"
+              target="_blank"
+            >
+              <InstagramIcon />
+              <span>
+                <strong>@Turks_Without_Borders</strong>
+                <small>{copy.followInstagram} ↗</small>
+              </span>
+            </a>
+          </div>
         </div>
         <div className="container">
-          {news.length > 0 ? (
+          {pressNews.length > 0 ? (
             <div className="story-news-grid">
-              {news.map((item) => {
+              {pressNews.map((item) => {
                 const title = locale === "tr" ? item.titleTr : item.titleEn;
                 const abstract =
                   locale === "tr" ? item.abstractTr : item.abstractEn;
@@ -159,12 +147,9 @@ export default async function StoryPage() {
                     <div className="story-news-copy">
                       <div className="story-news-meta">
                         {item.sourceName && <span>{item.sourceName}</span>}
-                        {item.publishedOn && (
-                          <time dateTime={item.publishedOn}>
-                            {new Intl.DateTimeFormat(
-                              locale === "tr" ? "tr-TR" : "en-US",
-                              { dateStyle: "long", timeZone: "UTC" },
-                            ).format(new Date(`${item.publishedOn}T00:00:00Z`))}
+                        {item.publishedAt && (
+                          <time dateTime={item.publishedAt}>
+                            {formatNewsDate(item.publishedAt, locale)}
                           </time>
                         )}
                       </div>

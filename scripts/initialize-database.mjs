@@ -17,6 +17,32 @@ try {
     "utf8",
   );
   await connection.query(schema);
+  const [newsColumns] = await connection.query(`
+    SELECT column_name, data_type
+    FROM information_schema.columns
+    WHERE table_schema = DATABASE() AND table_name = 'news'
+  `);
+  const newsColumnMap = new Map(
+    newsColumns.map((column) => [column.column_name, column.data_type]),
+  );
+  if (!newsColumnMap.has("content_type")) {
+    await connection.query(
+      "ALTER TABLE news ADD COLUMN content_type ENUM('update', 'news', 'video', 'blog') NOT NULL DEFAULT 'news' AFTER id",
+    );
+  }
+  if (!newsColumnMap.has("category")) {
+    await connection.query(
+      "ALTER TABLE news ADD COLUMN category VARCHAR(100) NOT NULL DEFAULT '' AFTER abstract_en",
+    );
+  }
+  if (!newsColumnMap.has("is_featured")) {
+    await connection.query(
+      "ALTER TABLE news ADD COLUMN is_featured TINYINT(1) NOT NULL DEFAULT 0 AFTER is_published",
+    );
+  }
+  if (newsColumnMap.get("published_on") === "date") {
+    await connection.query("ALTER TABLE news MODIFY published_on DATETIME NULL");
+  }
 
   const [[counts]] = await connection.query(`
     SELECT
@@ -69,20 +95,24 @@ try {
       for (const item of seed.news) {
         await connection.execute(
           `INSERT INTO news (
-            title_tr, title_en, abstract_tr, abstract_en, source_name,
-            article_url, image_url, video_url, published_on, is_published
-          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            content_type, title_tr, title_en, abstract_tr, abstract_en, category,
+            source_name, article_url, image_url, video_url, published_on,
+            is_published, is_featured
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
           [
+            item.content_type ?? "news",
             item.title_tr,
             item.title_en,
             item.abstract_tr,
             item.abstract_en,
+            item.category ?? "",
             item.source_name,
             item.article_url,
             item.image_url,
             item.video_url,
             item.published_on,
             item.is_published,
+            item.is_featured ?? 0,
           ],
         );
       }

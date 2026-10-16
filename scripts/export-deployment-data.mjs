@@ -19,8 +19,9 @@ try {
     SELECT \`key\`, value FROM settings ORDER BY \`key\`
   `);
   const [news] = await connection.query(`
-    SELECT id, title_tr, title_en, abstract_tr, abstract_en, source_name,
-      article_url, image_url, video_url, published_on, is_published
+    SELECT id, content_type, title_tr, title_en, abstract_tr, abstract_en,
+      category, source_name, article_url, image_url, video_url, published_on,
+      is_published, is_featured
     FROM news ORDER BY published_on IS NULL, published_on DESC, id DESC
   `);
   const [weekRows] = await connection.query(`
@@ -55,7 +56,7 @@ try {
     news: news.map((item) => ({
       ...item,
       published_on: item.published_on
-        ? new Date(item.published_on).toISOString().slice(0, 10)
+        ? new Date(item.published_on).toISOString().slice(0, 16)
         : null,
     })),
     weeks: weekRows.map(({ id, title }) => ({

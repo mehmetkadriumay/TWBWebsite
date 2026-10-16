@@ -1,13 +1,18 @@
 import Link from "next/link";
 import { BridgeInfographic } from "@/components/bridge-infographic";
 import { ArrowIcon, GlobeIcon, PeopleIcon, SparkIcon } from "@/components/icons";
-import { getPage } from "@/lib/db";
+import { LatestNewsUpdates } from "@/components/latest-news-updates";
+import { getNews, getPage } from "@/lib/db";
 import { getLocale, localizedSlug, ui } from "@/lib/i18n";
+import { latestFeaturedNews } from "@/lib/news";
 import { managedSection } from "@/lib/site-sections";
 
 export default async function Home() {
   const locale = await getLocale();
-  const page = await getPage(localizedSlug("home", locale));
+  const [page, news] = await Promise.all([
+    getPage(localizedSlug("home", locale)),
+    getNews(),
+  ]);
   if (!page) return null;
   const copy = managedSection(page.sections, "home", ui[locale].home);
 
@@ -85,6 +90,8 @@ export default async function Home() {
           </article>
         </div>
       </section>
+
+      <LatestNewsUpdates items={latestFeaturedNews(news)} locale={locale} />
 
       <section className="section quote-section">
         <div className="container">

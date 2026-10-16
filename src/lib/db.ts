@@ -107,6 +107,7 @@ async function initializeDatabase(pool: Pool): Promise<void> {
     await pool.query("UPDATE pages SET sections = JSON_OBJECT() WHERE sections IS NULL");
     await pool.query("ALTER TABLE pages MODIFY sections JSON NOT NULL");
   }
+  await migrateNewsSchema(pool);
   await migrateStudentSchema(pool);
   await importDeploymentSeed(pool);
 
@@ -130,6 +131,23 @@ async function initializeDatabase(pool: Pool): Promise<void> {
       [JSON.stringify(sections), page.slug],
     );
   }
+  for (const [slug, label] of [
+    ["home", "Haberler ve Güncellemeler"],
+    ["home-en", "News & Updates"],
+  ] as const) {
+    await pool.execute(
+      `UPDATE pages
+       SET sections = JSON_SET(sections, '$.navigation.updates', ?)
+       WHERE slug = ? AND JSON_EXTRACT(sections, '$.navigation.updates') IS NULL`,
+      [label, slug],
+    );
+    await pool.execute(
+      `UPDATE pages
+       SET sections = JSON_SET(sections, '$.footer.updates', ?)
+       WHERE slug = ? AND JSON_EXTRACT(sections, '$.footer.updates') IS NULL`,
+      [label, slug],
+    );
+  }
 
   type DeploymentSeed = {
     schemaVersion: number;
@@ -145,6 +163,9 @@ async function initializeDatabase(pool: Pool): Promise<void> {
       video_url: string;
       published_on: string | null;
       is_published: number;
+      content_type?: string;
+      category?: string;
+      is_featured?: number;
     }>;
     settings: Array<{ key: string; value: string }>;
     weeks: Array<{
@@ -208,20 +229,24 @@ async function initializeDatabase(pool: Pool): Promise<void> {
       for (const item of seed.news) {
         await connection.execute(
           `INSERT INTO news (
-            title_tr, title_en, abstract_tr, abstract_en, source_name,
-            article_url, image_url, video_url, published_on, is_published
-          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            content_type, title_tr, title_en, abstract_tr, abstract_en, category,
+            source_name, article_url, image_url, video_url, published_on,
+            is_published, is_featured
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
           [
+            item.content_type ?? "news",
             item.title_tr,
             item.title_en,
             item.abstract_tr,
             item.abstract_en,
+            item.category ?? "",
             item.source_name,
             item.article_url,
             item.image_url,
             item.video_url,
             item.published_on,
             item.is_published,
+            item.is_featured ?? 0,
           ],
         );
       }
@@ -257,6 +282,35 @@ async function initializeDatabase(pool: Pool): Promise<void> {
       [tableName, columnName],
     );
     return Number(rows[0]?.count ?? 0) > 0;
+  }
+
+  async function migrateNewsSchema(pool: Pool): Promise<void> {
+    if (!(await columnExists(pool, "news", "content_type"))) {
+      await pool.query(
+        "ALTER TABLE news ADD COLUMN content_type ENUM('update', 'news', 'video', 'blog') NOT NULL DEFAULT 'news' AFTER id",
+      );
+    }
+    if (!(await columnExists(pool, "news", "category"))) {
+      await pool.query(
+        "ALTER TABLE news ADD COLUMN category VARCHAR(100) NOT NULL DEFAULT '' AFTER abstract_en",
+      );
+    }
+    if (!(await columnExists(pool, "news", "is_featured"))) {
+      await pool.query(
+        "ALTER TABLE news ADD COLUMN is_featured TINYINT(1) NOT NULL DEFAULT 0 AFTER is_published",
+      );
+    }
+    const [dateColumns] = await pool.execute<
+      (RowDataPacket & { data_type: string })[]
+    >(
+      `SELECT data_type
+       FROM information_schema.columns
+       WHERE table_schema = DATABASE() AND table_name = 'news'
+         AND column_name = 'published_on'`,
+    );
+    if (dateColumns[0]?.data_type === "date") {
+      await pool.query("ALTER TABLE news MODIFY published_on DATETIME NULL");
+    }
   }
 
   async function migrateStudentSchema(pool: Pool): Promise<void> {
@@ -510,38 +564,45 @@ export async function updatePage(page: ContentPage): Promise<void> {
 
 type NewsRow = RowDataPacket & {
   id: number;
+  content_type: NewsItem["contentType"];
   title_tr: string;
   title_en: string;
   abstract_tr: string;
   abstract_en: string;
+  category: string;
   source_name: string;
   article_url: string;
   image_url: string;
   video_url: string;
   published_on: Date | string | null;
   is_published: number;
+  is_featured: number;
 };
 
 const newsColumns = `
-  id, title_tr, title_en, abstract_tr, abstract_en, source_name,
-  article_url, image_url, video_url, published_on, is_published
+  id, content_type, title_tr, title_en, abstract_tr, abstract_en, category,
+  source_name, article_url, image_url, video_url, published_on, is_published,
+  is_featured
 `;
 
 function mapNews(row: NewsRow): NewsItem {
   return {
     id: row.id,
+    contentType: row.content_type,
     titleTr: row.title_tr,
     titleEn: row.title_en,
     abstractTr: row.abstract_tr,
     abstractEn: row.abstract_en,
+    category: row.category,
     sourceName: row.source_name,
     articleUrl: row.article_url,
     imageUrl: row.image_url,
     videoUrl: row.video_url,
-    publishedOn: row.published_on
-      ? new Date(row.published_on).toISOString().slice(0, 10)
+    publishedAt: row.published_on
+      ? new Date(row.published_on).toISOString().slice(0, 16)
       : "",
     isPublished: Boolean(row.is_published),
+    isFeatured: Boolean(row.is_featured),
   };
 }
 
@@ -559,20 +620,24 @@ export async function createNews(input: NewsInput): Promise<NewsItem> {
   const db = await getDb();
   const [result] = await db.execute<ResultSetHeader>(
     `INSERT INTO news (
-      title_tr, title_en, abstract_tr, abstract_en, source_name,
-      article_url, image_url, video_url, published_on, is_published
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NULLIF(?, ''), ?)`,
+      content_type, title_tr, title_en, abstract_tr, abstract_en, category,
+      source_name, article_url, image_url, video_url, published_on,
+      is_published, is_featured
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULLIF(REPLACE(?, 'T', ' '), ''), ?, ?)`,
     [
+      input.contentType,
       input.titleTr,
       input.titleEn,
       input.abstractTr,
       input.abstractEn,
+      input.category,
       input.sourceName,
       input.articleUrl,
       input.imageUrl,
       input.videoUrl,
-      input.publishedOn,
+      input.publishedAt,
       input.isPublished ? 1 : 0,
+      input.isFeatured ? 1 : 0,
     ],
   );
   const [rows] = await db.execute<NewsRow[]>(
@@ -589,21 +654,26 @@ export async function updateNews(
   const db = await getDb();
   const [result] = await db.execute<ResultSetHeader>(
     `UPDATE news SET
-      title_tr = ?, title_en = ?, abstract_tr = ?, abstract_en = ?,
-      source_name = ?, article_url = ?, image_url = ?, video_url = ?,
-      published_on = NULLIF(?, ''), is_published = ?
+      content_type = ?, title_tr = ?, title_en = ?, abstract_tr = ?,
+      abstract_en = ?, category = ?, source_name = ?, article_url = ?,
+      image_url = ?, video_url = ?,
+      published_on = NULLIF(REPLACE(?, 'T', ' '), ''),
+      is_published = ?, is_featured = ?
      WHERE id = ?`,
     [
+      input.contentType,
       input.titleTr,
       input.titleEn,
       input.abstractTr,
       input.abstractEn,
+      input.category,
       input.sourceName,
       input.articleUrl,
       input.imageUrl,
       input.videoUrl,
-      input.publishedOn,
+      input.publishedAt,
       input.isPublished ? 1 : 0,
+      input.isFeatured ? 1 : 0,
       id,
     ],
   );
@@ -613,6 +683,15 @@ export async function updateNews(
     [id],
   );
   return mapNews(rows[0]);
+}
+
+export async function getNewsById(id: number): Promise<NewsItem | null> {
+  const db = await getDb();
+  const [rows] = await db.execute<NewsRow[]>(
+    `SELECT ${newsColumns} FROM news WHERE id = ? AND is_published = 1`,
+    [id],
+  );
+  return rows[0] ? mapNews(rows[0]) : null;
 }
 
 export async function deleteNews(id: number): Promise<boolean> {

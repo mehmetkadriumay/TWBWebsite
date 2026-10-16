@@ -6,6 +6,8 @@ A modern bilingual website and administration application for the Turks Without 
 
 - Turkish and English public website
 - Editable bilingual page content
+- Bilingual News & Updates hub with short updates, press coverage, videos, blogs, search, filters, and featured homepage rotation
+- Admin-managed draft/published and featured states for news and updates
 - 27 weeks of conversation topics with semester-aware dates
 - Multi-tab Excel import and export for weekly topics
 - Admin-only semester calendar management
@@ -83,8 +85,8 @@ Create a fresh deployment export from the currently configured database:
 npm run db:export:deployment
 ```
 
-This writes `data/godaddy-seed.json` with editable public pages, semester
-settings, weekly topic headings, and questions. Credentials, participation
+This writes `data/godaddy-seed.json` with editable public pages, news and
+updates, semester settings, weekly topic headings, and questions. Credentials, participation
 applications, schools, and student records are intentionally excluded so
 private information is never committed as deployment seed data.
 

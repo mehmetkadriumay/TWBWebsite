@@ -1,4 +1,4 @@
-import type { NewsInput } from "@/lib/types";
+import type { NewsContentType, NewsInput } from "@/lib/types";
 
 function text(value: unknown, label: string, maximum: number): string {
   if (typeof value !== "string") throw new Error(`${label} is required.`);
@@ -39,20 +39,46 @@ export function parseNewsInput(value: unknown): NewsInput {
     throw new Error("News details are required.");
   }
   const input = value as Record<string, unknown>;
-  const publishedOn = optionalText(input.publishedOn, 10);
-  if (publishedOn && !/^\d{4}-\d{2}-\d{2}$/.test(publishedOn)) {
-    throw new Error("Publication date is invalid.");
+  const allowedTypes: NewsContentType[] = ["update", "news", "video", "blog"];
+  const contentType = allowedTypes.includes(input.contentType as NewsContentType)
+    ? (input.contentType as NewsContentType)
+    : "news";
+  const publishedAt = optionalText(input.publishedAt, 16);
+  if (
+    publishedAt &&
+    !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(publishedAt)
+  ) {
+    throw new Error("Publication date and time are invalid.");
   }
+  const titleTr =
+    contentType === "update"
+      ? optionalText(input.titleTr, 300)
+      : text(input.titleTr, "Turkish title", 300);
+  const titleEn =
+    contentType === "update"
+      ? optionalText(input.titleEn, 300)
+      : text(input.titleEn, "English title", 300);
   return {
-    titleTr: text(input.titleTr, "Turkish title", 300),
-    titleEn: text(input.titleEn, "English title", 300),
-    abstractTr: text(input.abstractTr, "Turkish abstract", 3000),
-    abstractEn: text(input.abstractEn, "English abstract", 3000),
+    contentType,
+    titleTr,
+    titleEn,
+    abstractTr: text(
+      input.abstractTr,
+      contentType === "update" ? "Turkish update" : "Turkish abstract",
+      contentType === "update" ? 500 : 3000,
+    ),
+    abstractEn: text(
+      input.abstractEn,
+      contentType === "update" ? "English update" : "English abstract",
+      contentType === "update" ? 500 : 3000,
+    ),
+    category: optionalText(input.category, 100),
     sourceName: optionalText(input.sourceName, 255),
     articleUrl: optionalUrl(input.articleUrl, "Article link"),
     imageUrl: optionalUrl(input.imageUrl, "Image link"),
     videoUrl: optionalUrl(input.videoUrl, "Video link"),
-    publishedOn,
+    publishedAt,
     isPublished: input.isPublished !== false,
+    isFeatured: input.isFeatured === true,
   };
 }

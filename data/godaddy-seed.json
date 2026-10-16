@@ -3276,40 +3276,49 @@
   ],
   "news": [
     {
+      "content_type": "news",
       "title_tr": "Seattle Anlatiyor'da bu hafta Serpil Hikmet İngeç ve Ülkü Okatar Umay bize \"Sınır Tanımayan Türkler\" projesinin amacini ve faaliyetlerini anlattilar. Herkese iyi bayramlar ve iyi seyirler.",
       "title_en": "This week on Seattle Anlatıyor, Serpil Hikmet İngeç and Ülkü Okatar Umay told us about the goals and activities of the “Turks Without Borders” project. Happy holidays, and enjoy the show!",
       "abstract_tr": "Seattle Anlatiyor'da bu hafta Serpil Hikmet İngeç ve Ülkü Okatar Umay bize \"Sınır Tanımayan Türkler\" projesinin amacini ve faaliyetlerini anlattilar. Herkese iyi bayramlar ve iyi seyirler.",
       "abstract_en": "This week on Seattle Anlatıyor, Serpil Hikmet İngeç and Ülkü Okatar Umay told us about the goals and activities of the “Turks Without Borders” project. Happy holidays, and enjoy the show!",
+      "category": "",
       "source_name": "Seattle Anlatiyor",
       "article_url": "https://www.instagram.com/tv/COzUyt9nyqy/?cplk=M2w0Mnl6cjBlaDZ3&wa_logging_event=video_play_open",
       "image_url": "",
       "video_url": "https://www.instagram.com/tv/COzUyt9nyqy/?cplk=M2w0Mnl6cjBlaDZ3&wa_logging_event=video_play_open",
       "published_on": "2021-05-12",
-      "is_published": 1
+      "is_published": 1,
+      "is_featured": 0
     },
     {
+      "content_type": "news",
       "title_tr": "ABD’deki Türkler, internet üzerinden memleketle yeniden buluşuyor",
       "title_en": "Turkish diaspora in US reconnects with home online",
       "abstract_tr": "ABD merkezli bir sivil toplum kuruluşunun projesi olan Turks Without Borders, Amerika Birleşik Devletleri’ndeki Türk diasporasının genç üyelerinin anavatanlarıyla bağ kurmalarına yardımcı olurken, Türkiye’deki akranlarına da İngilizce öğrenme fırsatı sunuyor.",
       "abstract_en": "Turks Without Borders, a project by a U.S.-based nonprofit, helps young members of the Turkish diaspora in the United States to get in touch with their homeland while giving their peers in Turkey a chance to learn English.",
+      "category": "",
       "source_name": "Daily Sabah",
       "article_url": "https://www.dailysabah.com/turkey/diaspora/turkish-diaspora-in-us-reconnects-with-home-online",
       "image_url": "https://idsb.tmgrup.com.tr/ly/uploads/images/2021/03/14/100068.jpg?v=1615725848",
       "video_url": "",
       "published_on": "2021-03-14",
-      "is_published": 1
+      "is_published": 1,
+      "is_featured": 0
     },
     {
+      "content_type": "news",
       "title_tr": "ABD merkezli bir sivil toplum kuruluşunun projesi olan Turks Without Borders, Amerika Birleşik Devletleri’ndeki Türk diasporasının genç üyelerinin anavatanlarıyla bağ kurmalarına yardımcı olurken, Türkiye’deki akranlarına da İngilizce öğrenme fırsatı sunuyor.”",
       "title_en": "Turkish-American youth in the US keep their ties to Türkiye alive through the “Turks Without Borders” project",
       "abstract_tr": "Washington Türk Amerikan Kültür Derneğince hayata geçirilen \"Sınır Tanımayan Türkler\" projesi ile ABD'de yaşayan Türk asıllı gençler, Türkiye'nin farklı illerinde eğitimine devam eden akranlarıyla çevrim içi görüşmelerle kültürlerini yakından tanıma imkanı buluyor.",
       "abstract_en": "Through online conversations with peers studying in cities across Türkiye, Turkish-American youth get to know their culture up close while helping their Turkish peers improve their foreign-language skills.",
+      "category": "",
       "source_name": "Anadolu Ajansi",
       "article_url": "https://www.aa.com.tr/tr/turkiye/abddeki-turk-asilli-gencler-turkiye-ile-baglarini-sinir-tanimayan-turkler-projesiyle-koruyor/2174866",
       "image_url": "https://web-cdnprod.aa.com.tr/uploads/Contents/2021/03/13/thumbs_b_c_e1f090e3b15281e9868d698aaf9432df.jpg",
       "video_url": "",
       "published_on": "2021-03-13",
-      "is_published": 1
+      "is_published": 1,
+      "is_featured": 0
     }
   ]
 }

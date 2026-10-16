@@ -14,6 +14,10 @@ export async function Header({ locale }: { locale: Locale }) {
   const links = [
     { href: "/bizim-hikayemiz", label: copy.story },
     { href: "/nasil-calisiyoruz", label: copy.how },
+    {
+      href: "/haberler-ve-guncellemeler",
+      label: copy.updates ?? ui[locale].nav.updates,
+    },
     { href: "/konusma-konulari", label: copy.topics },
     { href: "/projeye-katilim", label: copy.join },
   ];

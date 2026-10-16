@@ -7,18 +7,23 @@ export type ContentPage = {
   sections: Record<string, unknown>;
 };
 
+export type NewsContentType = "update" | "news" | "video" | "blog";
+
 export type NewsItem = {
   id: number;
+  contentType: NewsContentType;
   titleTr: string;
   titleEn: string;
   abstractTr: string;
   abstractEn: string;
+  category: string;
   sourceName: string;
   articleUrl: string;
   imageUrl: string;
   videoUrl: string;
-  publishedOn: string;
+  publishedAt: string;
   isPublished: boolean;
+  isFeatured: boolean;
 };
 
 export type NewsInput = Omit<NewsItem, "id">;

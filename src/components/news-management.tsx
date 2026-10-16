@@ -1,21 +1,25 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { TrashIcon } from "@/components/icons";
 import type { Locale } from "@/lib/i18n";
+import { formatNewsDate } from "@/lib/news";
 import type { NewsInput, NewsItem } from "@/lib/types";
 
 const emptyNews: NewsInput = {
+  contentType: "update",
   titleTr: "",
   titleEn: "",
   abstractTr: "",
   abstractEn: "",
+  category: "",
   sourceName: "",
   articleUrl: "",
   imageUrl: "",
   videoUrl: "",
-  publishedOn: "",
+  publishedAt: "",
   isPublished: true,
+  isFeatured: false,
 };
 
 export function NewsManagement({
@@ -35,6 +39,16 @@ export function NewsManagement({
     selectedId === "new"
       ? emptyNews
       : items.find((item) => item.id === selectedId) ?? emptyNews;
+  const [draftType, setDraftType] = useState(selected.contentType);
+  const [trLength, setTrLength] = useState(selected.abstractTr.length);
+  const [enLength, setEnLength] = useState(selected.abstractEn.length);
+  const updateLimit = draftType === "update" ? 500 : 3000;
+
+  useEffect(() => {
+    setDraftType(selected.contentType);
+    setTrLength(selected.abstractTr.length);
+    setEnLength(selected.abstractEn.length);
+  }, [selected]);
 
   async function save(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -42,16 +56,21 @@ export function NewsManagement({
     setMessage("");
     const form = new FormData(event.currentTarget);
     const payload: NewsInput = {
+      contentType: String(
+        form.get("contentType") ?? "news",
+      ) as NewsInput["contentType"],
       titleTr: String(form.get("titleTr") ?? ""),
       titleEn: String(form.get("titleEn") ?? ""),
       abstractTr: String(form.get("abstractTr") ?? ""),
       abstractEn: String(form.get("abstractEn") ?? ""),
+      category: String(form.get("category") ?? ""),
       sourceName: String(form.get("sourceName") ?? ""),
       articleUrl: String(form.get("articleUrl") ?? ""),
       imageUrl: String(form.get("imageUrl") ?? ""),
       videoUrl: String(form.get("videoUrl") ?? ""),
-      publishedOn: String(form.get("publishedOn") ?? ""),
+      publishedAt: String(form.get("publishedAt") ?? ""),
       isPublished: form.get("isPublished") === "on",
+      isFeatured: form.get("isFeatured") === "on",
     };
     const creating = selectedId === "new";
     const response = await fetch(
@@ -88,7 +107,7 @@ export function NewsManagement({
     if (selectedId === "new") return;
     if (
       !window.confirm(
-        locale === "tr" ? "Bu haber silinsin mi?" : "Delete this news item?",
+        locale === "tr" ? "Bu içerik silinsin mi?" : "Delete this content item?",
       )
     ) {
       return;
@@ -113,7 +132,7 @@ export function NewsManagement({
     <div className="news-manager">
       <aside className="news-manager-list">
         <div className="news-manager-count">
-          <span>{locale === "tr" ? "HABERLER" : "NEWS"}</span>
+          <span>{locale === "tr" ? "HABERLER VE GÜNCELLEMELER" : "NEWS & UPDATES"}</span>
           <strong>{items.length}</strong>
         </div>
         <button
@@ -124,7 +143,7 @@ export function NewsManagement({
           }}
           type="button"
         >
-          + {locale === "tr" ? "Yeni haber ekle" : "Add news"}
+          + {locale === "tr" ? "Yeni içerik ekle" : "Add content"}
         </button>
         {items.map((item) => (
           <button
@@ -136,10 +155,19 @@ export function NewsManagement({
             }}
             type="button"
           >
-            <strong>{locale === "tr" ? item.titleTr : item.titleEn}</strong>
+            <strong>
+              {(locale === "tr" ? item.titleTr : item.titleEn) ||
+                (locale === "tr" ? item.abstractTr : item.abstractEn).slice(0, 70)}
+            </strong>
             <small>
-              {item.publishedOn ||
-                (locale === "tr" ? "Tarih belirtilmedi" : "No date")}
+              {item.contentType.toUpperCase()} ·{" "}
+              {item.publishedAt
+                ? formatNewsDate(item.publishedAt, locale)
+                : locale === "tr"
+                  ? "Tarih belirtilmedi"
+                  : "No date"}
+              {item.isFeatured &&
+                ` · ${locale === "tr" ? "Öne çıkan" : "Featured"}`}
               {!item.isPublished &&
                 ` · ${locale === "tr" ? "Taslak" : "Draft"}`}
             </small>
@@ -151,18 +179,19 @@ export function NewsManagement({
           <div>
             <span className="eyebrow">
               {selectedId === "new"
-                ? locale === "tr" ? "YENİ HABER" : "NEW ARTICLE"
-                : locale === "tr" ? "HABER KAYDI" : "NEWS ITEM"}
+                ? locale === "tr" ? "YENİ İÇERİK" : "NEW CONTENT"
+                : locale === "tr" ? "İÇERİK KAYDI" : "CONTENT ITEM"}
             </span>
             <h2>
               {selectedId === "new"
-                ? locale === "tr" ? "Haber ekle" : "Add news"
-                : locale === "tr" ? selected.titleTr : selected.titleEn}
+                ? locale === "tr" ? "Haber veya güncelleme ekle" : "Add news or update"
+                : (locale === "tr" ? selected.titleTr : selected.titleEn) ||
+                  (locale === "tr" ? selected.abstractTr : selected.abstractEn).slice(0, 80)}
             </h2>
           </div>
           {selectedId !== "new" && (
             <button
-              aria-label={locale === "tr" ? "Haberi sil" : "Delete news"}
+              aria-label={locale === "tr" ? "İçeriği sil" : "Delete content"}
               className="icon-danger-button"
               disabled={busy}
               onClick={() => void remove()}
@@ -172,37 +201,81 @@ export function NewsManagement({
             </button>
           )}
         </div>
+        <div className="news-type-grid">
+          <label>
+            <span>{locale === "tr" ? "İçerik türü" : "Content type"}</span>
+            <select
+              defaultValue={selected.contentType}
+              name="contentType"
+              onChange={(event) =>
+                setDraftType(event.target.value as NewsInput["contentType"])
+              }
+            >
+              <option value="update">
+                {locale === "tr" ? "Kısa güncelleme" : "Short update"}
+              </option>
+              <option value="news">{locale === "tr" ? "Haber" : "News"}</option>
+              <option value="video">Video</option>
+              <option value="blog">Blog</option>
+            </select>
+          </label>
+          <label>
+            <span>{locale === "tr" ? "Kategori / etiket" : "Category / hashtag"}</span>
+            <input
+              defaultValue={selected.category}
+              maxLength={100}
+              name="category"
+              placeholder={locale === "tr" ? "Etkinlik, #Gençlik..." : "Event, #Youth..."}
+            />
+          </label>
+        </div>
         <div className="news-language-grid">
           <fieldset>
             <legend>Türkçe</legend>
             <label>
               <span>Başlık</span>
-              <input defaultValue={selected.titleTr} name="titleTr" required />
+              <input
+                defaultValue={selected.titleTr}
+                name="titleTr"
+                required={draftType !== "update"}
+              />
+              {draftType === "update" && <small>Kısa güncellemelerde isteğe bağlıdır.</small>}
             </label>
             <label>
-              <span>Kısa özet</span>
+              <span>{draftType === "update" ? "Güncelleme metni" : "Kısa özet"}</span>
               <textarea
                 defaultValue={selected.abstractTr}
+                maxLength={updateLimit}
                 name="abstractTr"
+                onInput={(event) => setTrLength(event.currentTarget.value.length)}
                 required
                 rows={5}
               />
+              <small>{trLength} / {updateLimit}</small>
             </label>
           </fieldset>
           <fieldset>
             <legend>English</legend>
             <label>
               <span>Title</span>
-              <input defaultValue={selected.titleEn} name="titleEn" required />
+              <input
+                defaultValue={selected.titleEn}
+                name="titleEn"
+                required={draftType !== "update"}
+              />
+              {draftType === "update" && <small>Optional for short updates.</small>}
             </label>
             <label>
-              <span>Short abstract</span>
+              <span>{draftType === "update" ? "Update text" : "Short abstract"}</span>
               <textarea
                 defaultValue={selected.abstractEn}
+                maxLength={updateLimit}
                 name="abstractEn"
+                onInput={(event) => setEnLength(event.currentTarget.value.length)}
                 required
                 rows={5}
               />
+              <small>{enLength} / {updateLimit}</small>
             </label>
           </fieldset>
         </div>
@@ -212,15 +285,19 @@ export function NewsManagement({
             <input defaultValue={selected.sourceName} name="sourceName" />
           </label>
           <label>
-            <span>{locale === "tr" ? "Yayın tarihi" : "Publication date"}</span>
+            <span>{locale === "tr" ? "Yayın tarihi ve saati" : "Publication date and time"}</span>
             <input
-              defaultValue={selected.publishedOn}
-              name="publishedOn"
-              type="date"
+              defaultValue={selected.publishedAt}
+              name="publishedAt"
+              type="datetime-local"
             />
           </label>
           <label>
-            <span>{locale === "tr" ? "Haber bağlantısı" : "Article link"}</span>
+            <span>
+              {locale === "tr"
+                ? "Haber / blog / dış bağlantı"
+                : "News / blog / external link"}
+            </span>
             <input defaultValue={selected.articleUrl} name="articleUrl" type="url" />
           </label>
           <label>
@@ -244,8 +321,20 @@ export function NewsManagement({
             />
             <span>
               {locale === "tr"
-                ? "Haberi Our Story sayfasında yayımla"
-                : "Publish on the Our Story page"}
+                ? "Bu içeriği yayımla"
+                : "Publish this content"}
+            </span>
+          </label>
+          <label className="news-publish-field">
+            <input
+              defaultChecked={selected.isFeatured}
+              name="isFeatured"
+              type="checkbox"
+            />
+            <span>
+              {locale === "tr"
+                ? "Ana sayfada öne çıkar"
+                : "Feature on the homepage"}
             </span>
           </label>
         </div>
@@ -254,7 +343,7 @@ export function NewsManagement({
           <button className="button button-primary" disabled={busy} type="submit">
             {busy
               ? locale === "tr" ? "Kaydediliyor..." : "Saving..."
-              : locale === "tr" ? "Haberi kaydet" : "Save news"}
+              : locale === "tr" ? "İçeriği kaydet" : "Save content"}
           </button>
         </div>
       </form>

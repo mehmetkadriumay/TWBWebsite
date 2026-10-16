@@ -10,16 +10,19 @@ CREATE TABLE IF NOT EXISTS pages (
 
 CREATE TABLE IF NOT EXISTS news (
   id INT AUTO_INCREMENT PRIMARY KEY,
+  content_type ENUM('update', 'news', 'video', 'blog') NOT NULL DEFAULT 'news',
   title_tr VARCHAR(300) NOT NULL,
   title_en VARCHAR(300) NOT NULL,
   abstract_tr TEXT NOT NULL,
   abstract_en TEXT NOT NULL,
+  category VARCHAR(100) NOT NULL DEFAULT '',
   source_name VARCHAR(255) NOT NULL DEFAULT '',
   article_url TEXT NOT NULL,
   image_url TEXT NOT NULL,
   video_url TEXT NOT NULL,
-  published_on DATE NULL,
+  published_on DATETIME NULL,
   is_published TINYINT(1) NOT NULL DEFAULT 1,
+  is_featured TINYINT(1) NOT NULL DEFAULT 0,
   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   INDEX news_publication_idx (is_published, published_on, id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
