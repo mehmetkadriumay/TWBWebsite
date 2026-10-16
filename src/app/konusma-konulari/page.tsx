@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { TeamsIcon } from "@/components/icons";
 import { ManualTopicEditor } from "@/components/manual-topic-editor";
 import { PageHero } from "@/components/page-hero";
 import { WeekAdminTools } from "@/components/week-admin-tools";
@@ -48,6 +49,25 @@ export default async function TopicsPage({
         </section>
       )}
       <PageHero
+        action={
+          <a
+            aria-label={
+              locale === "tr"
+                ? "Microsoft Teams uygulamasını indir"
+                : "Download the Microsoft Teams application"
+            }
+            className="teams-download-link"
+            href="https://www.microsoft.com/en-us/microsoft-teams/download-app"
+            rel="noreferrer"
+            target="_blank"
+          >
+            <TeamsIcon />
+            <span>
+              <small>Microsoft Teams</small>
+              <strong>{locale === "tr" ? "Uygulamayı indir" : "Download app"}</strong>
+            </span>
+          </a>
+        }
         eyebrow={copy.eyebrow}
         title={copy.title}
         summary={copy.summary}

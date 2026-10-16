@@ -769,6 +769,47 @@ h3 {
   z-index: 1;
 }
 
+.page-hero-action {
+  position: absolute;
+  right: max(28px, calc((100vw - 1200px) / 2 + 28px));
+  top: 30px;
+  z-index: 2;
+}
+
+.teams-download-link {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 16px;
+  color: white;
+  display: flex;
+  gap: 11px;
+  padding: 11px 14px;
+  text-align: left;
+  transition: background 180ms ease, transform 180ms ease;
+}
+
+.teams-download-link:hover {
+  background: rgba(255, 255, 255, 0.17);
+  transform: translateY(-2px);
+}
+
+.teams-download-link span {
+  display: grid;
+  gap: 2px;
+}
+
+.teams-download-link small {
+  color: #cbd8e8;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.teams-download-link strong {
+  font-size: 11px;
+}
+
 .page-hero h1 {
   font-size: clamp(48px, 7vw, 78px);
   font-weight: 500;
@@ -4515,6 +4556,20 @@ textarea {
 
   .page-hero {
     padding: 90px 0 80px;
+  }
+
+  .page-hero-action {
+    right: 20px;
+    top: 18px;
+  }
+
+  .teams-download-link {
+    border-radius: 13px;
+    padding: 9px 11px;
+  }
+
+  .teams-download-link span {
+    display: none;
   }
 
   .page-hero h1 {

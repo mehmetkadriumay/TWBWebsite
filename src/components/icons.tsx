@@ -134,6 +134,27 @@ export function InstagramIcon({ size = 22, className }: IconProps) {
   );
 }
 
+export function TeamsIcon({ size = 28, className }: IconProps) {
+  return (
+    <svg
+      aria-hidden="true"
+      className={className}
+      height={size}
+      viewBox="0 0 32 32"
+      width={size}
+    >
+      <circle cx="22.5" cy="6.5" fill="#7B83EB" r="4" />
+      <path
+        d="M18 11h8.5A3.5 3.5 0 0 1 30 14.5V22a5 5 0 0 1-5 5h-7V11Z"
+        fill="#6264A7"
+      />
+      <rect fill="#7B83EB" height="19" rx="3" width="18" x="5" y="8" />
+      <rect fill="#5059C9" height="16" rx="2.5" width="16" x="1" y="10" />
+      <path d="M5 14h8v2.5h-2.7V23H7.7v-6.5H5V14Z" fill="white" />
+    </svg>
+  );
+}
+
 export function UploadIcon({ size = 18, className }: IconProps) {
   return (
     <svg
