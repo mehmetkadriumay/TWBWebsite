@@ -2320,12 +2320,46 @@ h3 {
   margin: -7px 0 0;
 }
 
+.week-picker-shell {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 36px;
+}
+
+.week-picker-controls {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  min-height: 42px;
+}
+
+.week-picker-controls button {
+  align-items: center;
+  background: var(--ink);
+  border: 0;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  font-size: 20px;
+  height: 42px;
+  justify-content: center;
+  transition: background 180ms ease, transform 180ms ease;
+  width: 42px;
+}
+
+.week-picker-controls button:hover {
+  background: var(--coral);
+  transform: translateY(-2px);
+}
+
 .week-picker {
   display: flex;
   gap: 10px;
-  margin-bottom: 36px;
   overflow-x: auto;
   padding-bottom: 5px;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
 }
 
 .week-picker a {

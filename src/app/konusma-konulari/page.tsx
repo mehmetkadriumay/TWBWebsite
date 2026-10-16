@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { TeamsIcon } from "@/components/icons";
 import { ManualTopicEditor } from "@/components/manual-topic-editor";
 import { PageHero } from "@/components/page-hero";
 import { WeekAdminTools } from "@/components/week-admin-tools";
+import { WeekPicker } from "@/components/week-picker";
 import { isAdmin } from "@/lib/auth";
 import { getAcademicCalendar, getPage, getWeeks } from "@/lib/db";
 import { getLocale, localizedSlug, ui } from "@/lib/i18n";
@@ -76,18 +76,12 @@ export default async function TopicsPage({
         <div className="container">
           {weeks.length > 0 ? (
             <>
-              <div className="week-picker" aria-label={copy.picker}>
-                {weeks.map((week) => (
-                  <Link
-                    className={week.id === selected?.id ? "active" : ""}
-                    href={`/konusma-konulari?hafta=${week.id}`}
-                    key={week.id}
-                  >
-                    <small>{copy.week}</small>
-                    <strong>{week.id}</strong>
-                  </Link>
-                ))}
-              </div>
+              <WeekPicker
+                locale={locale}
+                selectedWeek={selected?.id ?? null}
+                weekLabel={copy.week}
+                weeks={weeks}
+              />
               {selected && (
                 <div className="week-content">
                   <div className="week-heading">
