@@ -272,14 +272,33 @@ function ApplicationForm({
       </div>
       <div className="participation-form-footer">
         <button
-          className="button button-primary"
-          disabled={submitting || !recaptchaSiteKey}
+          aria-describedby={
+            !recaptchaToken && recaptchaSiteKey
+              ? `${formType}-recaptcha-submit-guidance`
+              : undefined
+          }
+          className="button button-primary participation-submit-button"
+          disabled={submitting || !recaptchaSiteKey || !recaptchaToken}
           type="submit"
         >
           {submitting
             ? copy.submitting
             : copy.submit}
         </button>
+        {!recaptchaToken && recaptchaSiteKey && (
+          <p
+            className="recaptcha-submit-guidance"
+            id={`${formType}-recaptcha-submit-guidance`}
+          >
+            {recaptchaReady
+              ? locale === "tr"
+                ? "Başvuruyu göndermek için lütfen insan olduğunuzu doğrulayın."
+                : "Please confirm that you are human before submitting."
+              : locale === "tr"
+                ? "Google reCAPTCHA hazırlanıyor..."
+                : "Google reCAPTCHA is loading..."}
+          </p>
+        )}
         {message && <p aria-live="polite">{message}</p>}
       </div>
     </form>

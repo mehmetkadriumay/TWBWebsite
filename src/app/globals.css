@@ -2261,6 +2261,20 @@ h3 {
   color: var(--ink-soft);
   font-size: 11px;
   line-height: 1.5;
+}
+
+.participation-submit-button:disabled {
+  background: #a8b0bb;
+  box-shadow: none;
+  color: #f4f6f8;
+  opacity: 1;
+}
+
+.participation-form-footer .recaptcha-submit-guidance {
+  color: #687789;
+  font-weight: 700;
+  margin: 0;
+  max-width: 330px;
   margin: 0;
 }
 
