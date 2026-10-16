@@ -1591,6 +1591,14 @@ h3 {
   margin-top: 32px;
 }
 
+.latest-update-placeholder {
+  min-height: 290px;
+}
+
+.latest-update-placeholder h3 {
+  max-width: 760px;
+}
+
 .latest-update-card > a {
   display: inline-block;
   font-size: 12px;
@@ -4184,6 +4192,17 @@ textarea {
   margin: 8px 0 0;
 }
 
+.news-delete-button {
+  background: #a62e25;
+  color: white;
+  flex: 0 0 auto;
+  padding: 11px 16px;
+}
+
+.news-delete-button:hover:not(:disabled) {
+  background: #7f211b;
+}
+
 .news-language-grid,
 .news-media-grid,
 .news-type-grid {
@@ -4551,6 +4570,11 @@ textarea {
   .news-type-grid,
   .news-archive-tools {
     grid-template-columns: 1fr;
+  }
+
+  .news-manager-heading {
+    gap: 18px;
+    flex-direction: column;
   }
 
   .story-news-grid {

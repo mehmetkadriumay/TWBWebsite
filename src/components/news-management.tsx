@@ -191,13 +191,13 @@ export function NewsManagement({
           </div>
           {selectedId !== "new" && (
             <button
-              aria-label={locale === "tr" ? "İçeriği sil" : "Delete content"}
-              className="icon-danger-button"
+              className="button news-delete-button"
               disabled={busy}
               onClick={() => void remove()}
               type="button"
             >
               <TrashIcon />
+              {locale === "tr" ? "İçeriği sil" : "Delete content"}
             </button>
           )}
         </div>

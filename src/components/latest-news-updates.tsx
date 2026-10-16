@@ -30,9 +30,8 @@ export function LatestNewsUpdates({
     return () => window.clearInterval(timer);
   }, [items.length, paused]);
 
-  if (items.length === 0) return null;
-  const item = items[activeIndex] ?? items[0];
-  const title = localizedNewsTitle(item, locale);
+  const item = items[activeIndex] ?? items[0] ?? null;
+  const title = item ? localizedNewsTitle(item, locale) : "";
 
   return (
     <section className="section latest-updates">
@@ -58,24 +57,42 @@ export function LatestNewsUpdates({
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
-        <article className={`latest-update-card type-${item.contentType}`}>
-          <div className="latest-update-meta">
-            <span>{newsTypeLabels[item.contentType][locale]}</span>
-            {item.category && <span>{item.category}</span>}
-            {item.publishedAt && (
-              <time dateTime={item.publishedAt}>
-                {formatNewsDate(item.publishedAt, locale)}
-              </time>
-            )}
-          </div>
-          {title && <h3>{title}</h3>}
-          <p className={title ? "" : "latest-update-primary"}>
-            {localizedNewsBody(item, locale)}
-          </p>
-          <Link href={`/haberler-ve-guncellemeler/${item.id}`}>
-            {locale === "tr" ? "Devamını aç" : "Open update"} →
-          </Link>
-        </article>
+        {item ? (
+          <article className={`latest-update-card type-${item.contentType}`}>
+            <div className="latest-update-meta">
+              <span>{newsTypeLabels[item.contentType][locale]}</span>
+              {item.category && <span>{item.category}</span>}
+              {item.publishedAt && (
+                <time dateTime={item.publishedAt}>
+                  {formatNewsDate(item.publishedAt, locale)}
+                </time>
+              )}
+            </div>
+            {title && <h3>{title}</h3>}
+            <p className={title ? "" : "latest-update-primary"}>
+              {localizedNewsBody(item, locale)}
+            </p>
+            <Link href={`/haberler-ve-guncellemeler/${item.id}`}>
+              {locale === "tr" ? "Devamını aç" : "Open update"} →
+            </Link>
+          </article>
+        ) : (
+          <article className="latest-update-card latest-update-placeholder type-update">
+            <div className="latest-update-meta">
+              <span>{locale === "tr" ? "Güncelleme" : "Update"}</span>
+            </div>
+            <h3>
+              {locale === "tr"
+                ? "Yeni güncellemeler yakında burada."
+                : "New updates will appear here soon."}
+            </h3>
+            <p>
+              {locale === "tr"
+                ? "Projemizdeki son gelişmeleri ve kısa duyuruları bu alandan takip edebilirsiniz."
+                : "Follow the latest project developments and short announcements in this section."}
+            </p>
+          </article>
+        )}
         {items.length > 1 && (
           <div className="latest-update-controls">
             <button
