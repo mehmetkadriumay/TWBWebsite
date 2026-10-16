@@ -11,36 +11,49 @@ const connection = await mysql.createConnection({
   timezone: "Z",
 });
 
+async function columnExists(tableName, columnName) {
+  const [[row]] = await connection.execute(
+    `SELECT COUNT(*) AS count
+     FROM information_schema.columns
+     WHERE table_schema = DATABASE() AND table_name = ? AND column_name = ?`,
+    [tableName, columnName],
+  );
+  return Number(row.count) > 0;
+}
+
+async function columnDataType(tableName, columnName) {
+  const [[row]] = await connection.execute(
+    `SELECT data_type
+     FROM information_schema.columns
+     WHERE table_schema = DATABASE() AND table_name = ? AND column_name = ?
+     LIMIT 1`,
+    [tableName, columnName],
+  );
+  return row?.data_type ?? null;
+}
+
 try {
   const schema = fs.readFileSync(
     path.join(process.cwd(), "scripts", "mysql-schema.sql"),
     "utf8",
   );
   await connection.query(schema);
-  const [newsColumns] = await connection.query(`
-    SELECT column_name, data_type
-    FROM information_schema.columns
-    WHERE table_schema = DATABASE() AND table_name = 'news'
-  `);
-  const newsColumnMap = new Map(
-    newsColumns.map((column) => [column.column_name, column.data_type]),
-  );
-  if (!newsColumnMap.has("content_type")) {
+  if (!(await columnExists("news", "content_type"))) {
     await connection.query(
       "ALTER TABLE news ADD COLUMN content_type ENUM('update', 'news', 'video', 'blog') NOT NULL DEFAULT 'news' AFTER id",
     );
   }
-  if (!newsColumnMap.has("category")) {
+  if (!(await columnExists("news", "category"))) {
     await connection.query(
       "ALTER TABLE news ADD COLUMN category VARCHAR(100) NOT NULL DEFAULT '' AFTER abstract_en",
     );
   }
-  if (!newsColumnMap.has("is_featured")) {
+  if (!(await columnExists("news", "is_featured"))) {
     await connection.query(
       "ALTER TABLE news ADD COLUMN is_featured TINYINT(1) NOT NULL DEFAULT 0 AFTER is_published",
     );
   }
-  if (newsColumnMap.get("published_on") === "date") {
+  if ((await columnDataType("news", "published_on")) === "date") {
     await connection.query("ALTER TABLE news MODIFY published_on DATETIME NULL");
   }
 
