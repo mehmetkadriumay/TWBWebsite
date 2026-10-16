@@ -43,8 +43,8 @@ export function LatestNewsUpdates({
           </span>
           <h2>
             {locale === "tr"
-              ? "Haberler ve kısa güncellemeler."
-              : "News and short updates."}
+              ? "En son kısa güncellemeler."
+              : "Our latest short updates."}
           </h2>
         </div>
         <Link className="text-link" href="/haberler-ve-guncellemeler">

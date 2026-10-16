@@ -4,7 +4,6 @@ import { ArrowIcon, GlobeIcon, PeopleIcon, SparkIcon } from "@/components/icons"
 import { LatestNewsUpdates } from "@/components/latest-news-updates";
 import { getNews, getPage } from "@/lib/db";
 import { getLocale, localizedSlug, ui } from "@/lib/i18n";
-import { latestFeaturedNews } from "@/lib/news";
 import { managedSection } from "@/lib/site-sections";
 
 export default async function Home() {
@@ -91,7 +90,10 @@ export default async function Home() {
         </div>
       </section>
 
-      <LatestNewsUpdates items={latestFeaturedNews(news)} locale={locale} />
+      <LatestNewsUpdates
+        items={news.filter((item) => item.contentType === "update").slice(0, 3)}
+        locale={locale}
+      />
 
       <section className="section quote-section">
         <div className="container">

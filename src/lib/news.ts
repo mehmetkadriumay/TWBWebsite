@@ -52,18 +52,3 @@ export function youtubeId(value: string): string | null {
   }
   return null;
 }
-
-export function latestFeaturedNews(items: NewsItem[], count = 3): NewsItem[] {
-  return [...items]
-    .sort((left, right) => {
-      if (left.isFeatured !== right.isFeatured) {
-        return left.isFeatured ? -1 : 1;
-      }
-      return (
-        new Date(right.publishedAt || 0).getTime() -
-          new Date(left.publishedAt || 0).getTime() ||
-        right.id - left.id
-      );
-    })
-    .slice(0, count);
-}
