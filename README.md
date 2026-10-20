@@ -8,6 +8,8 @@ A modern bilingual website and administration application for the Turks Without 
 - Editable bilingual page content
 - Bilingual News & Updates hub with short updates, press coverage, videos, blogs, search, filters, and featured homepage rotation
 - Admin-managed draft/published and featured states for news and updates
+- Admin image uploads for news, media, and founder headshots, with external image URLs still supported
+- Editable bilingual Our Founders / Kurucularımız profiles
 - 27 weeks of conversation topics with semester-aware dates
 - Multi-tab Excel import and export for weekly topics
 - Admin-only semester calendar management
@@ -159,6 +161,22 @@ RECAPTCHA_SECRET_KEY=<google-recaptcha-v2-secret-key>
 Restart the Node.js application after saving the variables. The site key is
 passed to the two participation forms at runtime, while the secret key remains
 server-side and is used only to verify submission tokens with Google.
+
+## Uploaded images
+
+Administrators can paste an external image URL or upload a JPEG, PNG, GIF, or
+WebP image up to 5 MB. Files are assigned randomized names and stored in
+GoDaddy's persistent application-assets directory by default:
+
+```env
+UPLOAD_DIR=./public/assets
+```
+
+No environment variable is required for the default. Set `UPLOAD_DIR` only to
+override the location with another writable persistent directory. The
+application creates the directory on the first upload. Uploaded files are
+served through `/api/uploads/<filename>`, and `public/assets` is intentionally
+excluded from Git.
 
 ## Twilio WhatsApp
 

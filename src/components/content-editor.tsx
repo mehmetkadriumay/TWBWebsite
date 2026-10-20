@@ -1,16 +1,19 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { ImageUploadField } from "@/components/image-upload-field";
 import type { ContentPage } from "@/lib/types";
 import type { Locale } from "@/lib/i18n";
 
 const pageNames: Record<string, string> = {
   home: "Ana Sayfa · TR",
   "bizim-hikayemiz": "Bizim Hikâyemiz · TR",
+  kurucularimiz: "Kurucularımız · TR",
   "nasil-calisiyoruz": "Nasıl Çalışıyoruz · TR",
   "projeye-katilim": "Projeye Katılım · TR",
   "home-en": "Home · EN",
   "bizim-hikayemiz-en": "Our Story · EN",
+  "kurucularimiz-en": "Our Founders · EN",
   "nasil-calisiyoruz-en": "How It Works · EN",
   "projeye-katilim-en": "Join the Project · EN",
 };
@@ -38,6 +41,13 @@ const pageConfiguration: Record<
     guidance: ["Her bölüm için boş satır bırakın. “Vizyonumuz” ile başlayan son paragraf kırmızı vizyon alanı olarak gösterilir.", "Separate sections with blank lines. A final paragraph beginning with “Our vision” becomes the highlighted vision panel."],
     managed: ["Sayfa hero alanı, proje hikâyesi ve vizyon", "Page hero, project story, and vision"],
     separate: ["Resmî proje videoları ve video bilgileri ayrı medya bölümünde yönetilir.", "Official project videos and metadata are managed in a separate media section."],
+  },
+  kurucularimiz: {
+    route: "/kurucularimiz",
+    bodyLabel: ["Kurucular sayfası giriş metni", "Founders page introduction"],
+    guidance: ["Kurucu profillerinin üstünde giriş metni olarak görüntülenir.", "Displayed as the introduction above the founder profiles."],
+    managed: ["Sayfa başlığı, giriş metni, kurucu fotoğrafları ve biyografileri", "Page heading, introduction, founder photographs, and biographies"],
+    separate: ["Her kurucunun fotoğrafı bağlantı olarak girilebilir veya bilgisayardan yüklenebilir.", "Each founder photograph can use an external link or be uploaded from a computer."],
   },
   "nasil-calisiyoruz": {
     route: "/nasil-calisiyoruz",
@@ -290,6 +300,20 @@ function StructuredFields({
         const label = contentFieldLabel(key, path, locale);
         if (typeof item === "string" || typeof item === "number") {
           const text = String(item);
+          if (
+            typeof key === "string" &&
+            key.toLocaleLowerCase().endsWith("imageurl")
+          ) {
+            return (
+              <ImageUploadField
+                key={nextPath.join(".")}
+                label={label}
+                locale={locale}
+                onChange={(nextValue) => onChange(nextPath, nextValue)}
+                value={text}
+              />
+            );
+          }
           const multiline = text.length > 90;
           return (
             <label className="structured-field" key={nextPath.join(".")}>
@@ -342,11 +366,19 @@ function contentFieldLabel(
     values: ["Değer kartları", "Value cards"],
     testimonials: ["Öğrenci görüşleri", "Student testimonials"],
     videos: ["Videolar", "Videos"],
+    founders: ["Kurucu profilleri", "Founder profiles"],
+    biography: ["Biyografi", "Biography"],
+    role: ["Görev", "Role"],
+    imageUrl: ["Fotoğraf bağlantısı veya yükleme", "Photo link or upload"],
     principles: ["Program bileşenleri", "Program principles"],
     headings: ["Bölüm başlıkları", "Section headings"],
     labels: ["Bölüm etiketleri", "Section labels"],
     id: ["YouTube video kimliği", "YouTube video ID"],
+    name: ["Ad soyad", "Full name"],
     title: ["Başlık", "Title"],
+    sectionEyebrow: ["Bölüm üst başlığı", "Section eyebrow"],
+    sectionTitle: ["Bölüm başlığı", "Section title"],
+    sectionSummary: ["Bölüm açıklaması", "Section summary"],
     summary: ["Açıklama", "Summary"],
     description: ["Açıklama", "Description"],
     publisher: ["Yayımlayan", "Publisher"],

@@ -17,6 +17,7 @@ export const ui = {
   tr: {
     nav: {
       story: "Hikâyemiz",
+      founders: "Kurucularımız",
       how: "Nasıl Çalışır?",
       updates: "Haberler ve Güncellemeler",
       topics: "Haftalık Program ve Konular",
@@ -33,6 +34,7 @@ export const ui = {
       explore: "Keşfet",
       contact: "İletişim",
       story: "Bizim Hikâyemiz",
+      founders: "Kurucularımız",
       how: "Nasıl Çalışıyoruz",
       updates: "Haberler ve Güncellemeler",
       topics: "Haftalık Program ve Konular",
@@ -93,6 +95,7 @@ export const ui = {
   en: {
     nav: {
       story: "Our Story",
+      founders: "Our Founders",
       how: "How It Works",
       updates: "News & Updates",
       topics: "Weekly Program and Topics",
@@ -109,6 +112,7 @@ export const ui = {
       explore: "Explore",
       contact: "Contact",
       story: "Our Story",
+      founders: "Our Founders",
       how: "How It Works",
       updates: "News & Updates",
       topics: "Weekly Program and Topics",

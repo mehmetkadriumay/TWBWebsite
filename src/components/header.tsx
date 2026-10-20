@@ -13,6 +13,10 @@ export async function Header({ locale }: { locale: Locale }) {
   const copy = managedSection(page?.sections ?? {}, "navigation", ui[locale].nav);
   const links = [
     { href: "/bizim-hikayemiz", label: copy.story },
+    {
+      href: "/kurucularimiz",
+      label: copy.founders ?? ui[locale].nav.founders,
+    },
     { href: "/nasil-calisiyoruz", label: copy.how },
     {
       href: "/haberler-ve-guncellemeler",

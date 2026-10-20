@@ -34,6 +34,15 @@ function optionalUrl(value: unknown, label: string): string {
   return url.toString();
 }
 
+function optionalImageUrl(value: unknown): string {
+  const normalized = optionalText(value, 2000);
+  if (!normalized) return "";
+  if (/^\/api\/uploads\/\d{13}-[0-9a-f-]{36}\.(gif|jpe?g|png|webp)$/i.test(normalized)) {
+    return normalized;
+  }
+  return optionalUrl(normalized, "Image link");
+}
+
 export function parseNewsInput(value: unknown): NewsInput {
   if (!value || typeof value !== "object") {
     throw new Error("News details are required.");
@@ -75,7 +84,7 @@ export function parseNewsInput(value: unknown): NewsInput {
     category: optionalText(input.category, 100),
     sourceName: optionalText(input.sourceName, 255),
     articleUrl: optionalUrl(input.articleUrl, "Article link"),
-    imageUrl: optionalUrl(input.imageUrl, "Image link"),
+    imageUrl: optionalImageUrl(input.imageUrl),
     videoUrl: optionalUrl(input.videoUrl, "Video link"),
     publishedAt,
     isPublished: input.isPublished !== false,

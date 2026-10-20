@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
+import { ImageUploadField } from "@/components/image-upload-field";
 import { TrashIcon } from "@/components/icons";
 import type { Locale } from "@/lib/i18n";
 import { formatNewsDate } from "@/lib/news";
@@ -40,12 +41,14 @@ export function NewsManagement({
       ? emptyNews
       : items.find((item) => item.id === selectedId) ?? emptyNews;
   const [draftType, setDraftType] = useState(selected.contentType);
+  const [draftImageUrl, setDraftImageUrl] = useState(selected.imageUrl);
   const [trLength, setTrLength] = useState(selected.abstractTr.length);
   const [enLength, setEnLength] = useState(selected.abstractEn.length);
   const updateLimit = draftType === "update" ? 500 : 3000;
 
   useEffect(() => {
     setDraftType(selected.contentType);
+    setDraftImageUrl(selected.imageUrl);
     setTrLength(selected.abstractTr.length);
     setEnLength(selected.abstractEn.length);
   }, [selected]);
@@ -300,10 +303,13 @@ export function NewsManagement({
             </span>
             <input defaultValue={selected.articleUrl} name="articleUrl" type="url" />
           </label>
-          <label>
-            <span>{locale === "tr" ? "Görsel bağlantısı" : "Image link"}</span>
-            <input defaultValue={selected.imageUrl} name="imageUrl" type="url" />
-          </label>
+          <ImageUploadField
+            label={locale === "tr" ? "Görsel bağlantısı veya yükleme" : "Image link or upload"}
+            locale={locale}
+            name="imageUrl"
+            onChange={setDraftImageUrl}
+            value={draftImageUrl}
+          />
           <label className="news-video-field">
             <span>{locale === "tr" ? "Video bağlantısı" : "Video link"}</span>
             <input defaultValue={selected.videoUrl} name="videoUrl" type="url" />

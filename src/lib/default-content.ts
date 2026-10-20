@@ -35,6 +35,15 @@ export const defaultPages: ContentPage[] = [
       "Turks Without Borders, Mart 2020'de Seattle'da tek bir grupla faaliyete başladı. Yalova Çiftlikköy Taşköprü Ortaokulu ile yürüttüğümüz pilot dönemin olumlu sonuçları programın bugünkü yapısını oluşturdu.\n\nİlk yılın ardından Amerika'nın farklı eyaletlerindeki Türk toplulukları da programa katıldı. Böylece Amerika'daki gençler kültürel bağlarını korurken Türkiye'deki arkadaşları günlük İngilizce kalıplarıyla pratik yapıyor; tüm katılımcılar birlikte zaman ayırmayı, dinlemeyi ve yardımlaşmayı öğreniyor.\n\nVizyonumuz; güçlü bir yabancı dil, kültürel merak ve özgüvenle dünya ile entegre, geleceğe hazır bir gençliğin temelini atmak.",
   },
   {
+    slug: "kurucularimiz",
+    title: "Turks Without Borders'ın kurucuları",
+    eyebrow: "Kurucularımız",
+    summary:
+      "Gençleri dil, kültür ve dostluk etrafında buluşturan programın arkasındaki gönüllü eğitimcilerle tanışın.",
+    body:
+      "Turks Without Borders, gençlerin sınırların ötesinde bağ kurmasına yardımcı olma fikrini gönüllü eğitimcilik deneyimiyle bir araya getiren iki kurucu tarafından hayata geçirildi.",
+  },
+  {
     slug: "nasil-calisiyoruz",
     title: "Her hafta, gerçek bir sohbet etrafında buluşuyoruz",
     eyebrow: "Nasıl Çalışıyoruz",
@@ -68,6 +77,15 @@ export const defaultPages: ContentPage[] = [
       "We set out to build a bridge between Turkish youth living in the United States and students in cities throughout Türkiye.",
     body:
       "Turks Without Borders began in Seattle in March 2020 with a single group. The positive results from our pilot with Yalova Çiftlikköy Taşköprü Middle School shaped the program we run today.\n\nAfter a successful first year, Turkish communities in other US states joined the program. Young people in America maintain their cultural ties while their friends in Türkiye practice everyday English; everyone learns to make time for one another, listen, and help each other grow.\n\nOur vision is to help build a generation that is globally connected and ready for the future through strong language skills, cultural curiosity, and confidence.",
+  },
+  {
+    slug: "kurucularimiz-en",
+    title: "The founders of Turks Without Borders",
+    eyebrow: "Our Founders",
+    summary:
+      "Meet the volunteer educators behind a program that brings young people together through language, culture, and friendship.",
+    body:
+      "Turks Without Borders was created by two founders who combined their volunteer education experience with a shared vision for helping young people build connections beyond borders.",
   },
   {
     slug: "nasil-calisiyoruz-en",

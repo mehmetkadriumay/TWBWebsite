@@ -131,21 +131,33 @@ async function initializeDatabase(pool: Pool): Promise<void> {
       [JSON.stringify(sections), page.slug],
     );
   }
-  for (const [slug, label] of [
-    ["home", "Haberler ve Güncellemeler"],
-    ["home-en", "News & Updates"],
+  for (const [slug, updatesLabel, foundersLabel] of [
+    ["home", "Haberler ve Güncellemeler", "Kurucularımız"],
+    ["home-en", "News & Updates", "Our Founders"],
   ] as const) {
     await pool.execute(
       `UPDATE pages
        SET sections = JSON_SET(sections, '$.navigation.updates', ?)
        WHERE slug = ? AND JSON_EXTRACT(sections, '$.navigation.updates') IS NULL`,
-      [label, slug],
+      [updatesLabel, slug],
     );
     await pool.execute(
       `UPDATE pages
        SET sections = JSON_SET(sections, '$.footer.updates', ?)
        WHERE slug = ? AND JSON_EXTRACT(sections, '$.footer.updates') IS NULL`,
-      [label, slug],
+      [updatesLabel, slug],
+    );
+    await pool.execute(
+      `UPDATE pages
+       SET sections = JSON_SET(sections, '$.navigation.founders', ?)
+       WHERE slug = ? AND JSON_EXTRACT(sections, '$.navigation.founders') IS NULL`,
+      [foundersLabel, slug],
+    );
+    await pool.execute(
+      `UPDATE pages
+       SET sections = JSON_SET(sections, '$.footer.founders', ?)
+       WHERE slug = ? AND JSON_EXTRACT(sections, '$.footer.founders') IS NULL`,
+      [foundersLabel, slug],
     );
   }
 
