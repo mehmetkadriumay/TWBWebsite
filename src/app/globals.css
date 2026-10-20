@@ -1524,43 +1524,28 @@ h3 {
     var(--paper);
 }
 
-.founders-heading {
+.founders-list {
   display: grid;
-  gap: 55px;
-  grid-template-columns: 1fr 1fr;
-  margin-bottom: 48px;
+  gap: 48px;
 }
 
-.founders-heading h2 {
-  font-size: clamp(38px, 5vw, 60px);
-  font-weight: 500;
-  letter-spacing: -2px;
-  line-height: 1.05;
-  margin: 14px 0 0;
-}
-
-.founders-heading > div:last-child {
-  color: var(--ink-soft);
-  line-height: 1.8;
-  padding-top: 15px;
-}
-
-.founders-grid {
-  display: grid;
-  gap: 28px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.founder-card {
+.founder-profile {
+  align-items: stretch;
   background: var(--cream);
   border: 1px solid var(--line);
   border-radius: 24px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   overflow: hidden;
+}
+
+.founder-profile:nth-child(even) .founder-photo {
+  order: 2;
 }
 
 .founder-photo {
   align-items: center;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 1 / 1;
   background:
     linear-gradient(135deg, rgba(10, 49, 97, 0.94), rgba(74, 120, 181, 0.72)),
     var(--ink);
@@ -1575,32 +1560,16 @@ h3 {
   width: 100%;
 }
 
-.founder-photo span {
-  color: white;
-  font-family: var(--font-serif), Georgia, serif;
-  font-size: clamp(58px, 8vw, 92px);
-}
-
 .founder-copy {
-  padding: 30px;
-}
-
-.founder-copy > span {
-  color: var(--coral-dark);
-  font-size: 10px;
-  font-weight: 900;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-}
-
-.founder-copy h2 {
-  font-size: 34px;
-  margin: 10px 0 14px;
+  align-items: center;
+  display: flex;
+  padding: clamp(30px, 6vw, 72px);
 }
 
 .founder-copy p {
   color: var(--ink-soft);
-  line-height: 1.75;
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.8;
   margin: 0;
   white-space: pre-line;
 }
@@ -4623,11 +4592,6 @@ textarea {
     grid-template-columns: 1fr;
   }
 
-  .founders-heading {
-    gap: 28px;
-    grid-template-columns: 1fr;
-  }
-
   .how-principles > div,
   .project-video-grid {
     grid-template-columns: 1fr 1fr;
@@ -4849,8 +4813,12 @@ textarea {
     grid-template-columns: 1fr;
   }
 
-  .founders-grid {
+  .founder-profile {
     grid-template-columns: 1fr;
+  }
+
+  .founder-profile:nth-child(even) .founder-photo {
+    order: 0;
   }
 
   .story-news-heading-actions {

@@ -84,6 +84,10 @@ export function ContentEditor({
   if (!selected) return null;
   const configuration = pageConfiguration[baseSlug(selected.slug)];
   const languageIndex = locale === "tr" ? 0 : 1;
+  const structuredSections =
+    baseSlug(selected.slug) === "kurucularimiz"
+      ? founderEditorSections(selected.sections)
+      : selected.sections;
 
   function updateSection(path: Array<string | number>, value: string) {
     setCurrentPages((current) =>
@@ -260,7 +264,7 @@ export function ContentEditor({
             <StructuredFields
               locale={locale}
               onChange={updateSection}
-              value={selected.sections}
+              value={structuredSections}
             />
           </div>
         )}
@@ -275,6 +279,30 @@ export function ContentEditor({
       </form>
     </div>
   );
+}
+
+function founderEditorSections(sections: Record<string, unknown>) {
+  const group = sections.founders;
+  if (!group || typeof group !== "object" || Array.isArray(group)) {
+    return sections;
+  }
+  const profiles = (group as Record<string, unknown>).founders;
+  if (!Array.isArray(profiles)) return sections;
+
+  return {
+    founders: {
+      founders: profiles.slice(0, 2).map((profile) => {
+        const fields =
+          profile && typeof profile === "object" && !Array.isArray(profile)
+            ? (profile as Record<string, unknown>)
+            : {};
+        return {
+          imageUrl: String(fields.imageUrl ?? ""),
+          biography: String(fields.biography ?? ""),
+        };
+      }),
+    },
+  };
 }
 
 function StructuredFields({

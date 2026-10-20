@@ -117,21 +117,13 @@ const story = {
 
 const founders = {
   tr: {
-    sectionEyebrow: "PROGRAMIN ARKASINDAKİ İNSANLAR",
-    sectionTitle: "Bir fikirden büyüyen ortak bir gönüllülük hikâyesi.",
-    sectionSummary:
-      "Kurucu profillerindeki fotoğraf ve biyografi metinleri yönetim panelindeki İçerik Yönetimi bölümünden değiştirilebilir.",
     founders: [
       {
-        name: "Ülkü Tuna Umay",
-        role: "Kurucu",
         imageUrl: "",
         biography:
           "Ülkü Tuna Umay'ın deneyimini, programa katkılarını ve Turks Without Borders vizyonunu anlatan biyografi metnini buraya ekleyin.",
       },
       {
-        name: "Serpil İngeç",
-        role: "Kurucu",
         imageUrl: "",
         biography:
           "Serpil İngeç'in deneyimini, programa katkılarını ve Turks Without Borders vizyonunu anlatan biyografi metnini buraya ekleyin.",
@@ -139,21 +131,13 @@ const founders = {
     ],
   },
   en: {
-    sectionEyebrow: "THE PEOPLE BEHIND THE PROGRAM",
-    sectionTitle: "A shared story of service that grew from one idea.",
-    sectionSummary:
-      "Founder photographs and biographies can be updated from Content Management in the administration panel.",
     founders: [
       {
-        name: "Ülkü Tuna Umay",
-        role: "Founder",
         imageUrl: "",
         biography:
           "Add a biography describing Ülkü Tuna Umay's experience, contribution to the program, and vision for Turks Without Borders.",
       },
       {
-        name: "Serpil İngeç",
-        role: "Founder",
         imageUrl: "",
         biography:
           "Add a biography describing Serpil İngeç's experience, contribution to the program, and vision for Turks Without Borders.",

@@ -6,15 +6,7 @@ import { foundersSections, managedSection } from "@/lib/site-sections";
 
 export const metadata: Metadata = { title: "Kurucularımız" };
 
-function initials(name: string): string {
-  return name
-    .split(/\s+/)
-    .map((part) => part[0])
-    .filter(Boolean)
-    .slice(0, 2)
-    .join("")
-    .toLocaleUpperCase("tr-TR");
-}
+const founderNames = ["Ülkü Tuna Umay", "Serpil İngeç"];
 
 export default async function FoundersPage() {
   const locale = await getLocale();
@@ -34,31 +26,17 @@ export default async function FoundersPage() {
         title={page.title}
       />
       <section className="section founders-section">
-        <div className="container founders-heading">
-          <div>
-            <span className="eyebrow">{copy.sectionEyebrow}</span>
-            <h2>{copy.sectionTitle}</h2>
-          </div>
-          <div>
-            {page.body.split(/\n\n+/).map((paragraph, index) => (
-              <p key={`${paragraph.slice(0, 24)}-${index}`}>{paragraph}</p>
-            ))}
-            <p>{copy.sectionSummary}</p>
-          </div>
-        </div>
-        <div className="container founders-grid">
-          {copy.founders.map((founder) => (
-            <article className="founder-card" key={founder.name}>
+        <div className="container founders-list">
+          {copy.founders.map((founder, index) => (
+            <article className="founder-profile" key={founderNames[index]}>
               <div className="founder-photo">
                 {founder.imageUrl ? (
-                  <img alt={founder.name} src={founder.imageUrl} />
+                  <img alt={founderNames[index]} src={founder.imageUrl} />
                 ) : (
-                  <span>{initials(founder.name)}</span>
+                  <span aria-hidden="true" />
                 )}
               </div>
               <div className="founder-copy">
-                <span>{founder.role}</span>
-                <h2>{founder.name}</h2>
                 <p>{founder.biography}</p>
               </div>
             </article>
